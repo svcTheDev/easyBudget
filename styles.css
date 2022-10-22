@@ -16,6 +16,10 @@ body {
   margin: 0rem auto 1rem auto;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
 /* Navigation */
 
 header {
@@ -23,16 +27,21 @@ header {
 }
 
 .navMenu {
+  min-height: 3rem;
   display: flex;
   justify-content: right;
+  align-items: center;
   margin-bottom: 1.5rem;
 }
 
-.navSection {
+/* .navSection {
   padding: 0.2rem 2rem;
-  text-decoration: none;
   color: white;
-  /* border: solid white; */
+}
+*/
+
+
+.navSection a {
   color: #a1dcfc;
 }
 
@@ -53,6 +62,33 @@ header {
   background-color: #e8cab0;
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  .navMenu {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .navSection {
+    /* padding: 1rem 0; */
+    border: solid wheat;
+  }
+
+  .FAQ {
+    padding: 0;
+  }
+  .logIn {
+    padding: 0;
+    width: 100%;
+  }
+  .freeTest {
+    padding: 0;
+  }
+}
+
+/* Search Tool */
 
 .search__container {
   display: flex;
