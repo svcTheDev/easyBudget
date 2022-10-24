@@ -13,16 +13,28 @@
   </head>
   <body>
     <header>
-      <nav class="navMenu container">
-        <div class="navSection">
-          <a class="FAQ" href="#">Faq</a>
+      <nav class="navbar container">
+        <!-- 0 -->
+        <a href="#" class="nav-branding">My BuddyGet</a>
+      
+        <!-- 1 -->
+        <div class="navMenu">
+          <div class="FAQ">
+            <a class="navLink" href="#">Faq</a>
+          </div>
+          <div class="logIn">
+            <a class="navLink" href="#">Iniciar Sessión</a>
+          </div>
+          <div class="freeTest">
+            <a class="navLink" href="#">Prueba Gratis</a>
+          </div>
         </div>
-        <div class="navSection">
-          <a class="logIn" href="#">Iniciar Sessión</a>
-        </div>
-        <div class="navSection">
-          <a class="freeTest" href="#">Prueba Gratis</a>
-        </div>
+        <!-- 2  -->
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+      </div>
       </nav>
     </header>
     <!-- <nav class="menu" tabindex="0">
@@ -153,27 +165,29 @@
         </div>
       </form>
 
-      <!-- Record table -->
+      <!-- History -->
 
-    <table class="record container">
-      
       <h2 class="container">Historial</h2>
 
       <div class="search__container container">
         <input class="search__input" type="text" placeholder="Buscar" />
       </div>
       
-      <thead>
-        <tr>
-          <th class="sort-column" id="sort-date">Fecha</th>
-          <th class="sort-column" id="sort-description">Descripción</th>
-          <th class="sort-column" id="sort-category">Categoría</th>
-          <th class="sort-column" id="sort-price">Precio</th>
-          <th class="sort-column">Eliminar</th>
-        </tr>
-      </thead>
-      <tbody id="table-body"></tbody>
-    </table>
+      <div style="overflow-x: auto;"> 
+            <table class="record container">
+        
+        <thead>
+          <tr>
+            <th class="sort-column" id="sort-date">Fecha</th>
+            <th class="sort-column" id="sort-description">Descripción</th>
+            <th class="sort-column" id="sort-category">Categoría</th>
+            <th class="sort-column" id="sort-price">Precio</th>
+            <th class="sort-column">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+            </table>
+      </div>
 
     <!-- Delete modal -->
     <section class="modal-container">

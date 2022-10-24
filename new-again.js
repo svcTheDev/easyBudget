@@ -36,6 +36,19 @@ const categoryColumnButton = document.querySelector("#sort-category");
 const dateColumnButton = document.querySelector("#sort-date");
 const descriptionColumnButton = document.querySelector("#sort-description");
 
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.navMenu');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+})
+
+document.querySelectorAll('.navLink').forEach(n => n.addEventListener('click', () => {
+    hamburger.classList.remove('active')
+    navMenu.classList.remove('active')
+}));
+
 let allBudgetStorage;
 let balance,
   expense,
