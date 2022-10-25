@@ -16,7 +16,7 @@
       <nav class="navbar container">
         <!-- 0 -->
         <a href="#" class="nav-branding">My BuddyGet</a>
-      
+
         <!-- 1 -->
         <div class="navMenu">
           <div class="FAQ">
@@ -34,7 +34,7 @@
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
-      </div>
+        </div>
       </nav>
     </header>
     <!-- <nav class="menu" tabindex="0">
@@ -78,7 +78,14 @@
       <div class="input-container">
         <div>
           <label for="date"></label>
-          <input placeholder="Elige una fecha" class="allInputs" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="dateExpense" />
+          <input
+            placeholder="Elige una fecha"
+            class="allInputs"
+            type="text"
+            onfocus="(this.type='date')"
+            onblur="(this.type='text')"
+            id="dateExpense"
+          />
         </div>
         <div>
           <label for="descriptionExpense"></label>
@@ -103,17 +110,17 @@
             <option value="Ropa"></option>
           </datalist>
         </div>
-        <div>      
+        <div>
           <label for="cantidad"></label>
           <input
             class="allInputs blockingPrice"
             type="number"
             id="priceExpense"
-            onwheel="return false;" 
+            onwheel="return false;"
             placeholder="Escribe un monto"
           />
         </div>
-    </div>
+      </div>
       <div class="button-container">
         <input class="submitBtn" type="submit" value="Enviar" />
       </div>
@@ -121,73 +128,84 @@
     <!-- Incomes -->
     <h2 class="inputTitle container">Ingresos</h2>
     <form id="income-form" class="form-container container">
-        <div class="input-container">
-          <div>
-            <label for="date"></label>
-            <input placeholder="Elige una fecha" class="allInputs" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="dateIncome" />
-          </div>
-          <div>
-            <label for="descriptionIncome"></label>
-            <input
-              class="allInputs"
-              type="text"
-              id="descriptionIncome"
-              placeholder="Ej: 1er salario"
-            />
-          </div>
-          <div>
-            <label for="CategoryIncome"></label>
-            <input
-              class="allInputs"
-              list="category"
-              id="categoryIncome"
-              placeholder="Elige una categoría"
-            />
-            <datalist id="category">
-              <option value="Salario"></option>
-              <option value="Ayudas"></option>
-              <option value="Bonos"></option>
-            </datalist>
-          </div>
-          <div>      
-            <label for="cantidad"></label>
-            <input
-              class="allInputs blockingPrice"
-              type="number"
-              id="priceIncome"
-              onwheel="return false;" 
-              placeholder="Escribe un monto"
-            />
-          </div>
-      </div>
-        <div class="button-container">
-          <input class="submitBtn" type="submit" value="Enviar" />
+      <div class="input-container">
+        <div>
+          <label for="date"></label>
+          <input
+            placeholder="Elige una fecha"
+            class="allInputs"
+            type="text"
+            onfocus="(this.type='date')"
+            onblur="(this.type='text')"
+            id="dateIncome"
+          />
         </div>
-      </form>
-
-      <!-- History -->
-
-      <h2 class="container">Historial</h2>
-
-      <div class="search__container container">
-        <input class="search__input" type="text" placeholder="Buscar" />
+        <div>
+          <label for="descriptionIncome"></label>
+          <input
+            class="allInputs"
+            type="text"
+            id="descriptionIncome"
+            placeholder="Ej: 1er salario"
+          />
+        </div>
+        <div>
+          <label for="CategoryIncome"></label>
+          <input
+            class="allInputs"
+            list="category"
+            id="categoryIncome"
+            placeholder="Elige una categoría"
+          />
+          <datalist id="category">
+            <option value="Salario"></option>
+            <option value="Ayudas"></option>
+            <option value="Bonos"></option>
+          </datalist>
+        </div>
+        <div>
+          <label for="cantidad"></label>
+          <input
+            class="allInputs blockingPrice"
+            type="number"
+            id="priceIncome"
+            onwheel="return false;"
+            placeholder="Escribe un monto"
+          />
+        </div>
       </div>
-      
-      <div style="overflow-x: auto;"> 
-            <table class="record container">
-        
+      <div class="button-container">
+        <input class="submitBtn" type="submit" value="Enviar" />
+      </div>
+    </form>
+
+    <!-- History -->
+
+    <!-- <h2 class="container">Historial</h2> -->
+
+    <div class="search__container container">
+      <input class="search__input" type="text" placeholder="Buscar" />
+    </div>
+
+    <div style="overflow-x: auto">
+      <table class="record container">
+        <div class="arrow-icon container">
+          <p>Historial</p>
+          <i class="fas fa-angle-double-right" style="font-size: 24px"></i>
+        </div>
         <thead>
           <tr>
-            <th class="sort-column" id="sort-date">Fecha</th>
-            <th class="sort-column" id="sort-description">Descripción</th>
-            <th class="sort-column" id="sort-category">Categoría</th>
-            <th class="sort-column" id="sort-price">Precio</th>
+            <th class="sort-column" id="sort-date">Fecha<i class='fas fa-sort'></i></th>
+            <th class="sort-column" id="sort-description">Descripción<i class='fas fa-sort'></i></th>
+            <th class="sort-column" id="sort-category">Categoría<i class='fas fa-sort'></i></th>
+            <th class="sort-column" id="sort-price">Precio<i class='fas fa-sort'></i></th>
             <th class="sort-column">Eliminar</th>
           </tr>
         </thead>
         <tbody id="table-body"></tbody>
-            </table>
-      </div>
+      </table>
+      
+    </div>
 
     <!-- Delete modal -->
     <section class="modal-container">
@@ -211,6 +229,10 @@
     </div>
 
     <!-- <script src="new.js"></script> -->
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="numberToWords.js"></script>
     <script src="new-again.js"></script>
   </body>
