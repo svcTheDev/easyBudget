@@ -31,23 +31,27 @@ const balanceTotal = document.querySelector(".balance p");
 
 const searchTool = document.querySelector(".search__input");
 const table = document.querySelector("#table-body");
-const priceColumnButton = document.querySelector("#sort-price");
-const categoryColumnButton = document.querySelector("#sort-category");
-const dateColumnButton = document.querySelector("#sort-date");
-const descriptionColumnButton = document.querySelector("#sort-description");
+const priceColumnButton = document.querySelector("#sort-price .fas");
+const categoryColumnButton = document.querySelector("#sort-category .fas");
+const dateColumnButton = document.querySelector("#sort-date .fas");
+const descriptionColumnButton = document.querySelector(
+  "#sort-description .fas"
+);
 
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.navMenu');
+const hamburger = document.querySelector(".hamburger");
+const navMenu = document.querySelector(".navMenu");
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-})
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("active");
+  navMenu.classList.toggle("active");
+});
 
-document.querySelectorAll('.navLink').forEach(n => n.addEventListener('click', () => {
-    hamburger.classList.remove('active')
-    navMenu.classList.remove('active')
-}));
+document.querySelectorAll(".navLink").forEach((n) =>
+  n.addEventListener("click", () => {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+  })
+);
 
 let allBudgetStorage;
 let balance,
@@ -85,18 +89,10 @@ showTableEntries(allBudgetStorage);
 expenseForm.addEventListener("submit", getExpense);
 incomeForm.addEventListener("submit", getIncome);
 
-function sorts(filterData) {
-  if (filterData) {
-    return;
-  } else {
-    priceColumnButton.addEventListener("click", sortByPrice);
-    categoryColumnButton.addEventListener("click", sortByCategory);
-    dateColumnButton.addEventListener("click", sortByDate);
-    descriptionColumnButton.addEventListener("click", sortByDescription);
-  }
-}
-
-sorts();
+priceColumnButton.addEventListener("click", sortByPrice);
+categoryColumnButton.addEventListener("click", sortByCategory);
+dateColumnButton.addEventListener("click", sortByDate);
+descriptionColumnButton.addEventListener("click", sortByDescription);
 
 let originalPrices = [...allBudgetStorage];
 
@@ -217,30 +213,30 @@ function updateTotals() {
   expenseTotal.innerHTML = expense;
   balanceTotal.innerHTML = balance;
 
-  numbersToLetters()
+  numbersToLetters();
 
-  let numbersBalanceText =  numbersBalance.textContent;
-  let numbersIncomeText =  numbersIncome.textContent;
-  let numbersOutcomeText =  numbersOutcome.textContent;
+  let numbersBalanceText = numbersBalance.textContent;
+  let numbersIncomeText = numbersIncome.textContent;
+  let numbersOutcomeText = numbersOutcome.textContent;
 
-  if (numbersBalanceText.includes('000000')) {
-    showConvertedBalance.innerHTML += ' DE PESOS'
+  if (numbersBalanceText.includes("000000")) {
+    showConvertedBalance.innerHTML += " DE PESOS";
   } else {
-    showConvertedBalance.innerHTML += ' PESOS'
+    showConvertedBalance.innerHTML += " PESOS";
   }
-  if (numbersIncomeText.includes('000000')) {
-    showConvertedIncome.innerHTML += ' DE PESOS'
+  if (numbersIncomeText.includes("000000")) {
+    showConvertedIncome.innerHTML += " DE PESOS";
   } else {
-    showConvertedIncome.innerHTML += ' PESOS'
+    showConvertedIncome.innerHTML += " PESOS";
   }
-  if (numbersOutcomeText.includes('000000')) {
-    showConvertedOutcome.innerHTML += ' DE PESOS'
+  if (numbersOutcomeText.includes("000000")) {
+    showConvertedOutcome.innerHTML += " DE PESOS";
   } else {
-    showConvertedOutcome.innerHTML += ' PESOS'
+    showConvertedOutcome.innerHTML += " PESOS";
   }
-  incomeTotal.innerHTML += ' COP'
-  expenseTotal.innerHTML += ' COP'
-  balanceTotal.innerHTML += ' COP'
+  incomeTotal.innerHTML += " COP";
+  expenseTotal.innerHTML += " COP";
+  balanceTotal.innerHTML += " COP";
 }
 
 function getDayWeek(date) {
@@ -266,12 +262,12 @@ function showTableEntries(allBudgetStorage) {
       budget.type === "income" ? "record-income" : "record-outcome";
 
     const row = `
-        <td class="size">${getDayWeek(new Date(budget.date))} ${
+        <td class="size edit-field">${getDayWeek(new Date(budget.date))} ${
       budget.date
     }</td>
-        <td class="size">${budget.description}</td>
-        <td class="size">${budget.category}</td>
-        <td class="size ${selectClass}">${budget.price}</td>
+        <td class="size edit-field">${budget.description}</td>
+        <td class="size edit-field">${budget.category}</td>
+        <td class="size edit-field ${selectClass}">${budget.price}</td>
         <td id="delete">Delete</td>
         `;
 
@@ -328,7 +324,6 @@ searchTool.addEventListener("keyup", function (e) {
 
   let dataToReturn = searchTable(valueSearch, allBudgetStorage);
   showTableEntries(dataToReturn);
-  sorts(dataToReturn);
   function searchTable(valueSearch, dataToReturn) {
     let filterData = [];
     dataToReturn.forEach((data) => {
@@ -341,22 +336,24 @@ searchTool.addEventListener("keyup", function (e) {
       let price = data.price;
       let priceString = price.toString();
 
-
-      if (valueSearch === priceString &&
-        valueSearch.length === priceString.length) { /* When the number of digits is equal than the table ones*/
-          filterData = [];
-          console.log(1);
-          filterData.push(data);
-        } else if ( 
-          priceString.includes(valueSearch)
-          ) { /* just by writing any number */
-            console.log(2);
-            filterData.push(data);
-          } else if (
-            lowerDescription.includes(valueSearch) ||
-            date.includes(valueSearch) ||
-            lowercategory.includes(valueSearch)
-            ) { /* Just by writing any letter, no numbers */
+      if (
+        valueSearch === priceString &&
+        valueSearch.length === priceString.length
+      ) {
+        /* When the number of digits is equal than the table ones*/
+        filterData = [];
+        console.log(1);
+        filterData.push(data);
+      } else if (priceString.includes(valueSearch)) {
+        /* just by writing any number */
+        console.log(2);
+        filterData.push(data);
+      } else if (
+        lowerDescription.includes(valueSearch) ||
+        date.includes(valueSearch) ||
+        lowercategory.includes(valueSearch)
+      ) {
+        /* Just by writing any letter, no numbers */
         console.log(3);
         filterData.push(data);
       }
@@ -365,101 +362,197 @@ searchTool.addEventListener("keyup", function (e) {
   }
 });
 
+// const arrowDateButton = document.querySelector('#sort-date .fas');
+// const arrowDescriptionButton = document.querySelector('#sort-description .fas');
+// const arrowCategoryButton = document.querySelector('#sort-category .fas');
+// const arrowPriceButton = document.querySelector('#sort-price .fas');
+
 let indexPrice = 0;
 function sortByPrice() {
-  console.log(originalPrices);
-  if (indexPrice === 0) {
-    let sorted = allBudgetStorage.sort((a, b) =>
-      a.price > b.price ? 1 : a.price < b.price ? -1 : 0
-    );
-
-    console.log(sorted);
-    showTableEntries(sorted);
-    indexPrice++;
-  } else if (indexPrice === 1) {
-    let sorted2 = allBudgetStorage.sort((a, b) =>
-      a.price < b.price ? 1 : a.price > b.price ? -1 : 0
-    );
-
-    console.log(sorted2);
-    showTableEntries(sorted2);
-    indexPrice++;
-  } else if (indexPrice === 2) {
+  if (searchTool.value) {
+    return;
+  } else {
     console.log(originalPrices);
-    showTableEntries(originalPrices);
-    indexPrice = 0;
+    if (indexPrice === 0) {
+      let sorted = allBudgetStorage.sort((a, b) =>
+        a.price > b.price ? 1 : a.price < b.price ? -1 : 0
+      );
+      priceColumnButton.classList.add("fa-caret-up");
+      priceColumnButton.classList.remove("fa-sort");
+      console.log(sorted);
+      showTableEntries(sorted);
+      indexPrice++;
+    } else if (indexPrice === 1) {
+      let sorted2 = allBudgetStorage.sort((a, b) =>
+        a.price < b.price ? 1 : a.price > b.price ? -1 : 0
+      );
+      priceColumnButton.classList.add("fa-caret-down");
+      priceColumnButton.classList.remove("fa-caret-up");
+      console.log(sorted2);
+      showTableEntries(sorted2);
+      indexPrice++;
+    } else if (indexPrice === 2) {
+      priceColumnButton.classList.add("fa-sort");
+      priceColumnButton.classList.remove("fa-caret-down");
+      console.log(originalPrices);
+      showTableEntries(originalPrices);
+      indexPrice = 0;
+    }
   }
 }
 
 let indexCategory = 0;
 function sortByCategory() {
-  console.log(originalPrices);
-  if (indexCategory === 0) {
-    let sorted = allBudgetStorage.sort((a, b) =>
-      a.category > b.category ? 1 : a.category < b.category ? -1 : 0
-    );
-    console.log(sorted);
-    showTableEntries(sorted);
-    indexCategory++;
-  } else if (indexCategory === 1) {
-    let sorted2 = allBudgetStorage.sort((a, b) =>
-      a.category < b.category ? 1 : a.category > b.category ? -1 : 0
-    );
-    console.log(sorted2);
-    showTableEntries(sorted2);
-    indexCategory++;
-  } else if (indexCategory === 2) {
+  if (searchTool.value) {
+    return;
+  } else {
     console.log(originalPrices);
-    showTableEntries(originalPrices);
-    indexCategory = 0;
+    if (indexCategory === 0) {
+      categoryColumnButton.classList.add("fa-caret-up");
+      categoryColumnButton.classList.remove("fa-sort");
+      let sorted = allBudgetStorage.sort((a, b) =>
+        a.category > b.category ? 1 : a.category < b.category ? -1 : 0
+      );
+      console.log(sorted);
+      showTableEntries(sorted);
+      indexCategory++;
+    } else if (indexCategory === 1) {
+      categoryColumnButton.classList.add("fa-caret-down");
+      categoryColumnButton.classList.remove("fa-caret-up");
+      let sorted2 = allBudgetStorage.sort((a, b) =>
+        a.category < b.category ? 1 : a.category > b.category ? -1 : 0
+      );
+      console.log(sorted2);
+      showTableEntries(sorted2);
+      indexCategory++;
+    } else if (indexCategory === 2) {
+      categoryColumnButton.classList.add("fa-sort");
+      categoryColumnButton.classList.remove("fa-caret-down");
+      console.log(originalPrices);
+      showTableEntries(originalPrices);
+      indexCategory = 0;
+    }
   }
 }
 
 let indexDate = 0;
 function sortByDate() {
-  console.log(originalPrices);
-  if (indexDate === 0) {
-    let sorted = allBudgetStorage.sort((a, b) =>
-      a.date > b.date ? 1 : a.date < b.date ? -1 : 0
-    );
-    console.log(sorted);
-    showTableEntries(sorted);
-    indexDate++;
-  } else if (indexDate === 1) {
-    let sorted2 = allBudgetStorage.sort((a, b) =>
-      a.date < b.date ? 1 : a.date > b.date ? -1 : 0
-    );
-    console.log(sorted2);
-    showTableEntries(sorted2);
-    indexDate++;
-  } else if (indexDate === 2) {
+  if (searchTool.value) {
+    return;
+  } else {
     console.log(originalPrices);
-    showTableEntries(originalPrices);
-    indexDate = 0;
+    if (indexDate === 0) {
+      dateColumnButton.classList.add("fa-caret-up");
+      dateColumnButton.classList.remove("fa-sort");
+      let sorted = allBudgetStorage.sort((a, b) =>
+        a.date > b.date ? 1 : a.date < b.date ? -1 : 0
+      );
+      console.log(sorted);
+      showTableEntries(sorted);
+      indexDate++;
+    } else if (indexDate === 1) {
+      dateColumnButton.classList.add("fa-caret-down");
+      dateColumnButton.classList.remove("fa-caret-up");
+      let sorted2 = allBudgetStorage.sort((a, b) =>
+        a.date < b.date ? 1 : a.date > b.date ? -1 : 0
+      );
+      console.log(sorted2);
+      showTableEntries(sorted2);
+      indexDate++;
+    } else if (indexDate === 2) {
+      dateColumnButton.classList.add("fa-sort");
+      dateColumnButton.classList.remove("fa-caret-down");
+      console.log(originalPrices);
+      showTableEntries(originalPrices);
+      indexDate = 0;
+    }
   }
 }
 let indexDescription = 0;
 function sortByDescription() {
-  console.log(originalPrices);
-  if (indexDescription === 0) {
-    let sorted = allBudgetStorage.sort((a, b) =>
-      a.description > b.description ? 1 : a.description < b.description ? -1 : 0
-    );
-    console.log(sorted);
-    showTableEntries(sorted);
-    indexDescription++;
-  } else if (indexDescription === 1) {
-    let sorted2 = allBudgetStorage.sort((a, b) =>
-      a.description < b.description ? 1 : a.description > b.description ? -1 : 0
-    );
-    console.log(sorted2);
-    showTableEntries(sorted2);
-    indexDescription++;
-  } else if (indexDescription === 2) {
+  if (searchTool.value) {
+    return;
+  } else {
     console.log(originalPrices);
-    showTableEntries(originalPrices);
-    indexDescription = 0;
+    if (indexDescription === 0) {
+      descriptionColumnButton.classList.add("fa-caret-up");
+      descriptionColumnButton.classList.remove("fa-sort");
+      let sorted = allBudgetStorage.sort((a, b) =>
+        a.description > b.description
+          ? 1
+          : a.description < b.description
+          ? -1
+          : 0
+      );
+      console.log(sorted);
+      showTableEntries(sorted);
+      indexDescription++;
+    } else if (indexDescription === 1) {
+      descriptionColumnButton.classList.add("fa-caret-down");
+      descriptionColumnButton.classList.remove("fa-caret-up");
+      let sorted2 = allBudgetStorage.sort((a, b) =>
+        a.description < b.description
+          ? 1
+          : a.description > b.description
+          ? -1
+          : 0
+      );
+      console.log(sorted2);
+      showTableEntries(sorted2);
+      indexDescription++;
+    } else if (indexDescription === 2) {
+      descriptionColumnButton.classList.add("fa-sort");
+      descriptionColumnButton.classList.remove("fa-caret-down");
+      console.log(originalPrices);
+      showTableEntries(originalPrices);
+      indexDescription = 0;
+    }
   }
+}
+
+document.querySelectorAll(".edit-field").forEach((rows) => {
+  rows.addEventListener("click", setNewInput);
+});
+
+function setNewInput () {
+  if (this.hasAttribute("data-clicked")) {
+    return;
+  }
+  this.setAttribute("data-clicked", "yes");
+  this.setAttribute("data-text", this.innerHTML);
+
+  let input = document.createElement("input");
+  input.setAttribute("type", "text");
+  input.value = this.innerHTML;
+  input.classList.add("onEdit");
+
+  input.onblur = function () {
+    let td = input.parentElement;
+    let original_text = input.parentElement.getAttribute("data-text");
+    let current_text = this.value;
+
+    if (original_text !== current_text) {
+      td.removeAttribute("data-clicked");
+      td.removeAttribute("data-text");
+      td.innerHTML = current_text;
+
+      console.log(original_text + " is changed to " + current_text);
+    } else {
+      td.removeAttribute("data-clicked");
+      td.removeAttribute("data-text");
+      td.innerHTML = original_text;
+      console.log('no changes');
+    }
+  };
+
+  input.onkeypress = function () {
+    if (event.keyCode === 13) {
+      this.blur();
+    } 
+  }
+  this.innerHTML = "";
+  this.append(input);
+  this.firstElementChild.select();
 }
 
 function sincronizeStorage() {

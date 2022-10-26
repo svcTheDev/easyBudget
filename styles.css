@@ -150,7 +150,10 @@ header {
   justify-content: space-around;
   margin: 3rem 3rem 1.5rem 3rem;
   /* max-width: 1104px; */
-  /* width: 80rem; */
+}
+
+
+.balance {
 }
 
 @media (max-width: 768px) {
@@ -176,14 +179,15 @@ header {
   /* width: 50%; */
   margin-bottom: 1.5rem;
   /* text-align: center; */
+  max-width: 300px;
 }
 .outcome p {
-  color: #e61d32;
   font-size: 2rem;
+  color: #e61d32;
 }
 .income p {
   color: #009b72;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 .balance p {
@@ -191,8 +195,11 @@ header {
 }
 
 span {
+  color: rgba(0, 0, 0, 0.5);
   font-size: 0.8rem;
+  font-weight: 400;
 }
+
 
 /* Search Tool */
 
@@ -540,14 +547,6 @@ input::-webkit-inner-spin-button {
 
 /* History */
 
-.sort-column {
-  cursor: pointer;
-}
-
-.sort-column:hover {
-  /* text-decoration: underline; */
-}
-
 .sort-column:nth-child(5) {
   cursor:unset;
 }
@@ -578,7 +577,7 @@ input::-webkit-inner-spin-button {
   text-align: left;
   /* padding: 0.5rem 5rem; */
   text-align: center;
-  /* padding: 10px 15px; */
+  padding: 10px 15px;
   /* width: 50%; */
 }
 
@@ -607,7 +606,25 @@ input::-webkit-inner-spin-button {
 }
 
 .size {
-  padding: 12px 15px;
+  /* padding: 12px 15px; */
+}
+
+.edit-active {
+  /* padding: 0; */
+}
+.onEdit {
+
+  font-family: inherit;
+  font-Size: inherit;
+  text-align: inherit;
+  box-shadow: inset 0 0 1em #339b9d, 0 0 1em rgba(0, 170, 170, 0.5);
+  border: #0dd solid 1px;
+  
+}
+
+
+.onEdit {
+
 }
 
 #delete {
@@ -664,7 +681,7 @@ input::-webkit-inner-spin-button {
 }
 
 #delete:hover::before,
-#delete:hover::after {
+#delete:hover::after {s
   height: 50px;
   transform: rotate(0deg);
   border: 0;
@@ -683,11 +700,20 @@ input::-webkit-inner-spin-button {
 }
 
 .fas {
+  cursor: pointer;
   margin-left: .5rem;
   /* border: solid 1px */
 }
+
+.fa-angle-double-right {
+ opacity: 0;
+}
+
 @media (max-width: 768px) {
   .record th {
     padding: 0 3rem;
   }
+  .fa-angle-double-right {
+    opacity: 1;
+   }
 }
