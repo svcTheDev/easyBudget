@@ -681,7 +681,7 @@ input::-webkit-inner-spin-button {
 }
 
 #delete:hover::before,
-#delete:hover::after {s
+#delete:hover::after {
   height: 50px;
   transform: rotate(0deg);
   border: 0;
