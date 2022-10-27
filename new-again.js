@@ -58,6 +58,8 @@ let balance,
   expense,
   income = [0, 0, 0];
 let outcome_Entries = [];
+let incomeValues = "";
+let expenseValues = "";
 
 incomePrice.addEventListener("keydown", blockKeys);
 expensePrice.addEventListener("keydown", blockKeys);
@@ -74,8 +76,6 @@ function blockKeys(e) {
       "Comma",
       "ArrowUp",
       "ArrowDown",
-      "ArrowLeft",
-      "ArrowRight",
     ].indexOf(e.code) > -1
   ) {
     e.preventDefault();
@@ -115,7 +115,7 @@ function getExpense(e) {
     return;
   }
 
-  let expense = {
+  expenseValues = {
     id: Date.now(),
     type: "expense",
     date: expenseDate.value,
@@ -124,11 +124,13 @@ function getExpense(e) {
     price: parseFloat(expensePrice.value),
   };
 
-  allBudgetStorage.push(expense);
+  allBudgetStorage.push(expenseValues);
 
   expenseForm.reset();
   setAllCalculations();
   showTableEntries(allBudgetStorage);
+
+  location.reload();
 }
 
 function getIncome(e) {
@@ -149,7 +151,7 @@ function getIncome(e) {
     return;
   }
 
-  let income = {
+  incomeValues = {
     id: Date.now(),
     type: "income",
     date: incomeDate.value,
@@ -158,7 +160,7 @@ function getIncome(e) {
     price: parseFloat(incomePrice.value),
   };
 
-  allBudgetStorage.push(income);
+  allBudgetStorage.push(incomeValues);
 
   incomeForm.reset();
   setAllCalculations();
@@ -262,12 +264,16 @@ function showTableEntries(allBudgetStorage) {
       budget.type === "income" ? "record-income" : "record-outcome";
 
     const row = `
-        <td class="size edit-field">${getDayWeek(new Date(budget.date))} ${
-      budget.date
+        <td id="date-field" class="size edit-field">${getDayWeek(
+          new Date(budget.date)
+        )} ${budget.date}</td>
+        <td id="description-field" class="size edit-field">${
+          budget.description
+        }</td>
+        <td id="category-field" class="size edit-field">${budget.category}</td>
+        <td id="price-field" class="size edit-field ${selectClass}">${
+      budget.price
     }</td>
-        <td class="size edit-field">${budget.description}</td>
-        <td class="size edit-field">${budget.category}</td>
-        <td class="size edit-field ${selectClass}">${budget.price}</td>
         <td id="delete">Delete</td>
         `;
 
@@ -514,7 +520,9 @@ document.querySelectorAll(".edit-field").forEach((rows) => {
   rows.addEventListener("click", setNewInput);
 });
 
-function setNewInput () {
+function setNewInput() {
+  
+
   if (this.hasAttribute("data-clicked")) {
     return;
   }
@@ -526,30 +534,94 @@ function setNewInput () {
   input.value = this.innerHTML;
   input.classList.add("onEdit");
 
-  input.onblur = function () {
+  input.onblur = function (e) {
     let td = input.parentElement;
     let original_text = input.parentElement.getAttribute("data-text");
     let current_text = this.value;
-
+    let savedParentId = e.target.parentElement.id;
+  
     if (original_text !== current_text) {
       td.removeAttribute("data-clicked");
       td.removeAttribute("data-text");
       td.innerHTML = current_text;
 
+        if (savedParentId === 'description-field') {
+          const descriptionModified = allBudgetStorage.find(
+                (values) => values.description === original_text)
+                console.log(descriptionModified);
+                delete descriptionModified.description;
+                descriptionModified.description = current_text;
+                console.log(descriptionModified);
+                sincronizeStorage();
+        } else if (savedParentId === 'date-field') {
+          console.log(allBudgetStorage);
+          const dateModified = allBudgetStorage.find(
+            (values) => original_text.includes(values.date))
+            console.log(original_text);
+                console.log(dateModified);
+                delete dateModified.date;
+                let daysWeek = ['Lunes ', 'Martes ', 'Miercoles ', 'Jueves ', 'Viernes ', 'Sábado ', 'Domingo ']
+                let NewCurrent_text = '';
+                 
+                console.log(current_text);
+                daysWeek.forEach(days => {
+                  if (current_text.includes(days)) {
+                    console.log(0);
+                    NewCurrent_text = current_text.replace(days,'')
+                  }
+                })
+                  
+                  if (NewCurrent_text) {
+                      console.log(1);
+                      console.log(NewCurrent_text);
+                      dateModified.date = NewCurrent_text;
+                      console.log(dateModified);
+                      showTableEntries(allBudgetStorage)
+                      sincronizeStorage();
+                    } else {
+                    console.log(2);
+                    dateModified.date = current_text;
+                    console.log(dateModified);
+                    showTableEntries(allBudgetStorage)
+                    sincronizeStorage();
+                }
+              
+   
+        } else if (savedParentId === 'category-field') {
+          const categoryModified = allBudgetStorage.find(
+            (values) => values.category === original_text)
+                console.log(categoryModified);
+                delete categoryModified.category;
+                categoryModified.category = current_text;
+                console.log(categoryModified);
+                sincronizeStorage();
+        } else if (savedParentId === 'price-field') {
+          console.log(allBudgetStorage);
+          const priceModified = allBudgetStorage.find(
+            (values) => values.price === parseFloat(original_text))
+            
+                console.log(priceModified);
+                delete priceModified.price;
+                priceModified.price = parseFloat(current_text);
+                console.log(priceModified);
+                sincronizeStorage();
+        } else {
+        console.log("no");
+      }
       console.log(original_text + " is changed to " + current_text);
     } else {
       td.removeAttribute("data-clicked");
       td.removeAttribute("data-text");
       td.innerHTML = original_text;
-      console.log('no changes');
+      console.log("no changes");
     }
   };
 
   input.onkeypress = function () {
     if (event.keyCode === 13) {
       this.blur();
-    } 
-  }
+    }
+  };
   this.innerHTML = "";
   this.append(input);
   this.firstElementChild.select();
