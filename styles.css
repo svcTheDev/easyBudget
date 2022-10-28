@@ -132,7 +132,7 @@ header {
   .hamburger.active .bar:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
   }
-  .hamburger.active .bar:nth-child(3) {
+  .hamburger.active .bar:nth-child(3) { 
     transform: translateY(-8px) rotate(-45deg);
   }
 
@@ -150,10 +150,6 @@ header {
   justify-content: space-around;
   margin: 3rem 3rem 1.5rem 3rem;
   /* max-width: 1104px; */
-}
-
-
-.balance {
 }
 
 @media (max-width: 768px) {
@@ -606,12 +602,9 @@ input::-webkit-inner-spin-button {
 }
 
 .size {
-  /* padding: 12px 15px; */
+  padding: 12px 15px;
 }
 
-.edit-active {
-  /* padding: 0; */
-}
 .onEdit {
   background-color: transparent;
   font-family: inherit;
@@ -620,11 +613,6 @@ input::-webkit-inner-spin-button {
   box-shadow:  0 0 1em rgba(0, 170, 170, 0.5);
   border: #0dd solid 1px;
   
-}
-
-
-.onEdit {
-
 }
 
 #delete {
