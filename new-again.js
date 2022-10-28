@@ -38,6 +38,8 @@ const descriptionColumnButton = document.querySelector(
   "#sort-description .fas"
 );
 
+const focusButtons = document.querySelector('.buttons');
+
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".navMenu");
 
@@ -165,6 +167,7 @@ function getIncome(e) {
   incomeForm.reset();
   setAllCalculations();
   showTableEntries(allBudgetStorage);
+  location.reload();
 }
 
 function showErrorMessage(inputs) {
@@ -264,7 +267,7 @@ function showTableEntries(allBudgetStorage) {
       budget.type === "income" ? "record-income" : "record-outcome";
 
     const row = `
-        <td id="date-field ${budget.id}" class="size edit-field">${getDayWeek(
+        <td id="date-field ${budget.id}" class="size specialDate">${getDayWeek(
       new Date(budget.date)
     )} ${budget.date}</td>
         <td id="description-field ${budget.id}" class="size edit-field">${
@@ -288,6 +291,15 @@ function showTableEntries(allBudgetStorage) {
     // row.appendChild(deleteBtn);
 
     document.querySelector("#delete").onclick = () => {
+          confirmation.focus({focusVisible: true});
+          document.onkeydown = function (e) {
+            if (event.keyCode === 39) {
+              cancelation.focus({focusVisible: true});
+            } else if (event.keyCode === 37) {
+              confirmation.focus({focusVisible: true});
+            }
+          };
+      
       modalContainer.classList.add("show-confirmation");
       budgetID = budget.id;
     };
@@ -518,28 +530,77 @@ function sortByDescription() {
   }
 }
 
-
 document.querySelectorAll(".edit-field").forEach((rows) => {
   rows.addEventListener("click", setNewInput);
 });
 
-function setNewInput() {
+document.querySelectorAll(".specialDate").forEach((dates) => {
+  dates.addEventListener("click", setNewDate);
+});
 
-  if (this.hasAttribute('date-clicked')) {
+function setNewDate() {
+  if (this.hasAttribute("data-clicked")) {
     return;
   }
-
-  
- 
   this.setAttribute("data-clicked", "yes");
   this.setAttribute("data-text", this.innerHTML);
 
-  let input = `<input type="date" class="onEdit">`
+  let inputDate = document.createElement("input");
+  inputDate.setAttribute("type", "date");
+  inputDate.value = this.innerHTML;
+  inputDate.classList.add("onEdit");
 
-  // input.setAttribute("type", "date");
-  this.append(input);
+  inputDate.onblur = function (e) {
+    let dateTd = inputDate.parentElement;
+    let original_date = inputDate.parentElement.getAttribute("data-text");
+    let current_date = this.value;
+    let dateParentId = parseFloat(e.target.parentElement.id.slice(-13));
+
+    if (current_date !== '') {
+      dateTd.removeAttribute("data-clicked");
+      dateTd.removeAttribute("data-text");
+      dateTd.innerHTML = current_date;
+
+      const checkDateId = allBudgetStorage.find(
+        (values) => values.id === dateParentId
+      );
+      console.log(checkDateId);
+      delete checkDateId.date;
+      checkDateId.date = current_date;
+      console.log(checkDateId);
+      showTableEntries(allBudgetStorage);
+      sincronizeStorage();
+
+      console.log(original_date + " is changed to " + current_date);
+      location.reload();
+    } else {
+      dateTd.removeAttribute("data-clicked");
+      dateTd.removeAttribute("data-text");
+      dateTd.innerHTML = original_date;
+    }
+  };
+  inputDate.onkeypress = function () {
+    if (event.keyCode === 13) {
+      this.blur();
+      location.reload()
+    }
+  };
+  this.innerHTML = "";
+  this.append(inputDate);
+  this.firstElementChild.select();
+}
+
+function setNewInput() {
+  if (this.hasAttribute("data-clicked")) {
+    return;
+  }
+  this.setAttribute("data-clicked", "yes");
+  this.setAttribute("data-text", this.innerHTML);
+
+  let input = document.createElement("input");
+  input.setAttribute("type", "text");
   input.value = this.innerHTML;
-  // input.classList.add("onEdit");
+  input.classList.add("onEdit");
 
   input.onblur = function (e) {
     let td = input.parentElement;
@@ -548,141 +609,65 @@ function setNewInput() {
     let savedParentId = parseFloat(e.target.parentElement.id.slice(-13));
     let savedParentType = e.target.parentElement.id.slice("", -20);
 
-  }
+    if (original_text !== current_text) {
+      td.removeAttribute("data-clicked");
+      td.removeAttribute("data-text");
+      td.innerHTML = current_text;
 
-
-  // if (this.hasAttribute("data-clicked")) {
-  //   return;
-  // }
-  // this.setAttribute("data-clicked", "yes");
-  // this.setAttribute("data-text", this.innerHTML);
-
-  // let input = document.createElement("input");
-  // input.setAttribute("type", "text");
-  // input.value = this.innerHTML;
-  // input.classList.add("onEdit");
-
-  // input.onblur = function (e) {
-  //   let td = input.parentElement;
-  //   let original_text = input.parentElement.getAttribute("data-text");
-  //   let current_text = this.value;
-  //   let savedParentId = parseFloat(e.target.parentElement.id.slice(-13));
-  //   let savedParentType = e.target.parentElement.id.slice("", -20);
-  //   console.log(current_text.length );
-
-   
-  //   if (original_text !== current_text) {
-  //     td.removeAttribute("data-clicked");
-  //     td.removeAttribute("data-text");
-  //     td.innerHTML = current_text;
-
-
-  //     const checkId = allBudgetStorage.find(
-  //       (values) => values.id === savedParentId
-  //     );
-  //     if (savedParentType === "description") {
-  //       if (current_text.length > 50) {
-  //         td.removeAttribute("data-clicked");
-  //         td.removeAttribute("data-text");
-  //         td.innerHTML = original_text;
-  //         return;
-  //       }    
-  //       console.log(checkId);
-  //       delete checkId.description;
-  //       checkId.description = current_text;
-  //       console.log(checkId);
-  //       sincronizeStorage();
-  //     }  
-  //     if (savedParentType === "date") {
-  //       if (current_text.length > 20) {
-  //         // td.removeAttribute("data-clicked");
-  //         // td.removeAttribute("data-text");
-  //         // td.innerHTML = original_text;
-  //         return;
-  //       }    
-  //       delete checkId.date;
-  //       let daysWeek = [
-  //         "Lunes ",
-  //         "Martes ",
-  //         "Miercoles ",
-  //         "Jueves ",
-  //         "Viernes ",
-  //         "Sábado ",
-  //         "Domingo ",
-  //       ];
-  //       let NewCurrent_text = "";
-
-  //       daysWeek.forEach((days) => {
-  //         if (current_text.includes(days)) {
-  //           NewCurrent_text = current_text.replace(days, "");
-  //         }
-  //       });
-
-  //       if (NewCurrent_text) {
-  //         console.log(1);
-  //         console.log(NewCurrent_text);
-  //         checkId.date = NewCurrent_text;
-  //         console.log(checkId);
-  //         showTableEntries(allBudgetStorage);
-  //         sincronizeStorage();
-  //       } else {
-  //         console.log(2);
-  //         checkId.date = current_text;
-  //         console.log(checkId);
-  //         showTableEntries(allBudgetStorage);
-  //         sincronizeStorage();
-  //       }
-  //       return;
-  //     } 
-  //     if (savedParentType === "category") {
-  //       if (current_text.length > 20) {
-  //         td.removeAttribute("data-clicked");
-  //         td.removeAttribute("data-text");
-  //         td.innerHTML = original_text;
-  //         return;
-  //       }    
-  //       console.log(checkId);
-  //       delete checkId.category;
-  //       checkId.category = current_text;
-  //       console.log(checkId);
-  //       sincronizeStorage();
-
-  //     }
-  //     if (savedParentType === "price") {
-  //       if (current_text.length > 9) {
-  //         td.removeAttribute("data-clicked");
-  //         td.removeAttribute("data-text");
-  //         td.innerHTML = original_text;
-  //         return;
-  //       }    
-  //       console.log(allBudgetStorage);
-  //       console.log(checkId);
-  //       delete checkId.price;
-  //       checkId.price = parseFloat(current_text);
-  //       console.log(checkId);
-  //       sincronizeStorage();
-  //     } 
-
-  //     console.log(original_text + " is changed to " + current_text);
-  //     location.reload()
-  //   } else {
-  //     td.removeAttribute("data-clicked");
-  //     td.removeAttribute("data-text");
-  //     td.innerHTML = original_text;
-  //     console.log("no changes");
-  //   }
-  // };
+      const checkId = allBudgetStorage.find(
+        (values) => values.id === savedParentId
+      );
+      if (savedParentType === "description") {
+        if (current_text.length > 50) {
+          td.removeAttribute("data-clicked");
+          td.removeAttribute("data-text");
+          td.innerHTML = original_text;
+          return;
+        }
+        delete checkId.description;
+        checkId.description = current_text;
+        sincronizeStorage();
+      }
+      
+      if (savedParentType === "category") {
+        if (current_text.length > 20) {
+          td.removeAttribute("data-clicked");
+          td.removeAttribute("data-text");
+          td.innerHTML = original_text;
+          return;
+        }
+        delete checkId.category;
+        checkId.category = current_text;
+        sincronizeStorage();
+      }
+      if (savedParentType === "price") {
+        if (current_text.length > 9) {
+          td.removeAttribute("data-clicked");
+          td.removeAttribute("data-text");
+          td.innerHTML = original_text;
+          return;
+        }
+        delete checkId.price;
+        checkId.price = parseFloat(current_text);
+        sincronizeStorage();
+      }
+      location.reload();
+    } else {
+      td.removeAttribute("data-clicked");
+      td.removeAttribute("data-text");
+      td.innerHTML = original_text;
+    }
+  };
 
   input.onkeypress = function () {
     if (event.keyCode === 13) {
       this.blur();
-      // location.reload()
+      location.reload()
     }
   };
   this.innerHTML = "";
   this.append(input);
   this.firstElementChild.select();
-  
 }
 
 function sincronizeStorage() {
