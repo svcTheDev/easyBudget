@@ -518,21 +518,28 @@ function sortByDescription() {
   }
 }
 
+
 document.querySelectorAll(".edit-field").forEach((rows) => {
   rows.addEventListener("click", setNewInput);
 });
 
 function setNewInput() {
-  if (this.hasAttribute("data-clicked")) {
+
+  if (this.hasAttribute('date-clicked')) {
     return;
   }
+
+  
+ 
   this.setAttribute("data-clicked", "yes");
   this.setAttribute("data-text", this.innerHTML);
 
-  let input = document.createElement("input");
-  input.setAttribute("type", "text");
+  let input = `<input type="date" class="onEdit">`
+
+  // input.setAttribute("type", "date");
+  this.append(input);
   input.value = this.innerHTML;
-  input.classList.add("onEdit");
+  // input.classList.add("onEdit");
 
   input.onblur = function (e) {
     let td = input.parentElement;
@@ -540,110 +547,131 @@ function setNewInput() {
     let current_text = this.value;
     let savedParentId = parseFloat(e.target.parentElement.id.slice(-13));
     let savedParentType = e.target.parentElement.id.slice("", -20);
-    console.log(current_text.length );
+
+  }
+
+
+  // if (this.hasAttribute("data-clicked")) {
+  //   return;
+  // }
+  // this.setAttribute("data-clicked", "yes");
+  // this.setAttribute("data-text", this.innerHTML);
+
+  // let input = document.createElement("input");
+  // input.setAttribute("type", "text");
+  // input.value = this.innerHTML;
+  // input.classList.add("onEdit");
+
+  // input.onblur = function (e) {
+  //   let td = input.parentElement;
+  //   let original_text = input.parentElement.getAttribute("data-text");
+  //   let current_text = this.value;
+  //   let savedParentId = parseFloat(e.target.parentElement.id.slice(-13));
+  //   let savedParentType = e.target.parentElement.id.slice("", -20);
+  //   console.log(current_text.length );
 
    
-    if (original_text !== current_text) {
-      td.removeAttribute("data-clicked");
-      td.removeAttribute("data-text");
-      td.innerHTML = current_text;
+  //   if (original_text !== current_text) {
+  //     td.removeAttribute("data-clicked");
+  //     td.removeAttribute("data-text");
+  //     td.innerHTML = current_text;
 
 
-      const checkId = allBudgetStorage.find(
-        (values) => values.id === savedParentId
-      );
-      if (savedParentType === "description") {
-        if (current_text.length > 50) {
-          td.removeAttribute("data-clicked");
-          td.removeAttribute("data-text");
-          td.innerHTML = original_text;
-          return;
-        }    
-        console.log(checkId);
-        delete checkId.description;
-        checkId.description = current_text;
-        console.log(checkId);
-        sincronizeStorage();
-      }  
-      if (savedParentType === "date") {
-        if (current_text.length > 20) {
-          // td.removeAttribute("data-clicked");
-          // td.removeAttribute("data-text");
-          // td.innerHTML = original_text;
-          return;
-        }    
-        delete checkId.date;
-        let daysWeek = [
-          "Lunes ",
-          "Martes ",
-          "Miercoles ",
-          "Jueves ",
-          "Viernes ",
-          "Sábado ",
-          "Domingo ",
-        ];
-        let NewCurrent_text = "";
+  //     const checkId = allBudgetStorage.find(
+  //       (values) => values.id === savedParentId
+  //     );
+  //     if (savedParentType === "description") {
+  //       if (current_text.length > 50) {
+  //         td.removeAttribute("data-clicked");
+  //         td.removeAttribute("data-text");
+  //         td.innerHTML = original_text;
+  //         return;
+  //       }    
+  //       console.log(checkId);
+  //       delete checkId.description;
+  //       checkId.description = current_text;
+  //       console.log(checkId);
+  //       sincronizeStorage();
+  //     }  
+  //     if (savedParentType === "date") {
+  //       if (current_text.length > 20) {
+  //         // td.removeAttribute("data-clicked");
+  //         // td.removeAttribute("data-text");
+  //         // td.innerHTML = original_text;
+  //         return;
+  //       }    
+  //       delete checkId.date;
+  //       let daysWeek = [
+  //         "Lunes ",
+  //         "Martes ",
+  //         "Miercoles ",
+  //         "Jueves ",
+  //         "Viernes ",
+  //         "Sábado ",
+  //         "Domingo ",
+  //       ];
+  //       let NewCurrent_text = "";
 
-        daysWeek.forEach((days) => {
-          if (current_text.includes(days)) {
-            NewCurrent_text = current_text.replace(days, "");
-          }
-        });
+  //       daysWeek.forEach((days) => {
+  //         if (current_text.includes(days)) {
+  //           NewCurrent_text = current_text.replace(days, "");
+  //         }
+  //       });
 
-        if (NewCurrent_text) {
-          console.log(1);
-          console.log(NewCurrent_text);
-          checkId.date = NewCurrent_text;
-          console.log(checkId);
-          showTableEntries(allBudgetStorage);
-          sincronizeStorage();
-        } else {
-          console.log(2);
-          checkId.date = current_text;
-          console.log(checkId);
-          showTableEntries(allBudgetStorage);
-          sincronizeStorage();
-        }
-        return;
-      } 
-      if (savedParentType === "category") {
-        if (current_text.length > 20) {
-          td.removeAttribute("data-clicked");
-          td.removeAttribute("data-text");
-          td.innerHTML = original_text;
-          return;
-        }    
-        console.log(checkId);
-        delete checkId.category;
-        checkId.category = current_text;
-        console.log(checkId);
-        sincronizeStorage();
+  //       if (NewCurrent_text) {
+  //         console.log(1);
+  //         console.log(NewCurrent_text);
+  //         checkId.date = NewCurrent_text;
+  //         console.log(checkId);
+  //         showTableEntries(allBudgetStorage);
+  //         sincronizeStorage();
+  //       } else {
+  //         console.log(2);
+  //         checkId.date = current_text;
+  //         console.log(checkId);
+  //         showTableEntries(allBudgetStorage);
+  //         sincronizeStorage();
+  //       }
+  //       return;
+  //     } 
+  //     if (savedParentType === "category") {
+  //       if (current_text.length > 20) {
+  //         td.removeAttribute("data-clicked");
+  //         td.removeAttribute("data-text");
+  //         td.innerHTML = original_text;
+  //         return;
+  //       }    
+  //       console.log(checkId);
+  //       delete checkId.category;
+  //       checkId.category = current_text;
+  //       console.log(checkId);
+  //       sincronizeStorage();
 
-      }
-      if (savedParentType === "price") {
-        if (current_text.length > 9) {
-          td.removeAttribute("data-clicked");
-          td.removeAttribute("data-text");
-          td.innerHTML = original_text;
-          return;
-        }    
-        console.log(allBudgetStorage);
-        console.log(checkId);
-        delete checkId.price;
-        checkId.price = parseFloat(current_text);
-        console.log(checkId);
-        sincronizeStorage();
-      } 
+  //     }
+  //     if (savedParentType === "price") {
+  //       if (current_text.length > 9) {
+  //         td.removeAttribute("data-clicked");
+  //         td.removeAttribute("data-text");
+  //         td.innerHTML = original_text;
+  //         return;
+  //       }    
+  //       console.log(allBudgetStorage);
+  //       console.log(checkId);
+  //       delete checkId.price;
+  //       checkId.price = parseFloat(current_text);
+  //       console.log(checkId);
+  //       sincronizeStorage();
+  //     } 
 
-      console.log(original_text + " is changed to " + current_text);
-      location.reload()
-    } else {
-      td.removeAttribute("data-clicked");
-      td.removeAttribute("data-text");
-      td.innerHTML = original_text;
-      console.log("no changes");
-    }
-  };
+  //     console.log(original_text + " is changed to " + current_text);
+  //     location.reload()
+  //   } else {
+  //     td.removeAttribute("data-clicked");
+  //     td.removeAttribute("data-text");
+  //     td.innerHTML = original_text;
+  //     console.log("no changes");
+  //   }
+  // };
 
   input.onkeypress = function () {
     if (event.keyCode === 13) {
