@@ -608,14 +608,6 @@ input::-webkit-inner-spin-button {
   animation: glow 1.5s linear 1s;
 }
 
-@keyframes glow {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  100% {
-    filter: hue-rotate(360deg);
-  }
-}
 
 .record tbody tr:nth-of-type(even) {
   background-color: #f2f2f2;
