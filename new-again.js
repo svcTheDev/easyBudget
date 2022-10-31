@@ -38,7 +38,7 @@ const descriptionColumnButton = document.querySelector(
   "#sort-description .fas"
 );
 
-const focusButtons = document.querySelector('.buttons');
+const focusButtons = document.querySelector(".buttons");
 
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".navMenu");
@@ -266,10 +266,11 @@ function showTableEntries(allBudgetStorage) {
     let selectClass =
       budget.type === "income" ? "record-income" : "record-outcome";
 
-    const row = `
-        <td id="date-field ${budget.id}" class="size specialDate">${getDayWeek(
-      new Date(budget.date)
-    )} ${budget.date}</td>
+    const row = `   
+    <td id="date-field ${
+      budget.id
+    }" class="size specialDate edit-field"><i class='far fa-clone duplicate-icon'></i>    
+    ${getDayWeek(new Date(budget.date))} ${budget.date}
         <td id="description-field ${budget.id}" class="size edit-field">${
       budget.description
     }</td>
@@ -291,15 +292,15 @@ function showTableEntries(allBudgetStorage) {
     // row.appendChild(deleteBtn);
 
     document.querySelector("#delete").onclick = () => {
-          confirmation.focus({focusVisible: true});
-          document.onkeydown = function (e) {
-            if (event.keyCode === 39) {
-              cancelation.focus({focusVisible: true});
-            } else if (event.keyCode === 37) {
-              confirmation.focus({focusVisible: true});
-            }
-          };
-      
+      confirmation.focus({ focusVisible: true });
+      document.onkeydown = function (e) {
+        if (event.keyCode === 39) {
+          cancelation.focus({ focusVisible: true });
+        } else if (event.keyCode === 37) {
+          confirmation.focus({ focusVisible: true });
+        }
+      };
+
       modalContainer.classList.add("show-confirmation");
       budgetID = budget.id;
     };
@@ -380,6 +381,15 @@ searchTool.addEventListener("keyup", function (e) {
     });
     return filterData;
   }
+  this.onkeydown = function (e) {
+    if (e.keyCode === 8) {
+      if (this.value.length <= 1) {
+        location.reload();
+      } else {
+        return;
+      }
+    }
+  };
 });
 
 // const arrowDateButton = document.querySelector('#sort-date .fas');
@@ -531,7 +541,8 @@ function sortByDescription() {
 }
 
 document.querySelectorAll(".edit-field").forEach((rows) => {
-  rows.addEventListener("click", setNewInput);
+  rows.addEventListener("click", convertToInput);
+  rows.addEventListener('click', getCloneRow)
 });
 
 document.querySelectorAll(".specialDate").forEach((dates) => {
@@ -549,6 +560,11 @@ function setNewDate() {
   inputDate.setAttribute("type", "date");
   inputDate.value = this.innerHTML;
   inputDate.classList.add("onEdit");
+  this.classList.remove("size");
+  // dateTd.classList.remove('size')
+  if (inputDate.className.includes(".duplicate-icon")) {
+    return;
+  }
 
   inputDate.onblur = function (e) {
     let dateTd = inputDate.parentElement;
@@ -556,7 +572,7 @@ function setNewDate() {
     let current_date = this.value;
     let dateParentId = parseFloat(e.target.parentElement.id.slice(-13));
 
-    if (current_date !== '') {
+    if (current_date !== "") {
       dateTd.removeAttribute("data-clicked");
       dateTd.removeAttribute("data-text");
       dateTd.innerHTML = current_date;
@@ -577,12 +593,13 @@ function setNewDate() {
       dateTd.removeAttribute("data-clicked");
       dateTd.removeAttribute("data-text");
       dateTd.innerHTML = original_date;
+      this.classList.add("size");
     }
   };
   inputDate.onkeypress = function () {
     if (event.keyCode === 13) {
       this.blur();
-      location.reload()
+      location.reload();
     }
   };
   this.innerHTML = "";
@@ -590,7 +607,11 @@ function setNewDate() {
   this.firstElementChild.select();
 }
 
-function setNewInput() {
+function convertToInput() {
+  if (this.className.includes("specialDate")) {
+    return;
+  }
+
   if (this.hasAttribute("data-clicked")) {
     return;
   }
@@ -601,8 +622,11 @@ function setNewInput() {
   input.setAttribute("type", "text");
   input.value = this.innerHTML;
   input.classList.add("onEdit");
+  this.classList.remove("size");
+  let myThis = this;
 
   input.onblur = function (e) {
+    myThis.classList.add("size");
     let td = input.parentElement;
     let original_text = input.parentElement.getAttribute("data-text");
     let current_text = this.value;
@@ -618,7 +642,7 @@ function setNewInput() {
         (values) => values.id === savedParentId
       );
       if (savedParentType === "description") {
-        if (current_text.length > 50) {
+        if (current_text.length > 50 || current_text.length === 0) {
           td.removeAttribute("data-clicked");
           td.removeAttribute("data-text");
           td.innerHTML = original_text;
@@ -628,9 +652,9 @@ function setNewInput() {
         checkId.description = current_text;
         sincronizeStorage();
       }
-      
+
       if (savedParentType === "category") {
-        if (current_text.length > 20) {
+        if (current_text.length > 20 || current_text.length === 0) {
           td.removeAttribute("data-clicked");
           td.removeAttribute("data-text");
           td.innerHTML = original_text;
@@ -641,7 +665,7 @@ function setNewInput() {
         sincronizeStorage();
       }
       if (savedParentType === "price") {
-        if (current_text.length > 9) {
+        if (current_text.length > 9 || current_text.length === 0) {
           td.removeAttribute("data-clicked");
           td.removeAttribute("data-text");
           td.innerHTML = original_text;
@@ -651,7 +675,7 @@ function setNewInput() {
         checkId.price = parseFloat(current_text);
         sincronizeStorage();
       }
-      location.reload();
+      // location.reload();
     } else {
       td.removeAttribute("data-clicked");
       td.removeAttribute("data-text");
@@ -662,12 +686,48 @@ function setNewInput() {
   input.onkeypress = function () {
     if (event.keyCode === 13) {
       this.blur();
-      location.reload()
+      // location.reload();{
+    }
+  };
+  input.onkeydown = function (e) {
+    console.log(e.keyCode);
+    if (e.keyCode === 9) {
+      // location.reload();{
     }
   };
   this.innerHTML = "";
   this.append(input);
   this.firstElementChild.select();
+}
+
+document.querySelectorAll(".duplicate-icon").forEach((icons) => {
+  icons.addEventListener("click", getCloneRow);
+});
+  
+function getCloneRow(e) {
+  if(!e.target.className.includes('duplicate-icon')) {
+    return;
+  } 
+  
+  let rowId = parseFloat(this.parentElement.id.slice(-13));
+  const indexRow = allBudgetStorage.findIndex((values) => values.id === rowId);
+
+  const rowById = allBudgetStorage.find((values) => values.id === rowId);
+
+  let stringRow = JSON.stringify(rowById);
+  let cloneRow = JSON.parse(stringRow);
+
+  delete cloneRow.id;
+  cloneRow.id = Date.now();
+  insertCloneRow(allBudgetStorage, indexRow, cloneRow);
+  showTableEntries(allBudgetStorage);
+  sincronizeStorage();
+
+  location.reload();
+}
+
+function insertCloneRow(allBudgetStorage, index, ...elementsArray) {
+  allBudgetStorage.splice(index, 0, ...elementsArray);
 }
 
 function sincronizeStorage() {

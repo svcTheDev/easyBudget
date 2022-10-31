@@ -183,18 +183,22 @@
 
     <!-- <h2 class="container">Historial</h2> -->
 
-    <div class="search__container container">
-      <input class="search__input" type="text" placeholder="Buscar" />
-    </div>
 
-    <div style="overflow-x: auto">
+
+    <div class="table-wrapper" style="overflow-x: auto">
       <table class="record container">
         <div class="arrow-icon container">
+        <i class="fas fa-angle-double-right" style="font-size: 24px"></i>
+      </div>
+        <div class="history-container container">
           <p>Historial</p>
-          <i class="fas fa-angle-double-right" style="font-size: 24px"></i>
+          <div class="search__container container">
+            <input class="search__input" type="text" placeholder="Buscar" />
+          </div>
         </div>
         <thead>
           <tr>
+            <th class="sort-column" id="sort-date"></th>
             <th class="sort-column" id="sort-date">Fecha<i class='fas fa-sort'></i></th>
             <th class="sort-column" id="sort-description">Descripción<i class='fas fa-sort'></i></th>
             <th class="sort-column" id="sort-category">Categoría<i class='fas fa-sort'></i></th>
@@ -229,10 +233,10 @@
     </div>
 
     <!-- <script src="new.js"></script> -->
-    <script
+    <!-- <script
       src="https://kit.fontawesome.com/a076d05399.js"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
     <script src="numberToWords.js"></script>
     <script src="new-again.js"></script>
   </body>
