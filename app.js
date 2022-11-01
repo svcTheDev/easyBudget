@@ -269,24 +269,24 @@ function showTableEntries(allBudgetStorage) {
     const row = `   
     <td id="date-field ${
       budget.id
-    }" class="size specialDate edit-field"><i class='far fa-clone duplicate-icon'></i>    
-    ${getDayWeek(new Date(budget.date))} ${budget.date}
+    }" class="size edit-field"><i class='far fa-clone duplicate-icon'></i>    
+    ${getDayWeek(new Date(budget.date))} ${budget.date}<i class="specialDate fa-solid fa-pencil"></i>
         <td id="description-field ${budget.id}" class="size edit-field">${
       budget.description
-    }</td>
+    }<i class="fa-solid fa-pencil"></i></td>
         <td id="category-field ${budget.id}" class="size edit-field">${
       budget.category
-    }</td>
+    }<i class="fa-solid fa-pencil"></i></td>
         <td id="price-field ${
           budget.id
-        }" class="size edit-field ${selectClass}">${budget.price}</td>
+        }" class="size edit-field ${selectClass}">${budget.price}<i class="fa-solid fa-pencil"></i></td>
         <td id="delete">Delete</td>
         `;
-
     const deleteBtn = document.createElement("button");
     deleteBtn.innerText = "Delete";
     deleteBtn.classList.add("delete");
 
+    
     // table.appendChild(row);
     table.insertAdjacentHTML("afterbegin", row);
     // row.appendChild(deleteBtn);
@@ -540,16 +540,24 @@ function sortByDescription() {
   }
 }
 
+document.querySelectorAll(".fa-pencil").forEach((pencil) => {
+  pencil.addEventListener("click", convertToInput)
+})
+
 document.querySelectorAll(".edit-field").forEach((rows) => {
-  rows.addEventListener("click", convertToInput);
+  // rows.addEventListener("click", convertToInput);
   rows.addEventListener('click', getCloneRow)
-});
+  
+})
+
 
 document.querySelectorAll(".specialDate").forEach((dates) => {
   dates.addEventListener("click", setNewDate);
 });
 
-function setNewDate() {
+function setNewDate(e) {
+  console.log(e.trget);
+  console.log('hola?');
   if (this.hasAttribute("data-clicked")) {
     return;
   }
@@ -607,7 +615,8 @@ function setNewDate() {
   this.firstElementChild.select();
 }
 
-function convertToInput() {
+function convertToInput(e) {
+
   if (this.className.includes("specialDate")) {
     return;
   }
@@ -615,12 +624,13 @@ function convertToInput() {
   if (this.hasAttribute("data-clicked")) {
     return;
   }
+  let iconParent = this.parentElement;
   this.setAttribute("data-clicked", "yes");
-  this.setAttribute("data-text", this.innerHTML);
+  this.setAttribute("data-text", this.textContent);
 
   let input = document.createElement("input");
   input.setAttribute("type", "text");
-  input.value = this.innerHTML;
+  input.value = this.textContent;
   input.classList.add("onEdit");
   this.classList.remove("size");
   let myThis = this;
@@ -728,6 +738,29 @@ function getCloneRow(e) {
 
 function insertCloneRow(allBudgetStorage, index, ...elementsArray) {
   allBudgetStorage.splice(index, 0, ...elementsArray);
+}
+
+
+document.querySelectorAll('tbody tr').forEach((tr) => {
+  tr.setAttribute('draggable', 'true')
+  tr.classList.add('draggable')
+
+  tr.addEventListener('dragstart', function () {
+    tr.classList.add('dragging')
+
+  })
+
+  tr.addEventListener('dragend', function () {
+    tr.classList.remove('dragging')
+  })
+})
+
+
+
+
+function setRowsToDrag () {
+  this.parentElement.classList.add('draggable')
+  console.log(this.parentElement);
 }
 
 function sincronizeStorage() {

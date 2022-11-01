@@ -617,12 +617,6 @@ input::-webkit-inner-spin-button {
   border-bottom: 1px solid #244564;
 }
 
-
-
-/* .record tbody tr::before {
-  font-family: "Font Awesome 5 Free"; font-weight: 100; content: "\f24d";
-  z-index: -1;
-} */
 .record tbody tr {
   position: relative;
 }
@@ -643,6 +637,31 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
   width: 3rem;
 }
+.edit-field::after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f303";
+  z-index: 0;
+  position: relative;
+  left: -.9rem;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.edit-field:hover::after {
+  opacity: .5;
+}
+
+.fa-pencil {
+  cursor: pointer;
+  z-index: 2;
+  pointer-events: auto;
+  opacity: 0;
+  margin-left: .5rem;
+}
+
 .record tbody tr:hover::before {
   opacity: 1;
 }
@@ -674,20 +693,14 @@ input::-webkit-inner-spin-button {
   border: 1px solid;
   padding: 0.5rem 2.5rem 0.6rem 2.5rem;
 }
-
-/* .specialDate::after {
-  content: '';
+/* 
+.draggable-icon {
+  z-index: -1;
   position: absolute;
-  width: 330%;
-  border: solid 1px;
-  padding: 1.5rem 0 .8rem 2.5rem;
-  left: 0rem;
-  top: 0;
-  pointer-events: none;
-} */
+  top: .5rem;
+  left: -2rem;
+  opacity: .5;
 
-/* .specialDate:hover::before {
-  opacity: 1;
 } */
 
 .record-income {
@@ -704,10 +717,6 @@ input::-webkit-inner-spin-button {
   padding: 8px 15px;
 }
 
-.sizeOn {
-  /* height: 2rem; */
-}
-
 .onEdit {
   background-color: transparent;
   font-family: inherit;
@@ -718,6 +727,14 @@ input::-webkit-inner-spin-button {
   padding: 0;
   /* width: 50%; */
   height: 2.1rem;
+}
+
+.draggable {
+
+}
+
+.dragging {
+  opacity: 1;
 }
 
 #delete {
@@ -795,8 +812,11 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
   margin-left: 0.5rem;
   font-size: 1.2rem;
+  opacity: 0;
   /* border: solid 1px */
 }
+
+
 
 .fa-angle-double-right {
   opacity: 0;
