@@ -562,7 +562,7 @@ function setNewDate(e) {
     return;
   }
   iconDateParent.setAttribute("data-clicked", "yes");
-  iconDateParent.setAttribute("data-text", this.innerHTML);
+  iconDateParent.setAttribute("data-text", iconDateParent.textContent);
 
   let inputDate = document.createElement("input");
   inputDate.setAttribute("type", "date");
@@ -637,7 +637,6 @@ function convertToInput(e) {
     console.log(input.parentElement);
     let original_text = input.parentElement.getAttribute("data-text");
     let current_text = this.value;
-
     let savedParentId = parseFloat(e.target.parentElement.id.slice(-13));
     let savedParentType = e.target.parentElement.id.slice("", -20);
 
@@ -683,12 +682,12 @@ function convertToInput(e) {
         checkId.price = parseFloat(current_text);
         sincronizeStorage();
       }
-      location.reload();
+      // location.reload();
     } else {
       td.removeAttribute("data-clicked");
       td.removeAttribute("data-text");
       td.innerHTML = original_text + `<i class="fa-solid fa-pencil">`;
-      location.reload();
+      // location.reload();
     }
   };
 
@@ -740,26 +739,99 @@ function insertCloneRow(allBudgetStorage, index, ...elementsArray) {
 }
 
 
+let rowLength = 0;
+let indexArrayGrab = 0;
 document.querySelectorAll('tbody tr').forEach((tr) => {
   tr.setAttribute('draggable', 'true')
   tr.classList.add('draggable')
-
+  
+  rowLength++;
+  
+  
+  // tr.setAttribute('id', Math.abs(indexTr);
+  
+  // console.log(tr);
+  // console.log(allBudgetStorage);
+  
+  
+  // console.log(tr.firstElementChild);
+  
+  // De estso tr childs, dame el que tenga este mismo id
   tr.addEventListener('dragstart', function () {
     tr.classList.add('dragging')
+    // setIds(rowLength) 
+    
+  
+      let rowIdStart = parseFloat(tr.firstElementChild.id.slice(-13));
+      indexArrayGrab = allBudgetStorage.findIndex((index) => index.id === rowIdStart)
+      console.log(indexArrayGrab);
+    // const check = [...table.children].find((child) => console.log(child))
+    
+    
+    // if(rowId === indexArrayGrab.id) {
+    //   console.log('hola');
+    // }
+    // if (tr.firstElementChild)
 
   })
 
   tr.addEventListener('dragend', function () {
     tr.classList.remove('dragging')
+    let indexTr = rowLength;
+    document.querySelectorAll('tbody tr').forEach((newTr) => {
+    indexTr--;
+    newTr.setAttribute('id', indexTr)
+
+  })
+  let rowIdEnd = parseFloat(tr.firstElementChild.id.slice(-13));
+
+    const rowObj = allBudgetStorage.find((obj) => obj.id === rowIdEnd)
+    let indexRow = tr.id;
+    console.log(indexRow);
+
+    insertDragRow(allBudgetStorage, indexRow, rowObj)
+
+    // allBudgetStorage.splice(indexRow, 0, rowObj)
+    let newBudget = JSON.stringify(allBudgetStorage);
+    allBudgetStorage = JSON.parse(newBudget);  
+    allBudgetStorage.splice(parseFloat(indexArrayGrab + 1), 1)
+    sincronizeStorage();
   })
 })
 
+function insertDragRow(allBudgetStorage, index, ...elementsArray) {
+  allBudgetStorage.splice(index, 0, ...elementsArray);
+}
+
+table.addEventListener('dragover', setRowsToDrag)
+
+function setRowsToDrag (e) {
+  e.preventDefault();
+  const afterElement = getDragAfterElement(table, e.clientY)
+  const draggable = document.querySelector('.dragging');
+  if (afterElement == null) {
+    table.appendChild(draggable)
+  } else {
+    table.insertBefore(draggable, afterElement)
+  }
+
+  let rowId = parseFloat(draggable.firstElementChild.id.slice(-13));
+  const indexWhenGrab = allBudgetStorage.findIndex((index) => index.id === rowId)
 
 
+}
 
-function setRowsToDrag () {
-  this.parentElement.classList.add('draggable')
-  console.log(this.parentElement);
+function getDragAfterElement(table, y) {
+  const draggableElements = [...table.querySelectorAll('.draggable:not(.dragging)')]
+  return draggableElements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect()
+    const offset = y - box.top - box.height / 2
+    if (offset < 0 && offset > closest.offset) {
+    return {offset: offset, element: child}
+    } else {
+      return closest
+    }
+  }, { offset: Number.NEGATIVE_INFINITY} ).element
 }
 
 function sincronizeStorage() {

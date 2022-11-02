@@ -619,6 +619,7 @@ input::-webkit-inner-spin-button {
 
 .record tbody tr {
   position: relative;
+  cursor:grab;
 }
 
 .record tbody tr::before {
@@ -634,7 +635,6 @@ input::-webkit-inner-spin-button {
   left: 0rem;
   top: 0;
   opacity: 0;
-  cursor: pointer;
   width: 3rem;
 }
 .edit-field::after {
@@ -688,21 +688,12 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
   z-index: 1;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: .5rem;
+  left: 2.5rem;
   opacity: 0;
   border: 1px solid;
-  padding: 0.5rem 2.5rem 0.6rem 2.5rem;
+  
 }
-/* 
-.draggable-icon {
-  z-index: -1;
-  position: absolute;
-  top: .5rem;
-  left: -2rem;
-  opacity: .5;
-
-} */
 
 .record-income {
   font-weight: bold;
@@ -734,9 +725,17 @@ input::-webkit-inner-spin-button {
 
 }
 
-.dragging {
-  opacity: 1;
+.draggable {
+  cursor: move;
 }
+.record tbody tr.dragging {
+  background-color: rgba(0, 170, 170, 0.5);
+  border: #0dd solid 1px;
+  opacity: .5;
+  cursor: move;
+}
+
+
 
 #delete {
   background: none;
