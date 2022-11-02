@@ -202,6 +202,7 @@ function setAllCalculations() {
 function sumEntries(type, entries) {
   let sum = 0;
   entries.forEach((entry) => {
+    // console.log(entry.type);
     if (entry.type === type) {
       sum += entry.price;
     }
@@ -738,6 +739,7 @@ function insertCloneRow(allBudgetStorage, index, ...elementsArray) {
   allBudgetStorage.splice(index, 0, ...elementsArray);
 }
 
+console.log(allBudgetStorage);
 
 let rowLength = 0;
 let indexArrayGrab = 0;
@@ -764,7 +766,6 @@ document.querySelectorAll('tbody tr').forEach((tr) => {
   
       let rowIdStart = parseFloat(tr.firstElementChild.id.slice(-13));
       indexArrayGrab = allBudgetStorage.findIndex((index) => index.id === rowIdStart)
-      console.log(indexArrayGrab);
     // const check = [...table.children].find((child) => console.log(child))
     
     
@@ -779,26 +780,46 @@ document.querySelectorAll('tbody tr').forEach((tr) => {
     tr.classList.remove('dragging')
     let indexTr = rowLength;
     document.querySelectorAll('tbody tr').forEach((newTr) => {
-    indexTr--;
-    newTr.setAttribute('id', indexTr)
-
-  })
-  let rowIdEnd = parseFloat(tr.firstElementChild.id.slice(-13));
-
+      indexTr--;
+      newTr.setAttribute('id', indexTr)
+      
+    })
+    let rowIdEnd = parseFloat(tr.firstElementChild.id.slice(-13));
+    
     const rowObj = allBudgetStorage.find((obj) => obj.id === rowIdEnd)
-    let indexRow = tr.id;
-    console.log(indexRow);
+    let indexRow = parseFloat(tr.id);
 
+    if (indexRow === 0 || indexArrayGrab > indexRow) {
+      indexRow;
+    } else {
+      indexRow = parseFloat(tr.id) + 1;
+    }
+    
     insertDragRow(allBudgetStorage, indexRow, rowObj)
-
-    // allBudgetStorage.splice(indexRow, 0, rowObj)
-    let newBudget = JSON.stringify(allBudgetStorage);
-    allBudgetStorage = JSON.parse(newBudget);  
-    allBudgetStorage.splice(parseFloat(indexArrayGrab + 1), 1)
-    sincronizeStorage();
-  })
-})
-
+    console.log({end: indexRow});
+    
+    //  if (indexRow === 0) {
+ 
+      // allBudgetStorage.splice(indexRow, 0, rowObj)
+      console.log(allBudgetStorage);
+      let newBudget = JSON.stringify(allBudgetStorage);
+      allBudgetStorage = JSON.parse(newBudget);  
+      
+      console.log({start: indexArrayGrab});
+          // allBudgetStorage.splice(indexArrayGrab, 1)
+      
+      if (indexArrayGrab === 0 || indexArrayGrab < indexRow) {
+          console.log('uno');
+          allBudgetStorage.splice(parseFloat(indexArrayGrab), 1)
+        } else {
+            console.log('dos');
+            allBudgetStorage.splice(parseFloat(indexArrayGrab + 1), 1)
+          }
+          console.log(allBudgetStorage);
+          sincronizeStorage();
+        })
+      })
+      
 function insertDragRow(allBudgetStorage, index, ...elementsArray) {
   allBudgetStorage.splice(index, 0, ...elementsArray);
 }
