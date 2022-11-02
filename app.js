@@ -196,13 +196,11 @@ function setAllCalculations() {
 
   updateTotals();
   sincronizeStorage();
-  // numbersToLetters();
 }
 
 function sumEntries(type, entries) {
   let sum = 0;
   entries.forEach((entry) => {
-    // console.log(entry.type);
     if (entry.type === type) {
       sum += entry.price;
     }
@@ -271,7 +269,9 @@ function showTableEntries(allBudgetStorage) {
     <td id="date-field ${
       budget.id
     }" class="size edit-field"><i class='far fa-clone duplicate-icon'></i>    
-    ${getDayWeek(new Date(budget.date))} ${budget.date}<i class="specialDate fa-solid fa-pencil"></i>
+    ${getDayWeek(new Date(budget.date))} ${
+      budget.date
+    }<i class="specialDate fa-solid fa-pencil"></i>
         <td id="description-field ${budget.id}" class="size edit-field">${
       budget.description
     }<i class="fa-solid fa-pencil"></i></td>
@@ -280,14 +280,15 @@ function showTableEntries(allBudgetStorage) {
     }<i class="fa-solid fa-pencil"></i></td>
         <td id="price-field ${
           budget.id
-        }" class="size edit-field ${selectClass}">${budget.price}<i class="fa-solid fa-pencil"></i></td>
+        }" class="size edit-field ${selectClass}">${
+      budget.price
+    }<i class="fa-solid fa-pencil"></i></td>
         <td id="delete">Delete</td>
         `;
     const deleteBtn = document.createElement("button");
     deleteBtn.innerText = "Delete";
     deleteBtn.classList.add("delete");
 
-    
     // table.appendChild(row);
     table.insertAdjacentHTML("afterbegin", row);
     // row.appendChild(deleteBtn);
@@ -337,9 +338,6 @@ function deleteRow(id) {
   setAllCalculations();
 }
 
-// let copyBudget = [...allBudgetStorage]
-
-// showTableEntries(copyBudget)
 
 searchTool.addEventListener("keyup", function (e) {
   let valueSearch = this.value;
@@ -392,11 +390,6 @@ searchTool.addEventListener("keyup", function (e) {
     }
   };
 });
-
-// const arrowDateButton = document.querySelector('#sort-date .fas');
-// const arrowDescriptionButton = document.querySelector('#sort-description .fas');
-// const arrowCategoryButton = document.querySelector('#sort-category .fas');
-// const arrowPriceButton = document.querySelector('#sort-price .fas');
 
 let indexPrice = 0;
 function sortByPrice() {
@@ -546,15 +539,12 @@ function sortByDescription() {
 }
 
 document.querySelectorAll(".fa-pencil").forEach((pencil) => {
-  pencil.addEventListener("click", convertToInput)
-})
+  pencil.addEventListener("click", convertToInput);
+});
 
 document.querySelectorAll(".edit-field").forEach((rows) => {
-  // rows.addEventListener("click", convertToInput);
-  rows.addEventListener('click', getCloneRow)
-  
-})
-
+  rows.addEventListener("click", getCloneRow);
+});
 
 document.querySelectorAll(".specialDate").forEach((dates) => {
   dates.addEventListener("click", setNewDate);
@@ -574,7 +564,6 @@ function setNewDate(e) {
   inputDate.value = iconDateParent.textContent;
   inputDate.classList.add("onEdit");
   this.classList.remove("size");
-  
 
   inputDate.onblur = function (e) {
     let dateTd = inputDate.parentElement;
@@ -703,7 +692,6 @@ function convertToInput(e) {
     }
   };
   input.onkeydown = function (e) {
-    console.log(e.keyCode);
     if (e.keyCode === 9) {
       // location.reload();{
     }
@@ -716,12 +704,12 @@ function convertToInput(e) {
 document.querySelectorAll(".duplicate-icon").forEach((icons) => {
   icons.addEventListener("click", getCloneRow);
 });
-  
+
 function getCloneRow(e) {
-  if(!e.target.className.includes('duplicate-icon')) {
+  if (!e.target.className.includes("duplicate-icon")) {
     return;
-  } 
-  
+  }
+
   let rowId = parseFloat(this.parentElement.id.slice(-13));
   const indexRow = allBudgetStorage.findIndex((values) => values.id === rowId);
 
@@ -743,54 +731,31 @@ function insertCloneRow(allBudgetStorage, index, ...elementsArray) {
   allBudgetStorage.splice(index, 0, ...elementsArray);
 }
 
-console.log(allBudgetStorage);
-
 let rowLength = 0;
 let indexArrayGrab = 0;
-document.querySelectorAll('tbody tr').forEach((tr) => {
-  tr.setAttribute('draggable', 'true')
-  tr.classList.add('draggable')
-  
+document.querySelectorAll("tbody tr").forEach((tr) => {
+  tr.setAttribute("draggable", "true");
+  tr.classList.add("draggable");
   rowLength++;
-  
-  
-  // tr.setAttribute('id', Math.abs(indexTr);
-  
-  // console.log(tr);
-  // console.log(allBudgetStorage);
-  
-  
-  // console.log(tr.firstElementChild);
-  
-  // De estso tr childs, dame el que tenga este mismo id
-  tr.addEventListener('dragstart', function () {
-    tr.classList.add('dragging')
-    // setIds(rowLength) 
-    
-  
-      let rowIdStart = parseFloat(tr.firstElementChild.id.slice(-13));
-      indexArrayGrab = allBudgetStorage.findIndex((index) => index.id === rowIdStart)
-    // const check = [...table.children].find((child) => console.log(child))
-    
-    
-    // if(rowId === indexArrayGrab.id) {
-    //   console.log('hola');
-    // }
-    // if (tr.firstElementChild)
+  tr.addEventListener("dragstart", function () {
+    tr.classList.add("dragging");
 
-  })
+    let rowIdStart = parseFloat(tr.firstElementChild.id.slice(-13));
+    indexArrayGrab = allBudgetStorage.findIndex(
+      (index) => index.id === rowIdStart
+    );
+  });
 
-  tr.addEventListener('dragend', function () {
-    tr.classList.remove('dragging')
+  tr.addEventListener("dragend", function () {
+    tr.classList.remove("dragging");
     let indexTr = rowLength;
-    document.querySelectorAll('tbody tr').forEach((newTr) => {
+    document.querySelectorAll("tbody tr").forEach((newTr) => {
       indexTr--;
-      newTr.setAttribute('id', indexTr)
-      
-    })
+      newTr.setAttribute("id", indexTr);
+    });
     let rowIdEnd = parseFloat(tr.firstElementChild.id.slice(-13));
-    
-    const rowObj = allBudgetStorage.find((obj) => obj.id === rowIdEnd)
+
+    const rowObj = allBudgetStorage.find((obj) => obj.id === rowIdEnd);
     let indexRow = parseFloat(tr.id);
 
     if (indexRow === 0 || indexArrayGrab > indexRow) {
@@ -798,65 +763,57 @@ document.querySelectorAll('tbody tr').forEach((tr) => {
     } else {
       indexRow = parseFloat(tr.id) + 1;
     }
-    
-    insertDragRow(allBudgetStorage, indexRow, rowObj)
-    console.log({end: indexRow});
-    
-    //  if (indexRow === 0) {
- 
-      // allBudgetStorage.splice(indexRow, 0, rowObj)
-      console.log(allBudgetStorage);
-      let newBudget = JSON.stringify(allBudgetStorage);
-      allBudgetStorage = JSON.parse(newBudget);  
-      
-      console.log({start: indexArrayGrab});
-          // allBudgetStorage.splice(indexArrayGrab, 1)
-      
-      if (indexArrayGrab === 0 || indexArrayGrab < indexRow) {
-          console.log('uno');
-          allBudgetStorage.splice(parseFloat(indexArrayGrab), 1)
-        } else {
-            console.log('dos');
-            allBudgetStorage.splice(parseFloat(indexArrayGrab + 1), 1)
-          }
-          console.log(allBudgetStorage);
-          sincronizeStorage();
-        })
-      })
-      
+
+    insertDragRow(allBudgetStorage, indexRow, rowObj);
+
+    let newBudget = JSON.stringify(allBudgetStorage);
+    allBudgetStorage = JSON.parse(newBudget);
+
+    if (indexArrayGrab === 0 || indexArrayGrab < indexRow) {
+      console.log("uno");
+      allBudgetStorage.splice(parseFloat(indexArrayGrab), 1);
+    } else {
+      console.log("dos");
+      allBudgetStorage.splice(parseFloat(indexArrayGrab + 1), 1);
+    }
+    console.log(allBudgetStorage);
+    sincronizeStorage();
+  });
+});
+
 function insertDragRow(allBudgetStorage, index, ...elementsArray) {
   allBudgetStorage.splice(index, 0, ...elementsArray);
 }
 
-table.addEventListener('dragover', setRowsToDrag)
+table.addEventListener("dragover", setRowsToDrag);
 
-function setRowsToDrag (e) {
+function setRowsToDrag(e) {
   e.preventDefault();
-  const afterElement = getDragAfterElement(table, e.clientY)
-  const draggable = document.querySelector('.dragging');
+  const afterElement = getDragAfterElement(table, e.clientY);
+  const draggable = document.querySelector(".dragging");
   if (afterElement == null) {
-    table.appendChild(draggable)
+    table.appendChild(draggable);
   } else {
-    table.insertBefore(draggable, afterElement)
+    table.insertBefore(draggable, afterElement);
   }
-
-  let rowId = parseFloat(draggable.firstElementChild.id.slice(-13));
-  const indexWhenGrab = allBudgetStorage.findIndex((index) => index.id === rowId)
-
-
 }
 
 function getDragAfterElement(table, y) {
-  const draggableElements = [...table.querySelectorAll('.draggable:not(.dragging)')]
-  return draggableElements.reduce((closest, child) => {
-    const box = child.getBoundingClientRect()
-    const offset = y - box.top - box.height / 2
-    if (offset < 0 && offset > closest.offset) {
-    return {offset: offset, element: child}
-    } else {
-      return closest
-    }
-  }, { offset: Number.NEGATIVE_INFINITY} ).element
+  const draggableElements = [
+    ...table.querySelectorAll(".draggable:not(.dragging)"),
+  ];
+  return draggableElements.reduce(
+    (closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child };
+      } else {
+        return closest;
+      }
+    },
+    { offset: Number.NEGATIVE_INFINITY }
+  ).element;
 }
 
 function sincronizeStorage() {
