@@ -643,7 +643,7 @@ input::-webkit-inner-spin-button {
   content: "\f303";
   z-index: 0;
   position: relative;
-  left: -.9rem;
+  left: -1.2rem;
   top: 0;
   opacity: 0;
   cursor: pointer;
@@ -660,6 +660,7 @@ input::-webkit-inner-spin-button {
   pointer-events: auto;
   opacity: 0;
   margin-left: .5rem;
+  border: solid 1px;
 }
 
 .record tbody tr:hover::before {
@@ -725,8 +726,8 @@ input::-webkit-inner-spin-button {
   box-shadow: 0 0 1em rgba(0, 170, 170, 0.5);
   border: #0dd solid 1px;
   padding: 0;
-  /* width: 50%; */
   height: 2.1rem;
+  /* width: 50%; */
 }
 
 .draggable {

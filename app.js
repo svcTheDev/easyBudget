@@ -556,23 +556,20 @@ document.querySelectorAll(".specialDate").forEach((dates) => {
 });
 
 function setNewDate(e) {
-  console.log(e.trget);
-  console.log('hola?');
-  if (this.hasAttribute("data-clicked")) {
+  let iconDateParent = this.parentElement;
+
+  if (iconDateParent.hasAttribute("data-clicked")) {
     return;
   }
-  this.setAttribute("data-clicked", "yes");
-  this.setAttribute("data-text", this.innerHTML);
+  iconDateParent.setAttribute("data-clicked", "yes");
+  iconDateParent.setAttribute("data-text", this.innerHTML);
 
   let inputDate = document.createElement("input");
   inputDate.setAttribute("type", "date");
-  inputDate.value = this.innerHTML;
+  inputDate.value = iconDateParent.textContent;
   inputDate.classList.add("onEdit");
   this.classList.remove("size");
-  // dateTd.classList.remove('size')
-  if (inputDate.className.includes(".duplicate-icon")) {
-    return;
-  }
+  
 
   inputDate.onblur = function (e) {
     let dateTd = inputDate.parentElement;
@@ -583,7 +580,7 @@ function setNewDate(e) {
     if (current_date !== "") {
       dateTd.removeAttribute("data-clicked");
       dateTd.removeAttribute("data-text");
-      dateTd.innerHTML = current_date;
+      dateTd.innerHTML = current_date + `<i class="fa-solid fa-pencil">`;
 
       const checkDateId = allBudgetStorage.find(
         (values) => values.id === dateParentId
@@ -600,8 +597,8 @@ function setNewDate(e) {
     } else {
       dateTd.removeAttribute("data-clicked");
       dateTd.removeAttribute("data-text");
-      dateTd.innerHTML = original_date;
-      this.classList.add("size");
+      dateTd.innerHTML = original_date + `<i class="fa-solid fa-pencil">`;
+      iconDateParent.classList.add("size");
     }
   };
   inputDate.onkeypress = function () {
@@ -610,43 +607,44 @@ function setNewDate(e) {
       location.reload();
     }
   };
-  this.innerHTML = "";
-  this.append(inputDate);
-  this.firstElementChild.select();
+  iconDateParent.innerHTML = "";
+  iconDateParent.append(inputDate);
+  iconDateParent.firstElementChild.select();
 }
 
 function convertToInput(e) {
+  let iconParent = this.parentElement;
 
   if (this.className.includes("specialDate")) {
     return;
   }
 
-  if (this.hasAttribute("data-clicked")) {
+  if (iconParent.hasAttribute("data-clicked")) {
     return;
   }
-  let iconParent = this.parentElement;
-  this.setAttribute("data-clicked", "yes");
-  this.setAttribute("data-text", this.textContent);
+  iconParent.setAttribute("data-clicked", "yes");
+  iconParent.setAttribute("data-text", iconParent.textContent);
 
   let input = document.createElement("input");
   input.setAttribute("type", "text");
-  input.value = this.textContent;
+  input.value = iconParent.textContent;
   input.classList.add("onEdit");
-  this.classList.remove("size");
-  let myThis = this;
+  iconParent.classList.remove("size");
 
   input.onblur = function (e) {
-    myThis.classList.add("size");
+    iconParent.classList.add("size");
     let td = input.parentElement;
+    console.log(input.parentElement);
     let original_text = input.parentElement.getAttribute("data-text");
     let current_text = this.value;
+
     let savedParentId = parseFloat(e.target.parentElement.id.slice(-13));
     let savedParentType = e.target.parentElement.id.slice("", -20);
 
     if (original_text !== current_text) {
       td.removeAttribute("data-clicked");
       td.removeAttribute("data-text");
-      td.innerHTML = current_text;
+      td.innerHTML = current_text + `<i class="fa-solid fa-pencil">`;
 
       const checkId = allBudgetStorage.find(
         (values) => values.id === savedParentId
@@ -685,11 +683,12 @@ function convertToInput(e) {
         checkId.price = parseFloat(current_text);
         sincronizeStorage();
       }
-      // location.reload();
+      location.reload();
     } else {
       td.removeAttribute("data-clicked");
       td.removeAttribute("data-text");
-      td.innerHTML = original_text;
+      td.innerHTML = original_text + `<i class="fa-solid fa-pencil">`;
+      location.reload();
     }
   };
 
@@ -705,9 +704,9 @@ function convertToInput(e) {
       // location.reload();{
     }
   };
-  this.innerHTML = "";
-  this.append(input);
-  this.firstElementChild.select();
+  iconParent.innerHTML = "";
+  iconParent.append(input);
+  iconParent.firstElementChild.select();
 }
 
 document.querySelectorAll(".duplicate-icon").forEach((icons) => {
