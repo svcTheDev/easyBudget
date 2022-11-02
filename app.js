@@ -425,9 +425,10 @@ function sortByPrice() {
     } else if (indexPrice === 2) {
       priceColumnButton.classList.add("fa-sort");
       priceColumnButton.classList.remove("fa-caret-down");
-      console.log(originalPrices);
-      showTableEntries(originalPrices);
+      // console.log(originalPrices);
+      // showTableEntries(originalPrices);
       indexPrice = 0;
+      location.reload();
     }
   }
 }
@@ -459,9 +460,10 @@ function sortByCategory() {
     } else if (indexCategory === 2) {
       categoryColumnButton.classList.add("fa-sort");
       categoryColumnButton.classList.remove("fa-caret-down");
-      console.log(originalPrices);
-      showTableEntries(originalPrices);
+      // console.log(originalPrices);
+      // showTableEntries(originalPrices);
       indexCategory = 0;
+      location.reload();
     }
   }
 }
@@ -493,9 +495,10 @@ function sortByDate() {
     } else if (indexDate === 2) {
       dateColumnButton.classList.add("fa-sort");
       dateColumnButton.classList.remove("fa-caret-down");
-      console.log(originalPrices);
-      showTableEntries(originalPrices);
+      // console.log(originalPrices);
+      // showTableEntries(originalPrices);
       indexDate = 0;
+      location.reload();
     }
   }
 }
@@ -534,9 +537,10 @@ function sortByDescription() {
     } else if (indexDescription === 2) {
       descriptionColumnButton.classList.add("fa-sort");
       descriptionColumnButton.classList.remove("fa-caret-down");
-      console.log(originalPrices);
-      showTableEntries(originalPrices);
+      // console.log(originalPrices);
+      // showTableEntries(originalPrices);
       indexDescription = 0;
+      location.reload();
     }
   }
 }
