@@ -338,6 +338,7 @@ function deleteRow(id) {
   setAllCalculations();
 }
 
+searchTool.focus({ focusVisible: true });
 searchTool.addEventListener("keyup", function (e) {
   let valueSearch = this.value;
 
@@ -393,10 +394,17 @@ searchTool.addEventListener("keyup", function (e) {
 });
 
 function showFilterTotal(autoTotal) {
+  console.log(autoTotal);
   incomeFilter = sumEntries("income", autoTotal);
   ExpenseFilter = sumEntries("expense", autoTotal);
   balanceFilter = calculateBalance(incomeFilter, ExpenseFilter);
-
+  console.log(searchTool.value);
+  if(!searchTool.value) {
+    document.querySelector(
+      ".autoPrice"
+    ).innerHTML = '';
+    return;
+  }
   document.querySelector(
     ".autoPrice"
   ).innerHTML = `<p class="record-income"><span>Ingresos:</span> ${incomeFilter} COP</p><p class="record-outcome"><span>Gastos:</span> ${ExpenseFilter} COP</p><p><span>Balance:</span> ${balanceFilter} COP</p>`;
