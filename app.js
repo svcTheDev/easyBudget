@@ -338,12 +338,12 @@ function deleteRow(id) {
   setAllCalculations();
 }
 
-
 searchTool.addEventListener("keyup", function (e) {
   let valueSearch = this.value;
 
   let dataToReturn = searchTable(valueSearch, allBudgetStorage);
   showTableEntries(dataToReturn);
+  showFilterTotal(dataToReturn);
   function searchTable(valueSearch, dataToReturn) {
     let filterData = [];
     dataToReturn.forEach((data) => {
@@ -380,6 +380,7 @@ searchTool.addEventListener("keyup", function (e) {
     });
     return filterData;
   }
+  /* To auto refresh once someone stop searching */
   this.onkeydown = function (e) {
     if (e.keyCode === 8) {
       if (this.value.length <= 1) {
@@ -390,6 +391,16 @@ searchTool.addEventListener("keyup", function (e) {
     }
   };
 });
+
+function showFilterTotal(autoTotal) {
+  incomeFilter = sumEntries("income", autoTotal);
+  ExpenseFilter = sumEntries("expense", autoTotal);
+  balanceFilter = calculateBalance(incomeFilter, ExpenseFilter);
+
+  document.querySelector(
+    ".autoPrice"
+  ).innerHTML = `<p class="record-income"><span>Ingresos:</span> ${incomeFilter} COP</p><p class="record-outcome"><span>Gastos:</span> ${ExpenseFilter} COP</p><p><span>Balance:</span> ${balanceFilter} COP</p>`;
+}
 
 let indexPrice = 0;
 function sortByPrice() {

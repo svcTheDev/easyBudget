@@ -729,9 +729,9 @@ input::-webkit-inner-spin-button {
   cursor: move;
 }
 .record tbody tr.dragging {
-  background-color: rgba(0, 170, 170, 0.5);
-  border: #0dd solid 1px;
-  opacity: .5;
+  background-color: rgba(0, 170, 170, 0.507);
+  border-top: #0dd solid 7px;
+  opacity: .3;
   cursor: move;
 }
 
@@ -820,6 +820,16 @@ input::-webkit-inner-spin-button {
 
 .fa-angle-double-right {
   opacity: 0;
+}
+
+.autoPrice {
+  display: flex;
+  justify-content: right;
+  font-style: italic;
+}
+
+.autoPrice p {
+  margin-right: 1rem;
 }
 
 @media (max-width: 768px) {
