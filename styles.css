@@ -722,10 +722,6 @@ input::-webkit-inner-spin-button {
 }
 
 .draggable {
-
-}
-
-.draggable {
   cursor: move;
 }
 .record tbody tr.dragging {
