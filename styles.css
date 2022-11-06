@@ -212,11 +212,33 @@ span {
 /* Search Tool */
 
 .history-container {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr 1fr 1fr);
+  column-gap: 2rem;
+  /* justify-content: space-between; */
   /* border: solid 1px black; */
-  text-align: right;
-  align-items: flex-end;
+  /* text-align: right; */
+  /* align-items: flex-end; */
+}
+
+
+.monthList {
+  position: relative;
+  top: 0%;
+  left: 0%;
+  /* transform: translate(-50%, -50%); */
+}
+
+.monthList select {
+  background-color: #e1e9f4;
+  color: 777777;
+  padding: .2rem 0;
+  width: 250px;
+  font-size: 20px;
+  border-radius: .5rem;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  outline: none;
+  border: none;
 }
 
 .history-container p {
@@ -227,14 +249,15 @@ span {
   display: flex;
   justify-content: right;
   margin: 0;
-  /* width: 100%; */
+  width: 100%;
+  padding: 0;
 }
 
 .search__input {
   display: flex;
   justify-content: right;
   color: white;
-  width: 35%;
+  width: 90%;
   padding: 0.3rem 0 0.3rem 1rem;
   background-color: transparent;
   transition: transform 250ms ease-in-out;
@@ -261,7 +284,6 @@ span {
   color: white;
   padding: 0.3rem 1rem;
   outline: 0;
-  border: 1px solid transparent;
   background-color: #25384f;
   border-bottom: 1px solid #339b9d;
   border-radius: 0;
@@ -313,6 +335,7 @@ label {
   color: #222;
   display: block;
 }
+
 
 .allInputs:focus {
   outline: none;
