@@ -14,6 +14,10 @@
 - Add audio
 - Sidebar: draggable calculator
 
+--- Pending issues
+
+- Update autmatically array when a new obj is added
+
 # History
 
 ### 06/11/2022
@@ -21,4 +25,4 @@
 <!-- TODO --> - Organize by month 
 <!-- TODO --> - Create a html list with months ✅
 <!-- TODO --> - Get the value of month selected ✅
-<!-- TODO --> - 
+<!-- TODO --> - Read the whole dates on the current budget array

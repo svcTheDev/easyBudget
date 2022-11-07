@@ -399,10 +399,8 @@ function showFilterTotal(autoTotal) {
   ExpenseFilter = sumEntries("expense", autoTotal);
   balanceFilter = calculateBalance(incomeFilter, ExpenseFilter);
   console.log(searchTool.value);
-  if(!searchTool.value) {
-    document.querySelector(
-      ".autoPrice"
-    ).innerHTML = '';
+  if (!searchTool.value && !autoTotal) {
+    document.querySelector(".autoPrice").innerHTML = "";
     return;
   }
   document.querySelector(
@@ -834,41 +832,70 @@ function getDragAfterElement(table, y) {
     { offset: Number.NEGATIVE_INFINITY }
   ).element;
 }
+const months = document.getElementById("months");
 
-// document.querySelectorAll('#months option').forEach((months) => {
+function setMonths() {
+  let month = '';
+  // allBudgetStorage.forEach((budget) => {
+  //   console.log(budget.date);
 
+  //   if(budget.date.includes('2022-12')) {
+  //   month = 'Diciembre'
+  //   }
+  //   if (budget.date.includes('2022-11')) {
+  //     month = 'Noviembre'
+  //   }
+  // });
 
-//   months.addEventListener('click', function (e){
-//     console.log('h');
-//     console.log(months);
-//     // if (e.target === 'Option 1') {
-//     //   console.log('hola');
-//     // } else {
-//     //   console.log(2);
-//     // }
+    const checkMonths = allBudgetStorage.find((budget) => budget.date.includes('2022-12'))
+    const checkNovember = allBudgetStorage.find((budget) => budget.date.includes('2022-11'))
 
-//   })
-// });
+    if (checkMonths) {
+      const newOption = document.createElement("option");
+  
+      months.appendChild(newOption);
+  
+      newOption.innerHTML = `Diciembre`
+  
+      console.log(months);
+    }
+    if (checkNovember) {
+      const newNovember = document.createElement("option");
+  
+      months.appendChild(newNovember);
+  
+      newNovember.innerHTML = `November`
+  
+      console.log(newNovember);
+    }
 
-
-function getMonthSelected () {
-  const months = document.getElementById('months').value;
-  if (months === 'Option 1') {
-    console.log(1); 
-  } else {
-    console.log(2);
-  }
 }
+
+setMonths();
+
+function getMonthSelected() {
+  if(months.value === 'Diciembre') {
+   const decemberBudget = allBudgetStorage.filter((budget) => budget.date.includes('2022-12'))
+    console.log(decemberBudget);
+    showTableEntries(decemberBudget)
+    showFilterTotal(decemberBudget)
+  }
+  if(months.value === 'November') {
+   const novemberBudget = allBudgetStorage.filter((budget) => budget.date.includes('2022-11'))
+    console.log(novemberBudget);
+    showTableEntries(novemberBudget)
+    showFilterTotal(novemberBudget)
+  }
+
+}
+
 
 
 // months.addEventListener('click', function (e){
 //   console.log(e.target.options[1].value);
-  
-// })
 
+// })
 
 function sincronizeStorage() {
   localStorage.setItem("budgetSaved", JSON.stringify(allBudgetStorage));
 }
-
-
