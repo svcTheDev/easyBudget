@@ -875,7 +875,7 @@ function setMonths() {
 
     for (let i = 0; i < allBudgetStorage.length; i++) {
       getMonthString = allBudgetStorage[i].date.slice(5, 7);
-      getMonth.push(getMonthString);
+      getMonth.push(Math.abs(getMonthString));
     }
     let uniqueMonths = [...new Set(getMonth)];
     return uniqueMonths;
@@ -914,18 +914,10 @@ setMonths();
 
 function generateMonthList() {
   let currentMonths = setMonths();
-  for (let i = 1; i < 12; i++) {
-    console.log(i);
-    console.log(createMonths[i]);
-    
+  for (let a = 0; a < currentMonths.length; a++) {
+    console.log(createMonths[currentMonths[a]]);
   }
   
-  for (let a = 0; a < currentMonths.length; a++) {
-    console.log(currentMonths[a]);
-    
-  }
-  //  const newOption = document.createElement("option");
-      // months.appendChild(newOption);
 }
 
 function getMonthSelected() {
