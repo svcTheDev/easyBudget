@@ -25,4 +25,6 @@
 <!-- TODO --> - Organize by month 
 <!-- TODO --> - Create a html list with months ✅
 <!-- TODO --> - Get the value of month selected ✅
-<!-- TODO --> - Read the whole dates on the current budget array
+<!-- TODO --> - Read the whole dates on the current budget array 
+<!-- TODO --> - Create a month object ✅
+<!-- TODO --> - Identify which months are in the current array ✅

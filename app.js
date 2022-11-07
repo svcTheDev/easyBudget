@@ -62,6 +62,7 @@ let balance,
 let outcome_Entries = [];
 let incomeValues = "";
 let expenseValues = "";
+let dateToMonths = [];
 
 incomePrice.addEventListener("keydown", blockKeys);
 expensePrice.addEventListener("keydown", blockKeys);
@@ -127,14 +128,13 @@ function getExpense(e) {
   };
 
   allBudgetStorage.push(expenseValues);
-
+  
   expenseForm.reset();
   setAllCalculations();
   showTableEntries(allBudgetStorage);
 
-  location.reload();
+  // location.reload();
 }
-
 function getIncome(e) {
   e.preventDefault();
 
@@ -312,7 +312,7 @@ function showTableEntries(allBudgetStorage) {
 modalContainer.addEventListener("click", discardModal);
 
 function discardModal(e) {
-  console.log(e.target.className);
+  // console.log(e.target.className);
   if (e.target.className !== "modalP" && e.target.className !== "modal") {
     modalContainer.classList.add("modal-inactive");
     modalContainer.classList.remove("show-confirmation");
@@ -394,11 +394,11 @@ searchTool.addEventListener("keyup", function (e) {
 });
 
 function showFilterTotal(autoTotal) {
-  console.log(autoTotal);
+  // console.log(autoTotal);
   incomeFilter = sumEntries("income", autoTotal);
   ExpenseFilter = sumEntries("expense", autoTotal);
   balanceFilter = calculateBalance(incomeFilter, ExpenseFilter);
-  console.log(searchTool.value);
+  // console.log(searchTool.valu3e);
   if (!searchTool.value && !autoTotal) {
     document.querySelector(".autoPrice").innerHTML = "";
     return;
@@ -832,64 +832,122 @@ function getDragAfterElement(table, y) {
     { offset: Number.NEGATIVE_INFINITY }
   ).element;
 }
+
+const allMonths = {
+  Enero: '01',
+  Febrero: '02',
+  Marzo: '03',
+  Abril: '04',
+  Mayo: '05',
+  Junio: '06',
+  Julio: '07',
+  Agosto: '08',
+  Septiembre: '09',
+  Octubre: '10',
+  Noviembre: '11',
+  Diciembre: '12'
+}
+
+const createMonths = {
+01: 'Enero',
+02: 'Febrero',
+03: 'Marzo',
+04: 'Abril',
+05: 'Mayo',
+06: 'Junio',
+07: 'Julio',
+08: 'Agosto',
+09: 'Septiembre',
+10: 'Octubre',
+11: 'Noviembre',
+12: 'Diciembre'
+}
+
+const wholeMonths = ['', 'Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+
 const months = document.getElementById("months");
 
-function setMonths() {
-  let month = '';
-  // allBudgetStorage.forEach((budget) => {
-  //   console.log(budget.date);
 
-  //   if(budget.date.includes('2022-12')) {
-  //   month = 'Diciembre'
-  //   }
-  //   if (budget.date.includes('2022-11')) {
-  //     month = 'Noviembre'
-  //   }
+
+function setMonths() {
+  let getMonth = [];
+  let getMonthString = '';
+
+    for (let i = 0; i < allBudgetStorage.length; i++) {
+      getMonthString = allBudgetStorage[i].date.slice(5, 7);
+      getMonth.push(getMonthString);
+    }
+    let uniqueMonths = [...new Set(getMonth)];
+    return uniqueMonths;
+
+
+    // const initValue = 0;
+    // const sumMonths = budget.date
+    // console.log(wholeMonths[parseFloat(getMonth)]);
+    // if (budget.value.includes(allMonths)) {
+    //   console.log(incomeDate.value);
+    // }
+    
+    // console.log(budget.date);
   // });
 
-    const checkMonths = allBudgetStorage.find((budget) => budget.date.includes('2022-12'))
-    const checkNovember = allBudgetStorage.find((budget) => budget.date.includes('2022-11'))
 
-    if (checkMonths) {
-      const newOption = document.createElement("option");
+    // if (checkMonths) {
+   
+    //   newOption.innerHTML = `Diciembre`
   
-      months.appendChild(newOption);
+    //   console.log(months);
+    // }
+    // if (checkNovember) {
+    //   const newNovember = document.createElement("option");
   
-      newOption.innerHTML = `Diciembre`
+    //   months.appendChild(newNovember);
   
-      console.log(months);
-    }
-    if (checkNovember) {
-      const newNovember = document.createElement("option");
+    //   newNovember.innerHTML = `November`
   
-      months.appendChild(newNovember);
-  
-      newNovember.innerHTML = `November`
-  
-      console.log(newNovember);
-    }
+    //   console.log(newNovember);
+    // }
 
 }
 
 setMonths();
 
+function generateMonthList() {
+  let currentMonths = setMonths();
+  for (let i = 1; i < 12; i++) {
+    console.log(i);
+    console.log(createMonths[i]);
+    
+  }
+  
+  for (let a = 0; a < currentMonths.length; a++) {
+    console.log(currentMonths[a]);
+    
+  }
+  //  const newOption = document.createElement("option");
+      // months.appendChild(newOption);
+}
+
 function getMonthSelected() {
-  if(months.value === 'Diciembre') {
-   const decemberBudget = allBudgetStorage.filter((budget) => budget.date.includes('2022-12'))
-    console.log(decemberBudget);
-    showTableEntries(decemberBudget)
-    showFilterTotal(decemberBudget)
-  }
-  if(months.value === 'November') {
-   const novemberBudget = allBudgetStorage.filter((budget) => budget.date.includes('2022-11'))
-    console.log(novemberBudget);
-    showTableEntries(novemberBudget)
-    showFilterTotal(novemberBudget)
-  }
+
+  
+
+  // if(months.value === 'Diciembre') {
+  //  const decemberBudget = allBudgetStorage.filter((budget) => budget.date.includes('2022-12'))
+  //   console.log(decemberBudget);
+  //   showTableEntries(decemberBudget)
+  //   showFilterTotal(decemberBudget)
+  // }
+  // if(months.value === 'November') {
+  //  const novemberBudget = allBudgetStorage.filter((budget) => budget.date.includes('2022-11'))
+  //   console.log(novemberBudget);
+  //   showTableEntries(novemberBudget)
+  //   showFilterTotal(novemberBudget)
+  // }
 
 }
 
-
+generateMonthList()
 
 // months.addEventListener('click', function (e){
 //   console.log(e.target.options[1].value);
