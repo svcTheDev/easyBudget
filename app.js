@@ -133,7 +133,7 @@ function getExpense(e) {
   setAllCalculations();
   showTableEntries(allBudgetStorage);
 
-  // location.reload();
+  location.reload();
 }
 function getIncome(e) {
   e.preventDefault();
@@ -865,67 +865,86 @@ const createMonths = {
 
 const wholeMonths = ['', 'Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
 
-const months = document.getElementById("months");
-
-
 
 function setMonths() {
   let getMonth = [];
   let getMonthString = '';
-
-    for (let i = 0; i < allBudgetStorage.length; i++) {
-      getMonthString = allBudgetStorage[i].date.slice(5, 7);
+  
+  for (let i = 0; i < allBudgetStorage.length; i++) {
+    getMonthString = allBudgetStorage[i].date.slice(5, 7);
       getMonth.push(Math.abs(getMonthString));
     }
     let uniqueMonths = [...new Set(getMonth)];
     return uniqueMonths;
-
-
+    
+    
     // const initValue = 0;
     // const sumMonths = budget.date
     // console.log(wholeMonths[parseFloat(getMonth)]);
     // if (budget.value.includes(allMonths)) {
-    //   console.log(incomeDate.value);
+      //   console.log(incomeDate.value);
+      // }
+      
+      // console.log(budget.date);
+      // });
+      
+      
+      // if (checkMonths) {
+        
+        //   newOption.innerHTML = `Diciembre`
+        
+        //   console.log(months);
+        // }
+        // if (checkNovember) {
+      
+          //   months.appendChild(newNovember);
+      
+          //   newNovember.innerHTML = `November`
+    
+          //   console.log(newNovember);
     // }
     
-    // console.log(budget.date);
-  // });
-
-
-    // if (checkMonths) {
-   
-    //   newOption.innerHTML = `Diciembre`
-  
-    //   console.log(months);
-    // }
-    // if (checkNovember) {
-    //   const newNovember = document.createElement("option");
-  
-    //   months.appendChild(newNovember);
-  
-    //   newNovember.innerHTML = `November`
-  
-    //   console.log(newNovember);
-    // }
-
-}
-
-setMonths();
-
-function generateMonthList() {
-  let currentMonths = setMonths();
-  for (let a = 0; a < currentMonths.length; a++) {
-    console.log(createMonths[currentMonths[a]]);
   }
   
+  setMonths();
+  
+  const months = document.getElementById("months");
+  let monthsName = []
+  function generateMonthList() {
+    let currentMonths = setMonths();
+    for (let a = 0; a < currentMonths.length; a++) {
+      monthsName.push(createMonths[currentMonths[a]]);
+      const newOption = document.createElement("option")
+      
+      months.appendChild(newOption)
+      newOption.setAttribute('id', `${currentMonths[a]}`)
+      
+      newOption.innerHTML = `${createMonths[currentMonths[a]]}`;
+     
+      }
 }
 
+generateMonthList()
+
 function getMonthSelected() {
+  let currentMonths = setMonths();
+  // document.querySelectorAll('#month option').forEach(option => {
+  //   console.log(option);
+  // });
+  if(monthsName.includes(months.value)) {
+    console.log(currentMonths);
+    let checkDateBudget = ''
+    for (let index = 0; index < currentMonths.length; index++) {
+
+      const checkDateBudget = 
+      allBudgetStorage.filter((budget) => budget.date.includes(currentMonths[index]))
+      console.log(checkDateBudget);
+      // filterBudget.push(checkDateBudget)
+    }
+    console.log(checkDateBudget);
+  }
 
   
-
-  // if(months.value === 'Diciembre') {
-  //  const decemberBudget = allBudgetStorage.filter((budget) => budget.date.includes('2022-12'))
   //   console.log(decemberBudget);
   //   showTableEntries(decemberBudget)
   //   showFilterTotal(decemberBudget)
@@ -939,7 +958,6 @@ function getMonthSelected() {
 
 }
 
-generateMonthList()
 
 // months.addEventListener('click', function (e){
 //   console.log(e.target.options[1].value);
