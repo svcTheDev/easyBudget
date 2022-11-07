@@ -835,6 +835,40 @@ function getDragAfterElement(table, y) {
   ).element;
 }
 
+// document.querySelectorAll('#months option').forEach((months) => {
+
+
+//   months.addEventListener('click', function (e){
+//     console.log('h');
+//     console.log(months);
+//     // if (e.target === 'Option 1') {
+//     //   console.log('hola');
+//     // } else {
+//     //   console.log(2);
+//     // }
+
+//   })
+// });
+
+
+function getMonthSelected () {
+  const months = document.getElementById('months').value;
+  if (months === 'Option 1') {
+    console.log(1); 
+  } else {
+    console.log(2);
+  }
+}
+
+
+// months.addEventListener('click', function (e){
+//   console.log(e.target.options[1].value);
+  
+// })
+
+
 function sincronizeStorage() {
   localStorage.setItem("budgetSaved", JSON.stringify(allBudgetStorage));
 }
+
+

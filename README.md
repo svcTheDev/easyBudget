@@ -18,5 +18,7 @@
 
 ### 06/11/2022
 
-<!-- TODO --> Organize by month 
-<!-- TODO --> Create a html list with months 
+<!-- TODO --> - Organize by month 
+<!-- TODO --> - Create a html list with months ✅
+<!-- TODO --> - Get the value of month selected ✅
+<!-- TODO --> - 
