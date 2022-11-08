@@ -101,22 +101,24 @@ let originalPrices = [...allBudgetStorage];
 
 function getExpense(e) {
   e.preventDefault();
+  let moneyLost = new Audio("Audios/coin-fail.mp3") 
+  moneyLost.play();
 
   if (
     !expenseDate.value ||
     !expenseDescription.value ||
     !expenseCategory.value ||
     !expensePrice.value
-  ) {
-    showErrorMessage([
-      expenseDate,
-      expenseDescription,
-      expenseCategory,
-      expensePrice,
-    ]);
-
-    return;
-  }
+    ) {
+      showErrorMessage([
+        expenseDate,
+        expenseDescription,
+        expenseCategory,
+        expensePrice,
+      ]);
+      
+      return;
+    }
 
   expenseValues = {
     id: Date.now(),
@@ -129,6 +131,8 @@ function getExpense(e) {
 
   allBudgetStorage.push(expenseValues);
 
+
+
   expenseForm.reset();
   setAllCalculations();
   showTableEntries(allBudgetStorage);
@@ -137,6 +141,10 @@ function getExpense(e) {
 }
 function getIncome(e) {
   e.preventDefault();
+
+  let moneyAdded = new Audio("Audios/Poker-Chips-short.mp3")
+
+  moneyAdded.play();
 
   if (
     !incomeDate.value ||
@@ -290,6 +298,8 @@ function showTableEntries(allBudgetStorage) {
     deleteBtn.innerText = "Delete";
     deleteBtn.classList.add("delete");
 
+    
+
     // table.appendChild(row);
     table.insertAdjacentHTML("afterbegin", row);
     // row.appendChild(deleteBtn);
@@ -326,6 +336,8 @@ confirmation.addEventListener("click", function () {
   deleteRow(budgetID);
   modalContainer.classList.add("modal-inactive");
   modalContainer.classList.remove("show-confirmation");
+  const audioDelete = new Audio("Audios/delete.mp3")
+  audioDelete.play();
 });
 
 cancelation.addEventListener("click", function () {
