@@ -10,7 +10,7 @@
 
 ### JS
 - Organize by month ✅
-- Add audio
+- Add audio ✅
 - Recreate the app with a month array active
 - Sidebar: draggable calculator
 
@@ -34,5 +34,6 @@
 
 ### 08/11/2022
 
-<!-- TODO --> - Add audio
-<!-- TODO --> - 
+<!-- TODO --> - Add audio ✅✅✅
+<!-- TODO --> - Download audios ✅
+<!-- TODO --> - Use new audio and .play ✅
