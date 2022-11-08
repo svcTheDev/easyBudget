@@ -215,21 +215,22 @@ span {
   display: grid;
   grid-template-columns: repeat(1, 1fr 1fr 1fr);
   column-gap: 2rem;
-  /* justify-content: space-between; */
-  /* border: solid 1px black; */
-  /* text-align: right; */
-  /* align-items: flex-end; */
 }
 
+#months{
+  margin-right: 1rem;
+}
 
-.monthList {
+.dateList {
+  display: flex;
+  margin-right: 2rem;
   position: relative;
   top: 0%;
   left: 0%;
   /* transform: translate(-50%, -50%); */
 }
 
-.monthList select {
+.dateList select {
   background-color: #e1e9f4;
   color: 777777;
   padding: .2rem 0;

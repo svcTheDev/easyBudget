@@ -192,10 +192,13 @@
       </div>
         <div class="history-container container">
           <p>Historial</p>
-          <div class="monthList">
+          <div class="dateList">
             <label for="monthList"></label>
-            <select id="months" onchange="getMonthSelected()">
+            <select id="months" onchange="showMonthFiltered(), showDateFiltered()">
 q             <option value="" disabled selected>Elige un mes</option>
+            </select>
+            <select id="years" onchange="showYearFiltered(), showDateFiltered()">
+q             <option value="" disabled selected>Elige un año</option>
             </select>
           </div>
           <div class="search__container container">
