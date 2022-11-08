@@ -37,3 +37,8 @@
 <!-- TODO --> - Add audio ✅✅✅
 <!-- TODO --> - Download audios ✅
 <!-- TODO --> - Use new audio and .play ✅
+
+<!-- TODO --> --- Recreate the app with a month array active
+
+<!-- TODO --> - Set the new folders 
+<!-- TODO --> -  
