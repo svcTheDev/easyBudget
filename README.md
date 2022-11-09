@@ -17,6 +17,7 @@
 
 --- Pending issues
 - Update the month and year text of the list when a new date is added ✅
+- Fix issues with month and list filter at the same time 
 
 
 # History
@@ -44,4 +45,7 @@
 
 <!-- TODO --> - Set the new folders 
 <!-- TODO --> - Get the expenses and income entries of the user by month and year*/ ✅
+
+### 09/11/2022
+<!-- TODO --> - 
 

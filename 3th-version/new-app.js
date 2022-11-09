@@ -248,11 +248,13 @@ function showYearFiltered() {
     console.log("year no tiene nada");
     return;
   }
+
   if (yearIndex.includes(yearList.value)) {
-    const filterYear = allBudgetStorage.filter((budget) =>
-      budget.date.includes(yearList.value)
+    let date = yearList.value + showMonthFiltered();
+    const filterYearMonth = allBudgetStorage.filter((budget) =>
+      budget.date.includes(date)
     );
-    showTableEntries(filterYear);
+    showTableEntries(filterYearMonth);
     // showFilterTotal(filterYear);
     return yearList.value;
   }
