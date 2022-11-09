@@ -1,24 +1,18 @@
 
-/* 1 - — Gets the expenses and income entries of the user */
-/* 2 - — Get the filterDate in order to print the table */
-const expenseDate = document.querySelector("#dateExpense");
-const expenseDescription = document.querySelector("#descriptionExpense");
-const expenseCategory = document.querySelector("#categoryExpense");
-const expensePrice = document.querySelector("#priceExpense");
-const expenseForm = document.querySelector("#expense-form");
 
-const incomeDate = document.querySelector("#dateIncome");
-const incomeDescription = document.querySelector("#descriptionIncome");
-const incomeCategory = document.querySelector("#categoryIncome");
-const incomePrice = document.querySelector("#priceIncome");
-const incomeForm = document.querySelector("#income-form");
+// * 1 -  — Gets the expenses and income entries of the user */ 
+ 
+// * 2 - — Get the filterDate in order to print the table */
 
-const table = document.querySelector("#table-body");
+// — Updates the incomes, expenses, and balance automatically
+// — Translates automatically the totals into words
+// — Instant search tool of the entries on the table
+// — Sorts function on all the 4 categories
+// — Deletes dynamically the rows by clicking the delete button
+// — Edit function to change entry rows manually
+// — Clones rows by clicking the clone icon
+// — Organize by month
 
-let allBudgetStorage = [];
-let balance,
-  expense,
-  income = [0, 0, 0];
 
 expenseForm.addEventListener("submit", getExpense);
 incomeForm.addEventListener("submit", getIncome);
@@ -122,56 +116,60 @@ function showErrorMessage(inputs) {
   });
 }
 
-const numberMonths = {
-  01: "Enero",
-  02: "Febrero",
-  03: "Marzo",
-  04: "Abril",
-  05: "Mayo",
-  06: "Junio",
-  07: "Julio",
-  08: "Agosto",
-  09: "Septiembre",
-  10: "Octubre",
-  11: "Noviembre",
-  12: "Diciembre",
-};
 
-const monthIndex = [
-  "",
-  "Enero",
-  "Febrero",
-  "Marzo",
-  "Abril",
-  "Mayo",
-  "Junio",
-  "Julio",
-  "Agosto",
-  "Septiembre",
-  "Octubre",
-  "Noviembre",
-  "Diciembre",
-];
+function setAllCalculations(currentBudgqet) {
+  income = sumEntries("income", currentBudgqet);
+  expense = sumEntries("expense", currentBudgqet);
+  balance = calculateBalance(income, expense);
 
-const yearIndex = [
-  "",
-  "2021",
-  "2022",
-  "2023",
-  "2024",
-  "2025",
-  "2026",
-  "2027",
-  "2028",
-  "2029",
-  "2030",
-];
+  updateTotals();
+  // sincronizeStorage();
+}
 
-const monthList = document.getElementById("months");
-const yearList = document.getElementById("years");
-let monthsName = [];
-let uniqueMonthFilter = [];
-let uniqueYearFilter = [];
+function sumEntries(type, entries) {
+  let sum = 0;
+  entries.forEach((entry) => {
+    if (entry.type === type) {
+      sum += entry.price;
+    }
+  });
+  return sum;
+}
+
+function calculateBalance(income, expense) {
+  return income - expense;
+}
+
+function updateTotals() {
+  incomeTotal.innerHTML = income;
+  expenseTotal.innerHTML = expense;
+  balanceTotal.innerHTML = balance;
+
+  numbersToLetters();
+
+  let numbersBalanceText = numbersBalance.textContent;
+  let numbersIncomeText = numbersIncome.textContent;
+  let numbersOutcomeText = numbersOutcome.textContent;
+
+  if (numbersBalanceText.includes("000000")) {
+    showConvertedBalance.innerHTML += " DE PESOS";
+  } else {
+    showConvertedBalance.innerHTML += " PESOS";
+  }
+  if (numbersIncomeText.includes("000000")) {
+    showConvertedIncome.innerHTML += " DE PESOS";
+  } else {
+    showConvertedIncome.innerHTML += " PESOS";
+  }
+  if (numbersOutcomeText.includes("000000")) {
+    showConvertedOutcome.innerHTML += " DE PESOS";
+  } else {
+    showConvertedOutcome.innerHTML += " PESOS";
+  }
+  incomeTotal.innerHTML += " COP";
+  expenseTotal.innerHTML += " COP";
+  balanceTotal.innerHTML += " COP";
+}
 
 function setCurrentDates() {
   let getMonth = [];
@@ -179,31 +177,42 @@ function setCurrentDates() {
   let getMonthString = "";
   for (let i = 0; i < allBudgetStorage.length; i++) {
     getMonthString = allBudgetStorage[i].date.slice(5, 7);
+    getYearString = allBudgetStorage[i].date.slice(0, -5);
     getMonth.push(Math.abs(getMonthString));
     getYear.push(allBudgetStorage[i].date.slice(0, -5));
   }
   let uniqueYears = [...new Set(getYear)];
   let uniqueMonths = [...new Set(getMonth)];
+  
+  if (getMonth.length > 2) {
+    const copyMonth = uniqueMonths.findIndex(month => month == getMonthString)
+    uniqueMonths.splice(copyMonth, 1)
+    uniqueMonths.splice(uniqueMonths.length, 0, parseFloat(getMonthString))
+  }
+  if (getYear.length > 2) {
+    const copyYear = uniqueYears.findIndex(years => years == getYearString)
+    uniqueYears.splice(copyYear, 1)
+    uniqueYears.splice(uniqueYears.length, 0, getYearString)
+  }
 
-  // if (uniqueMonths.length > 1 || uniqueYears > 1) {
-  //   console.log(1);
-  //   return [uniqueMonths[uniqueMonths.length - 1], uniqueYears[uniqueYears.length - 1]]
-  // } else {
-  //   console.log(2);
-  // }
+
+
   uniqueMonthFilter = uniqueMonths[uniqueMonths.length - 1];
   uniqueYearFilter = uniqueYears[uniqueYears.length - 1];
   return [uniqueMonths, uniqueYears];
 }
+// TODO Use if in the last element of the loop to push it in the last
 
 function generateDateList() {
   let currentMonths = setCurrentDates()[0];
   let currentYears = setCurrentDates()[1];
+  console.log(currentYears);
   /* Months */
   monthList.innerHTML = '';
 currentMonths.reverse();
   for (let m = 0; m < currentMonths.length; m++) {
     monthsName.push(numberMonths[currentMonths[m]]);
+    console.log(currentMonths[m]);
     const monthOption = document.createElement("option");
     monthList.appendChild(monthOption);
     monthOption.innerHTML = `${numberMonths[currentMonths[m]]}`;
@@ -221,12 +230,10 @@ currentMonths.reverse();
 
 function showMonthFiltered() {
   if (!generateDateList) {
-    console.log("month no ha sido cambiado");
     return;
   }
   let indexSelection = "";
-
-  if (monthsName.includes(monthList.value)) {
+  // if (monthsName.includes(monthList.value)) {
     const indexMonth = monthIndex.findIndex(
       (monthIndex) => monthIndex === monthList.value
       );
@@ -234,30 +241,30 @@ function showMonthFiltered() {
     if (indexMonth < 10) {
       indexSelection = `-0${indexMonth}-`;
     }
+    let date = yearList.value + indexSelection;
     const filterMonth = allBudgetStorage.filter((budget) =>
-      budget.date.includes(indexSelection)
+      budget.date.includes(date)
     );
     showTableEntries(filterMonth);
-    // showFilterTotal(filterMonth);
-  }
+    setAllCalculations(filterMonth);
+  // }
   return indexSelection;
 }
 
 function showYearFiltered() {
   if (!yearList.value) {
-    console.log("year no tiene nada");
     return;
   }
 
-  if (yearIndex.includes(yearList.value)) {
+  // if (yearIndex.includes(yearList.value)) {
     let date = yearList.value + showMonthFiltered();
     const filterYearMonth = allBudgetStorage.filter((budget) =>
       budget.date.includes(date)
     );
     showTableEntries(filterYearMonth);
-    // showFilterTotal(filterYear);
+    setAllCalculations(filterYearMonth);
     return yearList.value;
-  }
+  // }
 }
 
 function showFilterDate(month, year) {
@@ -270,4 +277,8 @@ function showFilterDate(month, year) {
     budget.date.includes(date)
   );
   showTableEntries(filterDate);
+  setAllCalculations(filterDate);
+
 }
+
+

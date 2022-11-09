@@ -47,5 +47,8 @@
 <!-- TODO --> - Get the expenses and income entries of the user by month and year*/ ✅
 
 ### 09/11/2022
-<!-- TODO --> - 
+<!-- TODO --> - Updates the incomes, expenses, and balance automatically 
 
+--- Pending issues
+- Fix issues with month and list filter at the same time ✅
+- Set conditionals to all input entries 
