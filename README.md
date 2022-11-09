@@ -16,7 +16,7 @@
 
 
 --- Pending issues
-- Update the month and year text of the list when a new date is added
+- Update the month and year text of the list when a new date is added ✅
 
 
 # History
@@ -43,4 +43,5 @@
 <!-- TODO --> --- Recreate the app with a month array active
 
 <!-- TODO --> - Set the new folders 
-<!-- TODO --> -  
+<!-- TODO --> - Get the expenses and income entries of the user by month and year*/ ✅
+

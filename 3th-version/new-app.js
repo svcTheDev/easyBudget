@@ -1,4 +1,3 @@
-"use strict";
 
 /* 1 - — Gets the expenses and income entries of the user */
 /* 2 - — Get the filterDate in order to print the table */
@@ -124,15 +123,15 @@ function showErrorMessage(inputs) {
 }
 
 const numberMonths = {
-  1: "Enero",
-  2: "Febrero",
-  3: "Marzo",
-  4: "Abril",
-  5: "Mayo",
-  6: "Junio",
-  7: "Julio",
-  8: "Agosto",
-  9: "Septiembre",
+  01: "Enero",
+  02: "Febrero",
+  03: "Marzo",
+  04: "Abril",
+  05: "Mayo",
+  06: "Junio",
+  07: "Julio",
+  08: "Agosto",
+  09: "Septiembre",
   10: "Octubre",
   11: "Noviembre",
   12: "Diciembre",
@@ -201,26 +200,20 @@ function generateDateList() {
   let currentMonths = setCurrentDates()[0];
   let currentYears = setCurrentDates()[1];
   /* Months */
-  console.log('ejecutando');
   monthList.innerHTML = '';
-//   monthList.innerHTML = `
-//   <select id="months" onchange="showMonthFiltered()">
-//   <option value="" disabled selected>Elige un mes</option>
-// </select>
-//   `
+currentMonths.reverse();
   for (let m = 0; m < currentMonths.length; m++) {
     monthsName.push(numberMonths[currentMonths[m]]);
     const monthOption = document.createElement("option");
     monthList.appendChild(monthOption);
     monthOption.innerHTML = `${numberMonths[currentMonths[m]]}`;
-    console.log(numberMonths[currentMonths[m]])
   }
   /* Years */
-  // yearList.innerHTML = "";
+  yearList.innerHTML = "";
+  currentYears.reverse();
   for (let y = 0; y < currentYears.length; y++) {
     const yearOption = document.createElement("option");
     yearList.appendChild(yearOption);
-
     yearOption.innerHTML = `${currentYears[y].slice(0, -1)}`;
   }
   showFilterDate(uniqueMonthFilter, uniqueYearFilter);
@@ -231,14 +224,12 @@ function showMonthFiltered() {
     console.log("month no ha sido cambiado");
     return;
   }
-  console.log("month si ha sido cambiado");
   let indexSelection = "";
 
   if (monthsName.includes(monthList.value)) {
     const indexMonth = monthIndex.findIndex(
       (monthIndex) => monthIndex === monthList.value
       );
-      console.log(monthList.value);
     indexSelection = `-${indexMonth}-`;
     if (indexMonth < 10) {
       indexSelection = `-0${indexMonth}-`;
@@ -246,8 +237,6 @@ function showMonthFiltered() {
     const filterMonth = allBudgetStorage.filter((budget) =>
       budget.date.includes(indexSelection)
     );
-    console.log(indexSelection);
-    console.log(filterMonth);
     showTableEntries(filterMonth);
     // showFilterTotal(filterMonth);
   }
@@ -259,9 +248,6 @@ function showYearFiltered() {
     console.log("year no tiene nada");
     return;
   }
-  console.log("year si tiene algo");
-  console.log(uniqueYearFilter);
-  // console.log('year tiene un valor de ' + yearList.value);
   if (yearIndex.includes(yearList.value)) {
     const filterYear = allBudgetStorage.filter((budget) =>
       budget.date.includes(yearList.value)
@@ -273,13 +259,13 @@ function showYearFiltered() {
 }
 
 function showFilterDate(month, year) {
+  if (month < 10) {
+    month = `0${month}-`;
+  }
+  
   let date = year + month;
-  console.log(year);
-  console.log(month);
-  console.log(date);
   const filterDate = allBudgetStorage.filter((budget) =>
     budget.date.includes(date)
   );
   showTableEntries(filterDate);
-  // showFilterTotal(filterDate);
 }
