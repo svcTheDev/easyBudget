@@ -16,6 +16,8 @@
 
 
 --- Pending issues
+- Update the month and year text of the list when a new date is added
+
 
 # History
 

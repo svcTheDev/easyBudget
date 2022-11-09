@@ -183,22 +183,20 @@
 
     <!-- <h2 class="container">Historial</h2> -->
 
-
-
     <div class="table-wrapper" style="overflow-x: auto">
       <table class="record container">
         <div class="arrow-icon container">
-        <i class="fas fa-angle-double-right" style="font-size: 24px"></i>
-      </div>
+          <i class="fas fa-angle-double-right" style="font-size: 24px"></i>
+        </div>
         <div class="history-container container">
           <p>Historial</p>
           <div class="dateList">
             <label for="monthList"></label>
-            <select id="months" onchange="showMonthFiltered(), showDateFiltered()">
-q             <option value="" disabled selected>Elige un mes</option>
+            <select id="months" onchange="showMonthFiltered()">
+              <option value="" disabled selected>Elige un mes</option>
             </select>
-            <select id="years" onchange="showYearFiltered(), showDateFiltered()">
-q             <option value="" disabled selected>Elige un año</option>
+            <select id="years" onchange="showYearFiltered()">
+              <option value="" disabled selected>Elige un año</option>
             </select>
           </div>
           <div class="search__container container">
@@ -208,19 +206,24 @@ q             <option value="" disabled selected>Elige un año</option>
         <thead>
           <tr>
             <th class="sort-column" id="sort-date"></th>
-            <th class="sort-column" id="sort-date">Fecha<i class='fas fa-sort'></i></th>
-            <th class="sort-column" id="sort-description">Descripción<i class='fas fa-sort'></i></th>
-            <th class="sort-column" id="sort-category">Categoría<i class='fas fa-sort'></i></th>
-            <th class="sort-column" id="sort-price">Precio<i class='fas fa-sort'></i></th>
+            <th class="sort-column" id="sort-date">
+              Fecha<i class="fas fa-sort"></i>
+            </th>
+            <th class="sort-column" id="sort-description">
+              Descripción<i class="fas fa-sort"></i>
+            </th>
+            <th class="sort-column" id="sort-category">
+              Categoría<i class="fas fa-sort"></i>
+            </th>
+            <th class="sort-column" id="sort-price">
+              Precio<i class="fas fa-sort"></i>
+            </th>
             <th class="sort-column">Eliminar</th>
           </tr>
         </thead>
         <tbody id="table-body"></tbody>
       </table>
-      <div class="autoPrice container">
-       
-      </div>
-      
+      <div class="autoPrice container"></div>
     </div>
 
     <!-- Delete modal -->
@@ -246,5 +249,6 @@ q             <option value="" disabled selected>Elige un año</option>
 
     <!-- <script src="numberToWords.js"></script> -->
     <script src="new-app.js"></script>
+    <script src="show-table-entries.js"></script>
   </body>
 </html>
