@@ -13,7 +13,6 @@
 // — Clones rows by clicking the clone icon
 // — Organize by month
 
-
 expenseForm.addEventListener("submit", getExpense);
 incomeForm.addEventListener("submit", getIncome);
 
@@ -171,6 +170,8 @@ function updateTotals() {
   balanceTotal.innerHTML += " COP";
 }
 
+let uniqueMonths = [];
+let uniqueYears = [];
 function setCurrentDates() {
   let getMonth = [];
   let getYear = [];
@@ -181,8 +182,8 @@ function setCurrentDates() {
     getMonth.push(Math.abs(getMonthString));
     getYear.push(allBudgetStorage[i].date.slice(0, -5));
   }
-  let uniqueYears = [...new Set(getYear)];
-  let uniqueMonths = [...new Set(getMonth)];
+  uniqueYears = [...new Set(getYear)];
+  uniqueMonths = [...new Set(getMonth)]
   
   if (getMonth.length > 2) {
     const copyMonth = uniqueMonths.findIndex(month => month == getMonthString)
@@ -204,26 +205,22 @@ function setCurrentDates() {
 // TODO Use if in the last element of the loop to push it in the last
 
 function generateDateList() {
-  let currentMonths = setCurrentDates()[0];
-  let currentYears = setCurrentDates()[1];
-  console.log(currentYears);
   /* Months */
   monthList.innerHTML = '';
-currentMonths.reverse();
-  for (let m = 0; m < currentMonths.length; m++) {
-    monthsName.push(numberMonths[currentMonths[m]]);
-    console.log(currentMonths[m]);
+uniqueMonths.reverse();
+  for (let m = 0; m < uniqueMonths.length; m++) {
+    monthsName.push(numberMonths[uniqueMonths[m]]);
     const monthOption = document.createElement("option");
     monthList.appendChild(monthOption);
-    monthOption.innerHTML = `${numberMonths[currentMonths[m]]}`;
+    monthOption.innerHTML = `${numberMonths[uniqueMonths[m]]}`;
   }
   /* Years */
   yearList.innerHTML = "";
-  currentYears.reverse();
-  for (let y = 0; y < currentYears.length; y++) {
+  uniqueYears.reverse();
+  for (let y = 0; y < uniqueYears.length; y++) {
     const yearOption = document.createElement("option");
     yearList.appendChild(yearOption);
-    yearOption.innerHTML = `${currentYears[y].slice(0, -1)}`;
+    yearOption.innerHTML = `${uniqueYears[y].slice(0, -1)}`;
   }
   showFilterDate(uniqueMonthFilter, uniqueYearFilter);
 }
@@ -257,7 +254,7 @@ function showYearFiltered() {
   }
 
   // if (yearIndex.includes(yearList.value)) {
-    let date = yearList.value + showMonthFiltered();
+    let date = yearList.value + showMonthFiltered;
     const filterYearMonth = allBudgetStorage.filter((budget) =>
       budget.date.includes(date)
     );
@@ -267,18 +264,21 @@ function showYearFiltered() {
   // }
 }
 
+
+
+
 function showFilterDate(month, year) {
   if (month < 10) {
     month = `0${month}-`;
   }
   
   let date = year + month;
-  const filterDate = allBudgetStorage.filter((budget) =>
-    budget.date.includes(date)
+  let filterDate = allBudgetStorage.filter((budget) =>
+  budget.date.includes(date)
   );
   showTableEntries(filterDate);
   setAllCalculations(filterDate);
 
+  
+
 }
-
-
