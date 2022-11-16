@@ -49,6 +49,30 @@
 ### 09/11/2022
 <!-- TODO --> - Updates the incomes, expenses, and balance automatically 
 
+### 11/11/2022
+<!-- TODO --> - Save all in the local storage 
+<!-- TODO --> - create 3 differnt arrays to store them independently 
+
+<!-- How should work the local storage by month -->
+- 3 arrays by month on an specific year
+- names are going to be january2023, december2022, febuary 2023 
+- To create dinamically the arrays, we are going to store them in an object
+- These arrays will be filled on every filter 
+
+### 14/11/2022
+<!-- TODO --> - create 3 differnt arrays to store them independently ✅
+
 --- Pending issues
-- Fix issues with month and list filter at the same time ✅
+- Activate change of month and year ✅
+- when I change the list and charge the page the list and the table do not match ✅
+- 
+- When is selected a date that does not exist e.x: enero 2022
 - Set conditionals to all input entries 
+
+### 15/11/2022 1:30h
+--- Pending issues
+- when I change the list and charge the page the list and the table do not match ✅
+
+### 16/11/2022
+--- Pending issues
+- when refreshing the page without an existing date, the page missed all data

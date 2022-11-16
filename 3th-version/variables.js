@@ -21,7 +21,7 @@ const balanceTotal = document.querySelector(".balance p");
 const monthList = document.getElementById("months");
 const yearList = document.getElementById("years");
 
-let allBudgetStorage = [];
+let allBudgetStorage;
 let balance,
   expense,
   income = [0, 0, 0];

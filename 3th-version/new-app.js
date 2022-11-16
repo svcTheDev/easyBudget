@@ -13,6 +13,48 @@
 // — Clones rows by clicking the clone icon
 // — Organize by month
 
+let december2022;
+let january2023;
+let febuary2023;
+let lastDate;
+
+let uniqueMonths = [];
+let uniqueYears = [];
+let allmonths = [december2022, january2023]
+
+
+allBudgetStorage = JSON.parse(localStorage.getItem("globalBudgetSaved")) || [];
+december2022 = JSON.parse(localStorage.getItem("budgetDecember2022")) || [];
+january2023 = JSON.parse(localStorage.getItem("budgetJanuary2023")) || [];
+febuary2023 = JSON.parse(localStorage.getItem("budgetFebuary2023")) || [];
+lastDate = JSON.parse(localStorage.getItem("lastDate")) || '';
+
+console.log({december2022: december2022, january2023: january2023, febuary2023: febuary2023, all: allBudgetStorage, lastDate: lastDate});
+
+// if (allBudgetStorage.length > 1) {
+  if (lastDate.includes('2023-01')) {
+    console.log('jan');
+    setCurrentDates(allBudgetStorage);
+    generateDateList();
+    setAllCalculations(january2023)
+    showTableEntries(january2023)
+  }
+  if (lastDate.includes('2022-12')) {
+    console.log('dec');
+    setCurrentDates(allBudgetStorage);
+    generateDateList();
+    setAllCalculations(december2022)
+    showTableEntries(december2022)
+  }
+  if (lastDate.includes('2023-02')) {
+    console.log('feb');
+    setCurrentDates(allBudgetStorage);
+    generateDateList();
+    setAllCalculations(febuary2023)
+    showTableEntries(febuary2023)
+  }
+// } 
+
 expenseForm.addEventListener("submit", getExpense);
 incomeForm.addEventListener("submit", getIncome);
 
@@ -48,11 +90,13 @@ function getExpense(e) {
 
   allBudgetStorage.push(expenseValues);
 
+  lastDate = expenseValues.date.slice(0, 7);
   expenseForm.reset();
-  setCurrentDates();
+  setCurrentDates(allBudgetStorage);
   generateDateList();
-  //   setAllCalculations();
-  //   showTableEntries(allBudgetStorage);
+  showFilterDate();
+    // setAllCalculations();
+    // showTableEntries(allBudgetStorage);
   // location.reload();
 }
 function getIncome(e) {
@@ -87,10 +131,11 @@ function getIncome(e) {
   };
 
   allBudgetStorage.push(incomeValues);
-
+  lastDate = incomeValues.date.slice(0, 7);
   incomeForm.reset();
-  setCurrentDates();
+  setCurrentDates(allBudgetStorage);
   generateDateList();
+  showFilterDate();
   //   setAllCalculations();
   //   showTableEntries(allBudgetStorage);
   // location.reload();
@@ -122,7 +167,6 @@ function setAllCalculations(currentBudgqet) {
   balance = calculateBalance(income, expense);
 
   updateTotals();
-  // sincronizeStorage();
 }
 
 function sumEntries(type, entries) {
@@ -170,9 +214,8 @@ function updateTotals() {
   balanceTotal.innerHTML += " COP";
 }
 
-let uniqueMonths = [];
-let uniqueYears = [];
-function setCurrentDates() {
+
+function setCurrentDates(allBudgetStorage) {
   let getMonth = [];
   let getYear = [];
   let getMonthString = "";
@@ -196,33 +239,52 @@ function setCurrentDates() {
     uniqueYears.splice(uniqueYears.length, 0, getYearString)
   }
 
-
-
   uniqueMonthFilter = uniqueMonths[uniqueMonths.length - 1];
   uniqueYearFilter = uniqueYears[uniqueYears.length - 1];
   return [uniqueMonths, uniqueYears];
 }
-// TODO Use if in the last element of the loop to push it in the last
 
 function generateDateList() {
   /* Months */
+  console.log(uniqueMonths);
   monthList.innerHTML = '';
-uniqueMonths.reverse();
+  if (uniqueMonths.length > 1) {  
+    let lastMonthString = lastDate.slice(5, 7);
+    console.log(lastMonthString);
+    const lastMonthIndex = uniqueMonths.findIndex(month => month == lastMonthString)
+    uniqueMonths.splice(lastMonthIndex, 1)
+    uniqueMonths.unshift(parseFloat(lastMonthString))
+    // uniqueYears.splice(uniqueYears.length, 0, getYearString)
+  }
+ 
+  // uniqueMonths.reverse();
+  
   for (let m = 0; m < uniqueMonths.length; m++) {
     monthsName.push(numberMonths[uniqueMonths[m]]);
     const monthOption = document.createElement("option");
     monthList.appendChild(monthOption);
+    console.log({uniqueMonths: uniqueMonths});
     monthOption.innerHTML = `${numberMonths[uniqueMonths[m]]}`;
   }
   /* Years */
   yearList.innerHTML = "";
-  uniqueYears.reverse();
+  
+  if (uniqueYears.length > 1) {  
+    let lastYearString = lastDate.slice(0, 5);
+    console.log(lastYearString);
+    const lastYearIndex = uniqueYears.findIndex(month => month == lastYearString)
+    uniqueYears.splice(lastYearIndex, 1)
+    uniqueYears.unshift(lastYearString)
+    // uniqueYears.splice(uniqueYears.length, 0, getYearString)
+  }
+  // uniqueYears.reverse();
+  console.log(uniqueYears);
   for (let y = 0; y < uniqueYears.length; y++) {
     const yearOption = document.createElement("option");
     yearList.appendChild(yearOption);
+    console.log({uniqueYears :uniqueYears});
     yearOption.innerHTML = `${uniqueYears[y].slice(0, -1)}`;
   }
-  showFilterDate(uniqueMonthFilter, uniqueYearFilter);
 }
 
 function showMonthFiltered() {
@@ -238,12 +300,13 @@ function showMonthFiltered() {
     if (indexMonth < 10) {
       indexSelection = `-0${indexMonth}-`;
     }
-    let date = yearList.value + indexSelection;
+    lastDate = yearList.value + indexSelection;
     const filterMonth = allBudgetStorage.filter((budget) =>
-      budget.date.includes(date)
+    budget.date.includes(lastDate)
     );
     showTableEntries(filterMonth);
     setAllCalculations(filterMonth);
+    sincronizeLastDate(lastDate)  
   // }
   return indexSelection;
 }
@@ -254,31 +317,73 @@ function showYearFiltered() {
   }
 
   // if (yearIndex.includes(yearList.value)) {
-    let date = yearList.value + showMonthFiltered;
+    lastDate = yearList.value + showMonthFiltered();
+
     const filterYearMonth = allBudgetStorage.filter((budget) =>
-      budget.date.includes(date)
+      budget.date.includes(lastDate)
     );
     showTableEntries(filterYearMonth);
     setAllCalculations(filterYearMonth);
+    sincronizeLastDate(lastDate)
     return yearList.value;
   // }
 }
 
 
+function showFilterDate() {
 
-
-function showFilterDate(month, year) {
-  if (month < 10) {
-    month = `0${month}-`;
-  }
-  
-  let date = year + month;
   let filterDate = allBudgetStorage.filter((budget) =>
-  budget.date.includes(date)
+  budget.date.includes(lastDate)
   );
+  if (lastDate.includes('2022-12')) {
+    december2022.push(filterDate)
+    if (december2022.length > 1) {
+      console.log(1);
+      december2022 = december2022[december2022.length - 1]
+    } else {
+      console.log(2);
+      december2022 = december2022[0];
+    }
+    sincronizeDecember2022();
+  } else if (lastDate.includes('2023-01')) {
+    january2023.push(filterDate)
+    if (january2023.length > 1) {
+      january2023 = january2023[january2023.length - 1]
+    } else {
+      january2023 = january2023[0];
+    }
+    sincronizeJanuary2023();
+  } else if (lastDate.includes('2023-02')) {
+    febuary2023.push(filterDate)
+    if (febuary2023.length > 1) {
+      febuary2023 = febuary2023[febuary2023.length - 1]
+    } else {
+      febuary2023 = febuary2023[0];
+    }
+    sincronizeFebuary2023();
+  }
   showTableEntries(filterDate);
   setAllCalculations(filterDate);
+  sincronizeLastDate(lastDate);
+  sincronizeStorage();
 
-  
+}
 
+function sincronizeStorage() {
+  localStorage.setItem("globalBudgetSaved", JSON.stringify(allBudgetStorage));
+}
+
+function sincronizeDecember2022 () {
+  localStorage.setItem("budgetDecember2022", JSON.stringify(december2022));
+}
+function sincronizeJanuary2023 () {
+  localStorage.setItem("budgetJanuary2023", JSON.stringify(january2023));
+}
+
+function sincronizeFebuary2023 () {
+  localStorage.setItem("budgetFebuary2023", JSON.stringify(febuary2023));
+}
+
+function sincronizeLastDate (lastDate) {
+  localStorage.setItem("lastDate", JSON.stringify(lastDate));
 }
