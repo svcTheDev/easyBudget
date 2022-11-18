@@ -7,7 +7,7 @@
 - Diseño del home (Big chart, brieflty summary of incomes, expenses, mandatory expenses and voluntary expenses, goal chart)
 - Manual de uso
 - FAQ
-
+- Adjust message for inexisiting date selected 
 ### JS
 - Organize by month ✅
 - Add audio ✅
@@ -75,4 +75,4 @@
 
 ### 16/11/2022
 --- Pending issues
-- when refreshing the page without an existing date, the page missed all data
+- when refreshing the page without an existing date, the page missed all data ✅

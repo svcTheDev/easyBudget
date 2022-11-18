@@ -17,6 +17,7 @@ let december2022;
 let january2023;
 let febuary2023;
 let lastDate;
+let savedLastDate;
 
 let uniqueMonths = [];
 let uniqueYears = [];
@@ -69,7 +70,7 @@ function getExpense(e) {
     !expenseCategory.value ||
     !expensePrice.value
   ) {
-    showErrorMessage([
+    pointErrorBox([
       expenseDate,
       expenseDescription,
       expenseCategory,
@@ -112,7 +113,7 @@ function getIncome(e) {
     !incomeCategory.value ||
     !incomePrice.value
   ) {
-    showErrorMessage([
+    pointErrorBox([
       incomeDate,
       incomeDescription,
       incomeCategory,
@@ -141,7 +142,7 @@ function getIncome(e) {
   // location.reload();
 }
 
-function showErrorMessage(inputs) {
+function pointErrorBox(inputs) {
   const checkEmptyField = inputs.filter((input) => input.value === "");
 
   checkEmptyField.forEach((field) => {
@@ -149,16 +150,21 @@ function showErrorMessage(inputs) {
     setTimeout(function () {
       field.classList.remove("error-field");
     }, 3000);
-
-    errorMessageBox.classList.add("show-message");
-    errorMessageBox.classList.add("hide-error-message");
-
-    setTimeout(function () {
-      errorMessageBox.classList.remove("show-message");
-      errorMessageBox.classList.remove("hide-error-message");
-    }, 6000);
   });
+
+  showErrorMessage();
 }
+
+function showErrorMessage () {
+  errorMessageBox.classList.add("show-message");
+  errorMessageBox.classList.add("hide-error-message");
+
+  setTimeout(function () {
+    errorMessageBox.classList.remove("show-message");
+    errorMessageBox.classList.remove("hide-error-message");
+  }, 6000);
+}
+
 
 
 function setAllCalculations(currentBudgqet) {
@@ -291,8 +297,9 @@ function showMonthFiltered() {
   if (!generateDateList) {
     return;
   }
+
+  savedLastDate = lastDate;
   let indexSelection = "";
-  // if (monthsName.includes(monthList.value)) {
     const indexMonth = monthIndex.findIndex(
       (monthIndex) => monthIndex === monthList.value
       );
@@ -304,10 +311,21 @@ function showMonthFiltered() {
     const filterMonth = allBudgetStorage.filter((budget) =>
     budget.date.includes(lastDate)
     );
+    if (filterMonth.length === 0) {
+      lastDate = savedLastDate; 
+      const alternativeFilterMonth = allBudgetStorage.filter((budget) =>
+      budget.date.includes(lastDate));
+      showTableEntries(alternativeFilterMonth);
+      setAllCalculations(alternativeFilterMonth);
+      sincronizeLastDate(lastDate)  
+
+      showErrorMessage();
+      return indexSelection;
+
+    }
     showTableEntries(filterMonth);
     setAllCalculations(filterMonth);
     sincronizeLastDate(lastDate)  
-  // }
   return indexSelection;
 }
 
@@ -315,13 +333,26 @@ function showYearFiltered() {
   if (!yearList.value) {
     return;
   }
+  savedLastDate = lastDate;
 
-  // if (yearIndex.includes(yearList.value)) {
     lastDate = yearList.value + showMonthFiltered();
 
     const filterYearMonth = allBudgetStorage.filter((budget) =>
       budget.date.includes(lastDate)
     );
+    if (filterYearMonth.length === 0) {
+      lastDate = savedLastDate; 
+      const alternativeFilterYear = allBudgetStorage.filter((budget) =>
+      budget.date.includes(lastDate));
+      showTableEntries(alternativeFilterYear);
+      setAllCalculations(alternativeFilterYear);
+      sincronizeLastDate(lastDate);
+      
+      showErrorMessage();
+      return yearList.value;
+      
+    }
+
     showTableEntries(filterYearMonth);
     setAllCalculations(filterYearMonth);
     sincronizeLastDate(lastDate)
