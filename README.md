@@ -76,3 +76,32 @@
 ### 16/11/2022
 --- Pending issues
 - when refreshing the page without an existing date, the page missed all data ✅
+
+### 27/11/2022
+### CSS
+- End the rest of the repeated code
+* 4 — Translates automatically the totals into words
+* 5 — Instant search tool of the entries on the table 
+
+
+### 28/11/2022
+- Add a transition when creating a new entry
+- Sidebar
+
+### 29/11/2022
+- Diseño del home (Big chart, brieflty summary of incomes, expenses, mandatory expenses and voluntary expenses, goal chart)
+
+
+- Manual de uso
+- FAQ
+- Adjust message for inexisiting date selected 
+### JS
+- Organize by month ✅
+- Add audio ✅
+- Recreate the app with a month array active
+- Sidebar: draggable calculator
+
+
+--- Pending issues
+- Update the month and year text of the list when a new date is added ✅
+- Fix issues with month and list filter at the same time ✅

@@ -21,6 +21,8 @@ const balanceTotal = document.querySelector(".balance p");
 const monthList = document.getElementById("months");
 const yearList = document.getElementById("years");
 
+const searchBar = document.querySelector('.search__input');
+
 let allBudgetStorage;
 let balance,
   expense,

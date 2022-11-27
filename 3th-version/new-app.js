@@ -4,9 +4,9 @@
  
 // * 2 - — Get the filterDate in order to print the table */
 
-// — Updates the incomes, expenses, and balance automatically
-// — Translates automatically the totals into words
-// — Instant search tool of the entries on the table
+// * 3 - Updates the incomes, expenses, and balance automatically
+// * 4 — Translates automatically the totals into words
+// * 5 — Instant search tool of the entries on the table
 // — Sorts function on all the 4 categories
 // — Deletes dynamically the rows by clicking the delete button
 // — Edit function to change entry rows manually
@@ -39,6 +39,7 @@ console.log({december2022: december2022, january2023: january2023, febuary2023: 
     generateDateList();
     setAllCalculations(january2023)
     showTableEntries(january2023)
+    setSearch(january2023)
   }
   if (lastDate.includes('2022-12')) {
     console.log('dec');
@@ -46,6 +47,7 @@ console.log({december2022: december2022, january2023: january2023, febuary2023: 
     generateDateList();
     setAllCalculations(december2022)
     showTableEntries(december2022)
+    setSearch(december2022)
   }
   if (lastDate.includes('2023-02')) {
     console.log('feb');
@@ -53,6 +55,7 @@ console.log({december2022: december2022, january2023: january2023, febuary2023: 
     generateDateList();
     setAllCalculations(febuary2023)
     showTableEntries(febuary2023)
+    setSearch(febuary2023)
   }
 // } 
 
@@ -167,11 +170,12 @@ function showErrorMessage () {
 
 
 
-function setAllCalculations(currentBudgqet) {
-  income = sumEntries("income", currentBudgqet);
-  expense = sumEntries("expense", currentBudgqet);
+function setAllCalculations(currentBudget) {
+  console.log(currentBudget);
+  income = sumEntries("income", currentBudget);
+  expense = sumEntries("expense", currentBudget);
   balance = calculateBalance(income, expense);
-
+  console.log(balance);
   updateTotals();
 }
 
@@ -197,6 +201,7 @@ function updateTotals() {
   numbersToLetters();
 
   let numbersBalanceText = numbersBalance.textContent;
+  console.log(numbersBalanceText);
   let numbersIncomeText = numbersIncome.textContent;
   let numbersOutcomeText = numbersOutcome.textContent;
 
@@ -399,6 +404,70 @@ function showFilterDate() {
   sincronizeStorage();
 
 }
+
+searchBar.focus({ focusVisible: true });
+
+function setSearch (currentBudget) {
+  console.log('active0');
+  searchBar.addEventListener("keyup", function (e){
+    e.preventDefault();
+    searchTool(currentBudget)
+  })
+}
+
+function searchTool (currentBudget) { 
+  console.log(currentBudget);
+  let valueSearch = searchBar.value;
+  console.log(valueSearch);
+
+  let dataToReturn = searchTable(valueSearch, currentBudget);
+  showTableEntries(dataToReturn);
+  console.log(dataToReturn);
+  // showFilterTotal(dataToReturn);
+  function searchTable(valueSearch, dataToReturn) {
+    let filterData = [];
+    dataToReturn.forEach((data) => {
+      valueSearch = valueSearch.toLowerCase();
+      let description = data.description;
+      let lowerDescription = description.toLowerCase();
+      let category = data.category;
+      let lowercategory = category.toLowerCase();
+      let date = data.date;
+      let price = data.price;
+      let priceString = price.toString();
+
+      if (
+        valueSearch === priceString &&
+        valueSearch.length === priceString.length
+      ) {
+        /* When the number of digits is equal than the table ones*/
+        filterData = [];
+        filterData.push(data);
+      } else if (priceString.includes(valueSearch)) {
+        /* just by writing any number */
+        filterData.push(data);
+      } else if (
+        lowerDescription.includes(valueSearch) ||
+        date.includes(valueSearch) ||
+        lowercategory.includes(valueSearch)
+      ) {
+        /* Just by writing any letter, no numbers */
+        console.log(3);
+        filterData.push(data);
+      }
+    });
+    return filterData;
+  }
+  searchBar.onkeydown = function (e) {
+    if (e.keyCode === 8) {
+      if (searchBar.value.length <= 1) {
+        location.reload();
+      } else {
+        return;
+      }
+    }
+  };
+};
 
 function sincronizeStorage() {
   localStorage.setItem("globalBudgetSaved", JSON.stringify(allBudgetStorage));

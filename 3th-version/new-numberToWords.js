@@ -9,7 +9,7 @@ let showConvertedBalance = document.querySelector(".numberLettersBalance");
 function numbersToLetters() {
   showConvertedIncome.innerHTML=NumeroALetras(numbersIncome.textContent);
   showConvertedOutcome.innerHTML=NumeroALetras(numbersOutcome.textContent);
-  showConvertedBalance.innerHTML=NumeroALetras(numbersBalance.textContent);
+  showConvertedBalance.innerHTML=NumeroALetras(Math.abs(numbersBalance.textContent));
     }
     
     function Unidades(num){
