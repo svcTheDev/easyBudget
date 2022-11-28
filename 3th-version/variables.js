@@ -13,6 +13,9 @@ const incomeForm = document.querySelector("#income-form");
 const table = document.querySelector("#table-body");
 
 const errorMessageBox = document.querySelector(".error-message");
+const modalContainer = document.querySelector(".modal-container");
+const confirmation = document.querySelector(".confirm");
+const cancelation = document.querySelector(".cancel");
 
 const incomeTotal = document.querySelector(".income p");
 const expenseTotal = document.querySelector(".outcome p");
@@ -22,6 +25,13 @@ const monthList = document.getElementById("months");
 const yearList = document.getElementById("years");
 
 const searchBar = document.querySelector('.search__input');
+
+const priceColumnButton = document.querySelector("#sort-price .fas");
+const categoryColumnButton = document.querySelector("#sort-category .fas");
+const dateColumnButton = document.querySelector("#sort-date .fas");
+const descriptionColumnButton = document.querySelector(
+  "#sort-description .fas"
+);
 
 let allBudgetStorage;
 let balance,

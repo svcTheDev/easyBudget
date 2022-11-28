@@ -7,7 +7,7 @@
 // * 3 - Updates the incomes, expenses, and balance automatically
 // * 4 — Translates automatically the totals into words
 // * 5 — Instant search tool of the entries on the table
-// — Sorts function on all the 4 categories
+// * 6 — Sorts function on all the 4 categories
 // — Deletes dynamically the rows by clicking the delete button
 // — Edit function to change entry rows manually
 // — Clones rows by clicking the clone icon
@@ -22,6 +22,9 @@ let savedLastDate;
 let uniqueMonths = [];
 let uniqueYears = [];
 let allmonths = [december2022, january2023]
+let originalPrices = []
+
+
 
 
 allBudgetStorage = JSON.parse(localStorage.getItem("globalBudgetSaved")) || [];
@@ -40,6 +43,7 @@ console.log({december2022: december2022, january2023: january2023, febuary2023: 
     setAllCalculations(january2023)
     showTableEntries(january2023)
     setSearch(january2023)
+    originalPrices = [...january2023];
   }
   if (lastDate.includes('2022-12')) {
     console.log('dec');
@@ -48,6 +52,8 @@ console.log({december2022: december2022, january2023: january2023, febuary2023: 
     setAllCalculations(december2022)
     showTableEntries(december2022)
     setSearch(december2022)
+    originalPrices = [...december2022];
+    setSortTool(december2022)
   }
   if (lastDate.includes('2023-02')) {
     console.log('feb');
@@ -56,6 +62,7 @@ console.log({december2022: december2022, january2023: january2023, febuary2023: 
     setAllCalculations(febuary2023)
     showTableEntries(febuary2023)
     setSearch(febuary2023)
+    originalPrices = [...febuary2023];
   }
 // } 
 
@@ -64,9 +71,6 @@ incomeForm.addEventListener("submit", getIncome);
 
 function getExpense(e) {
   e.preventDefault();
-  let moneyLost = new Audio("../Audios/coin-fail.mp3");
-  moneyLost.play();
-
   if (
     !expenseDate.value ||
     !expenseDescription.value ||
@@ -101,15 +105,10 @@ function getExpense(e) {
   showFilterDate();
     // setAllCalculations();
     // showTableEntries(allBudgetStorage);
-  // location.reload();
+  location.reload();
 }
 function getIncome(e) {
   e.preventDefault();
-
-  let moneyAdded = new Audio("../Audios/Poker-Chips-short.mp3");
-
-  moneyAdded.play();
-
   if (
     !incomeDate.value ||
     !incomeDescription.value ||
@@ -142,7 +141,7 @@ function getIncome(e) {
   showFilterDate();
   //   setAllCalculations();
   //   showTableEntries(allBudgetStorage);
-  // location.reload();
+  location.reload();
 }
 
 function pointErrorBox(inputs) {
@@ -227,6 +226,11 @@ function updateTotals() {
 
 
 function setCurrentDates(allBudgetStorage) {
+
+  // let moneyAdded = new Audio("../Audios/Poker-Chips-short.mp3");
+
+  // moneyAdded.play();
+
   let getMonth = [];
   let getYear = [];
   let getMonthString = "";
@@ -252,6 +256,8 @@ function setCurrentDates(allBudgetStorage) {
 
   uniqueMonthFilter = uniqueMonths[uniqueMonths.length - 1];
   uniqueYearFilter = uniqueYears[uniqueYears.length - 1];
+  // let moneyLost = new Audio("../Audios/coin-fail.mp3");
+  // moneyLost.play();
   return [uniqueMonths, uniqueYears];
 }
 
@@ -330,7 +336,8 @@ function showMonthFiltered() {
     }
     showTableEntries(filterMonth);
     setAllCalculations(filterMonth);
-    sincronizeLastDate(lastDate)  
+    sincronizeLastDate(lastDate);
+    location.reload();
   return indexSelection;
 }
 
@@ -354,6 +361,7 @@ function showYearFiltered() {
       sincronizeLastDate(lastDate);
       
       showErrorMessage();
+      location.reload();
       return yearList.value;
       
     }
@@ -361,6 +369,7 @@ function showYearFiltered() {
     showTableEntries(filterYearMonth);
     setAllCalculations(filterYearMonth);
     sincronizeLastDate(lastDate)
+    location.reload();
     return yearList.value;
   // }
 }

@@ -78,15 +78,21 @@
 - when refreshing the page without an existing date, the page missed all data ✅
 
 ### 27/11/2022
-### CSS
+### JS
 - End the rest of the repeated code
-* 4 — Translates automatically the totals into words
-* 5 — Instant search tool of the entries on the table 
+4 — Translates automatically the totals into words ✅
+5 — Instant search tool of the entries on the table ✅
 
 
 ### 28/11/2022
+### JS
+
+6 — Sorts function on all the 4 categories
+7 — Deletes dynamically the rows by clicking the delete button
+
+### css
 - Add a transition when creating a new entry
-- Sidebar
+- Sidebar 
 
 ### 29/11/2022
 - Diseño del home (Big chart, brieflty summary of incomes, expenses, mandatory expenses and voluntary expenses, goal chart)
