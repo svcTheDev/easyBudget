@@ -101,4 +101,18 @@ function deleteRow(id, current) {
     setAllCalculations(december2022);
     sincronizeDecember2022();
   }
+  if (JSON.stringify(current) === JSON.stringify(january2023)) {
+    console.log(2);
+    january2023 = january2023.filter((budget) => budget.id !== id);
+    showTableEntries(january2023);
+    setAllCalculations(january2023);
+    sincronizeJanuary2023();
+  }
+  if (JSON.stringify(current) === JSON.stringify(febuary2023)) {
+    console.log(3);
+    febuary2023 = febuary2023.filter((budget) => budget.id !== id);
+    showTableEntries(febuary2023);
+    setAllCalculations(febuary2023);
+    sincronizeFebuary2023(); 
+  }
 }
