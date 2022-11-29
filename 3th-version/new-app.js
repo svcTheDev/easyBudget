@@ -8,7 +8,7 @@
 // * 4 — Translates automatically the totals into words
 // * 5 — Instant search tool of the entries on the table
 // * 6 — Sorts function on all the 4 categories
-// — Deletes dynamically the rows by clicking the delete button
+// * 7 — Deletes dynamically the rows by clicking the delete button
 // — Edit function to change entry rows manually
 // — Clones rows by clicking the clone icon
 // — Organize by month
@@ -37,7 +37,6 @@ console.log({december2022: december2022, january2023: january2023, febuary2023: 
 
 // if (allBudgetStorage.length > 1) {
   if (lastDate.includes('2023-01')) {
-    console.log('jan');
     setCurrentDates(allBudgetStorage);
     generateDateList();
     setAllCalculations(january2023)
@@ -46,7 +45,6 @@ console.log({december2022: december2022, january2023: january2023, febuary2023: 
     originalPrices = [...january2023];
   }
   if (lastDate.includes('2022-12')) {
-    console.log('dec');
     setCurrentDates(allBudgetStorage);
     generateDateList();
     setAllCalculations(december2022)
@@ -56,7 +54,6 @@ console.log({december2022: december2022, january2023: january2023, febuary2023: 
     setSortTool(december2022)
   }
   if (lastDate.includes('2023-02')) {
-    console.log('feb');
     setCurrentDates(allBudgetStorage);
     generateDateList();
     setAllCalculations(febuary2023)
@@ -170,11 +167,9 @@ function showErrorMessage () {
 
 
 function setAllCalculations(currentBudget) {
-  console.log(currentBudget);
   income = sumEntries("income", currentBudget);
   expense = sumEntries("expense", currentBudget);
   balance = calculateBalance(income, expense);
-  console.log(balance);
   updateTotals();
 }
 
@@ -200,7 +195,6 @@ function updateTotals() {
   numbersToLetters();
 
   let numbersBalanceText = numbersBalance.textContent;
-  console.log(numbersBalanceText);
   let numbersIncomeText = numbersIncome.textContent;
   let numbersOutcomeText = numbersOutcome.textContent;
 
@@ -263,11 +257,9 @@ function setCurrentDates(allBudgetStorage) {
 
 function generateDateList() {
   /* Months */
-  console.log(uniqueMonths);
   monthList.innerHTML = '';
   if (uniqueMonths.length > 1) {  
     let lastMonthString = lastDate.slice(5, 7);
-    console.log(lastMonthString);
     const lastMonthIndex = uniqueMonths.findIndex(month => month == lastMonthString)
     uniqueMonths.splice(lastMonthIndex, 1)
     uniqueMonths.unshift(parseFloat(lastMonthString))
@@ -280,7 +272,6 @@ function generateDateList() {
     monthsName.push(numberMonths[uniqueMonths[m]]);
     const monthOption = document.createElement("option");
     monthList.appendChild(monthOption);
-    console.log({uniqueMonths: uniqueMonths});
     monthOption.innerHTML = `${numberMonths[uniqueMonths[m]]}`;
   }
   /* Years */
@@ -288,18 +279,15 @@ function generateDateList() {
   
   if (uniqueYears.length > 1) {  
     let lastYearString = lastDate.slice(0, 5);
-    console.log(lastYearString);
     const lastYearIndex = uniqueYears.findIndex(month => month == lastYearString)
     uniqueYears.splice(lastYearIndex, 1)
     uniqueYears.unshift(lastYearString)
     // uniqueYears.splice(uniqueYears.length, 0, getYearString)
   }
   // uniqueYears.reverse();
-  console.log(uniqueYears);
   for (let y = 0; y < uniqueYears.length; y++) {
     const yearOption = document.createElement("option");
     yearList.appendChild(yearOption);
-    console.log({uniqueYears :uniqueYears});
     yearOption.innerHTML = `${uniqueYears[y].slice(0, -1)}`;
   }
 }
@@ -374,7 +362,6 @@ function showYearFiltered() {
   // }
 }
 
-
 function showFilterDate() {
 
   let filterDate = allBudgetStorage.filter((budget) =>
@@ -383,10 +370,8 @@ function showFilterDate() {
   if (lastDate.includes('2022-12')) {
     december2022.push(filterDate)
     if (december2022.length > 1) {
-      console.log(1);
       december2022 = december2022[december2022.length - 1]
     } else {
-      console.log(2);
       december2022 = december2022[0];
     }
     sincronizeDecember2022();
@@ -411,72 +396,7 @@ function showFilterDate() {
   setAllCalculations(filterDate);
   sincronizeLastDate(lastDate);
   sincronizeStorage();
-
 }
-
-searchBar.focus({ focusVisible: true });
-
-function setSearch (currentBudget) {
-  console.log('active0');
-  searchBar.addEventListener("keyup", function (e){
-    e.preventDefault();
-    searchTool(currentBudget)
-  })
-}
-
-function searchTool (currentBudget) { 
-  console.log(currentBudget);
-  let valueSearch = searchBar.value;
-  console.log(valueSearch);
-
-  let dataToReturn = searchTable(valueSearch, currentBudget);
-  showTableEntries(dataToReturn);
-  console.log(dataToReturn);
-  // showFilterTotal(dataToReturn);
-  function searchTable(valueSearch, dataToReturn) {
-    let filterData = [];
-    dataToReturn.forEach((data) => {
-      valueSearch = valueSearch.toLowerCase();
-      let description = data.description;
-      let lowerDescription = description.toLowerCase();
-      let category = data.category;
-      let lowercategory = category.toLowerCase();
-      let date = data.date;
-      let price = data.price;
-      let priceString = price.toString();
-
-      if (
-        valueSearch === priceString &&
-        valueSearch.length === priceString.length
-      ) {
-        /* When the number of digits is equal than the table ones*/
-        filterData = [];
-        filterData.push(data);
-      } else if (priceString.includes(valueSearch)) {
-        /* just by writing any number */
-        filterData.push(data);
-      } else if (
-        lowerDescription.includes(valueSearch) ||
-        date.includes(valueSearch) ||
-        lowercategory.includes(valueSearch)
-      ) {
-        /* Just by writing any letter, no numbers */
-        console.log(3);
-        filterData.push(data);
-      }
-    });
-    return filterData;
-  }
-  searchBar.onkeydown = function (e) {
-    if (e.keyCode === 8) {
-      if (searchBar.value.length <= 1) {
-        location.reload();
-      } else {
-        return;
-      }
-    }
-  };
-};
 
 function sincronizeStorage() {
   localStorage.setItem("globalBudgetSaved", JSON.stringify(allBudgetStorage));

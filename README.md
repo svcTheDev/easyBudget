@@ -87,8 +87,8 @@
 ### 28/11/2022
 ### JS
 
-6 — Sorts function on all the 4 categories
-7 — Deletes dynamically the rows by clicking the delete button
+6 — Sorts function on all the 4 categories ✅
+7 — Deletes dynamically the rows by clicking the delete button ✅
 
 ### css
 - Add a transition when creating a new entry
