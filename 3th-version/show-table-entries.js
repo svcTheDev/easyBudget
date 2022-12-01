@@ -25,10 +25,10 @@ function showTableEntries(budgetStorage) {
       const row = `   
       <td id="date-field ${
         budget.id
-      }" class="size edit-field"><i class='far fa-clone duplicate-icon'></i>    
+      }" class="size"><i class='far fa-clone duplicate-icon'></i>    
       ${getDayWeek(new Date(budget.date))} ${
         budget.date
-      }<i class="specialDate fa-solid fa-pencil"></i>
+      }
           <td id="description-field ${budget.id}" class="size edit-field">${
         budget.description
       }<i class="fa-solid fa-pencil"></i></td>

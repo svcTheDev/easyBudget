@@ -6,67 +6,67 @@ document.querySelectorAll(".fa-pencil").forEach((pencil) => {
     //     rows.addEventListener("click", getCloneRow);
     //   });
     
-    document.querySelectorAll(".specialDate").forEach((dates) => {
-        dates.addEventListener("click", setNewDate);
-    });
+    // document.querySelectorAll(".specialDate").forEach((dates) => {
+    //     dates.addEventListener("click", setNewDate);
+    // });
     
-    function setNewDate(e) {
-        console.log('1');
-        let iconDateParent = this.parentElement;
+  //   function setNewDate(e) {
+  //       console.log('1');
+  //       let iconDateParent = this.parentElement;
         
-    if (iconDateParent.hasAttribute("data-clicked")) {
-      return;
-    }
-    iconDateParent.setAttribute("data-clicked", "yes");
-    iconDateParent.setAttribute("data-text", iconDateParent.textContent);
-    let inputDate = document.createElement("input");
-    inputDate.setAttribute("type", "date");
-    inputDate.value = iconDateParent.textContent;
-    inputDate.classList.add("onEdit");
-    this.classList.remove("size");
-    // console.log(iconDateParent.textContent);
+  //   if (iconDateParent.hasAttribute("data-clicked")) {
+  //     return;
+  //   }
+  //   iconDateParent.setAttribute("data-clicked", "yes");
+  //   iconDateParent.setAttribute("data-text", iconDateParent.textContent);
+  //   let inputDate = document.createElement("input");
+  //   inputDate.setAttribute("type", "date");
+  //   inputDate.value = iconDateParent.textContent;
+  //   inputDate.classList.add("onEdit");
+  //   this.classList.remove("size");
+  //   // console.log(iconDateParent.textContent);
   
-    inputDate.onblur = function (e) {
+  //   inputDate.onblur = function (e) {
       
-      let dateTd = inputDate.parentElement;
-      let original_date = inputDate.parentElement.getAttribute("data-text");
-      let current_date = iconDateParent.textContent;
-      let dateParentId = parseFloat(e.target.parentElement.id.slice(-13));
+  //     let dateTd = inputDate.parentElement;
+  //     let original_date = inputDate.parentElement.getAttribute("data-text");
+  //     let current_date = iconDateParent.textContent;
+  //     let dateParentId = parseFloat(e.target.parentElement.id.slice(-13));
         
-      if (current_date !== original_date) {
-        console.log(1);
-        dateTd.removeAttribute("data-clicked");
-        dateTd.removeAttribute("data-text");
-        dateTd.innerHTML = current_date + `<i class="fa-solid fa-pencil">`;
+  //     if (current_date !== original_date) {
+  //       console.log(1);
+  //       dateTd.removeAttribute("data-clicked");
+  //       dateTd.removeAttribute("data-text");
+  //       dateTd.innerHTML = current_date + `<i class="fa-solid fa-pencil">`;
   
-        const checkDateId = december2022.find(
-          (values) => values.id === dateParentId
-        );
-        delete checkDateId.date;
-        checkDateId.date = current_date;
-        showTableEntries(december2022);
-        sincronizeDecember2022();
+  //       const checkDateId = december2022.find(
+  //         (values) => values.id === dateParentId
+  //       );
+  //       delete checkDateId.date;
+  //       checkDateId.date = current_date;
+  //       showTableEntries(december2022);
+  //       sincronizeDecember2022();
   
-        console.log(original_date + " is changed to " + current_date);
-        // location.reload();
-      } else {
-        console.log(2);
-        dateTd.removeAttribute("data-clicked");
-        dateTd.removeAttribute("data-text");
-        dateTd.innerHTML = original_date + `<i class="fa-solid fa-pencil">`;
-        iconDateParent.classList.add("size");
-      }
-    };
-    inputDate.onkeypress = function () {
-      if (event.keyCode === 13) {
-        this.blur();
-        // location.reload();
-      }
-    };
-    iconDateParent.innerHTML = "";
-    iconDateParent.append(inputDate);
-    iconDateParent.firstElementChild.select();
-  }
+  //       console.log(original_date + " is changed to " + current_date);
+  //       // location.reload();
+  //     } else {
+  //       console.log(2);
+  //       dateTd.removeAttribute("data-clicked");
+  //       dateTd.removeAttribute("data-text");
+  //       dateTd.innerHTML = original_date + `<i class="fa-solid fa-pencil">`;
+  //       iconDateParent.classList.add("size");
+  //     }
+  //   };
+  //   inputDate.onkeypress = function () {
+  //     if (event.keyCode === 13) {
+  //       this.blur();
+  //       // location.reload();
+  //     }
+  //   };
+  //   iconDateParent.innerHTML = "";
+  //   iconDateParent.append(inputDate);
+  //   iconDateParent.firstElementChild.select();
+  // }
   
   /* takes all but date fields */
   function convertToInput(e) {

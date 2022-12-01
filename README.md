@@ -94,7 +94,13 @@
 - Add a transition when creating a new entry
 - Sidebar 
 
-### 29/11/2022
+### 01/12/2022
+8 - Fix bug with edit fields, but I had to delete the option to edit dates
+
+### 02/12/2022
+
+
+
 - Diseño del home (Big chart, brieflty summary of incomes, expenses, mandatory expenses and voluntary expenses, goal chart)
 
 
