@@ -1,5 +1,5 @@
 let budgetID;
-let currentBudgetToDelete;
+let currentBudget;
 
 function getDayWeek(date) {
     const days = {
@@ -60,7 +60,7 @@ function showTableEntries(budgetStorage) {
   
         modalContainer.classList.add("show-confirmation");
         budgetID = budget.id;
-        currentBudgetToDelete = budgetStorage;
+        currentBudget = budgetStorage;
       };
     });
   }
@@ -78,7 +78,7 @@ function discardModal(e) {
 }
 
 confirmation.addEventListener("click", function () {
-  deleteRow(budgetID, currentBudgetToDelete);
+  deleteRow(budgetID, currentBudget);
   modalContainer.classList.add("modal-inactive");
   modalContainer.classList.remove("show-confirmation");
   // const audioDelete = new Audio("Audios/delete.mp3")
@@ -94,6 +94,9 @@ function deleteRow(id, current) {
   console.log(current);
   console.log(december2022);
 
+  allBudgetStorage = allBudgetStorage.filter((budget) => budget.id !== id);
+  console.log(allBudgetStorage);
+  sincronizeStorage();
   if (JSON.stringify(current) === JSON.stringify(december2022)) {
     console.log(1);
     december2022 = december2022.filter((budget) => budget.id !== id);
@@ -115,4 +118,7 @@ function deleteRow(id, current) {
     setAllCalculations(febuary2023);
     sincronizeFebuary2023(); 
   }
+
+  // location.reload(); 
 }
+

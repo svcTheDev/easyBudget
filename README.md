@@ -95,11 +95,23 @@
 - Sidebar 
 
 ### 01/12/2022
-8 - Fix bug with edit fields, but I had to delete the option to edit dates
+8 - create edit fields option and fix bug with edit fields, but I had to delete the option to edit dates ✅
 
-### 02/12/2022
+--- Pending issues
+- Fix bug when adding a new entry, returns a delete item ✅
+- Clones rows by clicking the clone icon ✅
 
+### 02/12/2022 
+9 - Drag rows ❌
 
+### 03/12/2022
+9 - Drag rows ✅
+- Add the rest of the arrays to clone rows ✅
+
+### 04/12/2022
+- Some sorts are not working in some months ✅
+- When editing a price is not being automatically updated on the totals 
+- Local storage not working (check local storage and totals on all functions)
 
 - Diseño del home (Big chart, brieflty summary of incomes, expenses, mandatory expenses and voluntary expenses, goal chart)
 
@@ -110,10 +122,15 @@
 ### JS
 - Organize by month ✅
 - Add audio ✅
-- Recreate the app with a month array active
-- Sidebar: draggable calculator
+- Recreate the app with a month array active ✅
+- Sidebar: draggable calculator 
 
 
 --- Pending issues
 - Update the month and year text of the list when a new date is added ✅
 - Fix issues with month and list filter at the same time ✅
+- Sometimes change the month and creates an array that does not exist ✅
+- When adding a new entry, the array does not save the arrange previously done by the user, you have to update the allbudget array at the same time ✅
+- Some sorts are not working in some months
+- When editing a price is not being automatically updated on the totals
+- Local storage not working (check local storage and totals on all functions)

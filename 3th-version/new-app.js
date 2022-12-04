@@ -9,9 +9,9 @@
 // * 5 — Instant search tool of the entries on the table
 // * 6 — Sorts function on all the 4 categories
 // * 7 — Deletes dynamically the rows by clicking the delete button
-// — Edit function to change entry rows manually
-// — Clones rows by clicking the clone icon
-// — Organize by month
+// * 8 — Edit function to change entry rows manually
+// * 9 — Clones rows by clicking the clone icon
+//* 10 - Drag rows
 
 let december2022;
 let january2023;
@@ -42,6 +42,7 @@ console.log({december2022: december2022, january2023: january2023, febuary2023: 
     setAllCalculations(january2023)
     showTableEntries(january2023)
     setSearch(january2023)
+    setSortTool(january2023)
     originalPrices = [...january2023];
   }
   if (lastDate.includes('2022-12')) {
@@ -60,6 +61,7 @@ console.log({december2022: december2022, january2023: january2023, febuary2023: 
     showTableEntries(febuary2023)
     setSearch(febuary2023)
     originalPrices = [...febuary2023];
+    setSortTool(febuary2023)
   }
 // } 
 
@@ -224,7 +226,6 @@ function setCurrentDates(allBudgetStorage) {
   // let moneyAdded = new Audio("../Audios/Poker-Chips-short.mp3");
 
   // moneyAdded.play();
-
   let getMonth = [];
   let getYear = [];
   let getMonthString = "";
@@ -311,7 +312,9 @@ function showMonthFiltered() {
     budget.date.includes(lastDate)
     );
     if (filterMonth.length === 0) {
+      console.log(filterMonth);
       lastDate = savedLastDate; 
+      console.log(lastDate);
       const alternativeFilterMonth = allBudgetStorage.filter((budget) =>
       budget.date.includes(lastDate));
       showTableEntries(alternativeFilterMonth);
