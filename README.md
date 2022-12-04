@@ -113,6 +113,9 @@
 - When editing a price is not being automatically updated on the totals 
 - Local storage not working (check local storage and totals on all functions)
 
+### css
+- Add a transition when creating a new entry
+- Sidebar 
 - Diseño del home (Big chart, brieflty summary of incomes, expenses, mandatory expenses and voluntary expenses, goal chart)
 
 
@@ -131,6 +134,6 @@
 - Fix issues with month and list filter at the same time ✅
 - Sometimes change the month and creates an array that does not exist ✅
 - When adding a new entry, the array does not save the arrange previously done by the user, you have to update the allbudget array at the same time ✅
-- Some sorts are not working in some months
+- Some sorts are not working in some months ✅
 - When editing a price is not being automatically updated on the totals
 - Local storage not working (check local storage and totals on all functions)

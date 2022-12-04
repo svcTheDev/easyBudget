@@ -103,9 +103,13 @@ document.querySelectorAll(".fa-pencil").forEach((pencil) => {
         td.removeAttribute("data-text");
         td.innerHTML = current_text + `<i class="fa-solid fa-pencil">`;
   
-        const checkId = december2022.find(
+        currentDate = getCurrentDate();
+
+        const checkId = currentDate.find(
           (values) => values.id === savedParentId
         );
+
+
         if (savedParentType === "description") {
           if (current_text.length > 50 || current_text.length === 0) {
             td.removeAttribute("data-clicked");
@@ -116,6 +120,9 @@ document.querySelectorAll(".fa-pencil").forEach((pencil) => {
           delete checkId.description;
           checkId.description = current_text;
           sincronizeDecember2022();
+          sincronizeJanuary2023();
+          sincronizeFebuary2023();
+          
         }
   
         if (savedParentType === "category") {
@@ -128,6 +135,9 @@ document.querySelectorAll(".fa-pencil").forEach((pencil) => {
           delete checkId.category;
           checkId.category = current_text;
           sincronizeDecember2022();
+          sincronizeJanuary2023();
+          sincronizeFebuary2023();
+          
         }
         if (savedParentType === "price") {
           if (current_text.length > 9 || current_text.length === 0) {
@@ -139,21 +149,24 @@ document.querySelectorAll(".fa-pencil").forEach((pencil) => {
           delete checkId.price;
           checkId.price = parseFloat(current_text);
           sincronizeDecember2022();
+          sincronizeJanuary2023();
+          sincronizeFebuary2023();
+          
         }
-        // location.reload();
+        location.reload();
     } else {
           console.log('hola?');
         td.removeAttribute("data-clicked");
         td.removeAttribute("data-text");
         td.innerHTML = original_text + `<i class="fa-solid fa-pencil">`;
-        // location.reload();
+        location.reload();
       }
     };
   
     input.onkeypress = function () {
       if (event.keyCode === 13) {
         this.blur();
-        // location.reload();{
+        location.reload();
       }
     };
     input.onkeydown = function (e) {

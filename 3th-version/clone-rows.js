@@ -63,19 +63,5 @@ document.querySelectorAll(".duplicate-icon").forEach((icons) => {
     allBudgetStorage.splice(index, 0, ...elementsArray);
   }
   
-function getCurrentDate() {
-  let indexDateList = monthIndex.findIndex(
-    (monthIndex) => monthIndex === monthList.value
-    );
-if (indexDateList == 12) {
-    console.log(1);
-    currentDate = december2022;
-  } else if (indexDateList == 1) {
-    currentDate = january2023;
-  } else if (indexDateList = 2) {
-    currentDate = febuary2023;
-  }
 
-  return currentDate;
-}
 
