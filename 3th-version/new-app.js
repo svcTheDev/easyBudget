@@ -312,18 +312,10 @@ function showMonthFiltered() {
     budget.date.includes(lastDate)
     );
     if (filterMonth.length === 0) {
-      console.log(filterMonth);
-      lastDate = savedLastDate; 
-      console.log(lastDate);
-      const alternativeFilterMonth = allBudgetStorage.filter((budget) =>
-      budget.date.includes(lastDate));
-      showTableEntries(alternativeFilterMonth);
-      setAllCalculations(alternativeFilterMonth);
-      sincronizeLastDate(lastDate)  
-
+      table.innerHTML = '';
+      setAllCalculations(filterMonth)
       showErrorMessage();
       return indexSelection;
-
     }
     showTableEntries(filterMonth);
     setAllCalculations(filterMonth);
@@ -344,15 +336,9 @@ function showYearFiltered() {
       budget.date.includes(lastDate)
     );
     if (filterYearMonth.length === 0) {
-      lastDate = savedLastDate; 
-      const alternativeFilterYear = allBudgetStorage.filter((budget) =>
-      budget.date.includes(lastDate));
-      showTableEntries(alternativeFilterYear);
-      setAllCalculations(alternativeFilterYear);
-      sincronizeLastDate(lastDate);
-      
+      table.innerHTML = '';
+      setAllCalculations(filterYearMonth)
       showErrorMessage();
-      location.reload();
       return yearList.value;
       
     }

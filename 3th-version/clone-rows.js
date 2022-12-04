@@ -41,6 +41,8 @@ document.querySelectorAll(".duplicate-icon").forEach((icons) => {
       sincronizeDecember2022();
       sincronizeJanuary2023();
       sincronizeFebuary2023();
+
+      location.reload();
  
    /* To the whole budget */
 
