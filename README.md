@@ -135,5 +135,6 @@
 - Sometimes change the month and creates an array that does not exist ✅
 - When adding a new entry, the array does not save the arrange previously done by the user, you have to update the allbudget array at the same time ✅
 - Some sorts are not working in some months ✅
-- When editing a price is not being automatically updated on the totals
-- Local storage not working (check local storage and totals on all functions)
+- When editing a price is not being automatically updated on the totals ✅
+- When user selects a non existing date unlike the table, the totals are updated
+- Local storage not working (check local storage and totals on all functions) 

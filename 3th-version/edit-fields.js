@@ -105,54 +105,63 @@ document.querySelectorAll(".fa-pencil").forEach((pencil) => {
   
         currentDate = getCurrentDate();
 
-        const checkId = currentDate.find(
-          (values) => values.id === savedParentId
-        );
+       
 
+        let twoArrays = [currentDate, allBudgetStorage]
+        let currentBudget;
+          for (let index = 0; index < twoArrays.length; index++) {
+            
+            currentBudget = [...twoArrays[index]]
+            console.log(currentBudget);
+            const checkId = currentBudget.find(
+              (values) => values.id === savedParentId
+            );
 
-        if (savedParentType === "description") {
-          if (current_text.length > 50 || current_text.length === 0) {
-            td.removeAttribute("data-clicked");
-            td.removeAttribute("data-text");
-            td.innerHTML = original_text;
-            return;
+            if (savedParentType === "description") {
+              if (current_text.length > 50 || current_text.length === 0) {
+                td.removeAttribute("data-clicked");
+                td.removeAttribute("data-text");
+                td.innerHTML = original_text;
+                return;
+              }
+              delete checkId.description;
+              checkId.description = current_text;
+              sincronizeDecember2022();
+              sincronizeJanuary2023();
+              sincronizeFebuary2023();
+              sincronizeStorage();
+            }
+      
+            if (savedParentType === "category") {
+              if (current_text.length > 20 || current_text.length === 0) {
+                td.removeAttribute("data-clicked");
+                td.removeAttribute("data-text");
+                td.innerHTML = original_text;
+                return;
+              }
+              delete checkId.category;
+              checkId.category = current_text;
+              sincronizeDecember2022();
+              sincronizeJanuary2023();
+              sincronizeFebuary2023();
+              sincronizeStorage();
+            }
+            if (savedParentType === "price") {
+              if (current_text.length > 9 || current_text.length === 0) {
+                td.removeAttribute("data-clicked");
+                td.removeAttribute("data-text");
+                td.innerHTML = original_text;
+                return;
+              }
+              delete checkId.price;
+              checkId.price = parseFloat(current_text);
+              sincronizeDecember2022();
+              sincronizeJanuary2023();
+              sincronizeFebuary2023();
+              sincronizeStorage();
+            }
           }
-          delete checkId.description;
-          checkId.description = current_text;
-          sincronizeDecember2022();
-          sincronizeJanuary2023();
-          sincronizeFebuary2023();
-          
-        }
-  
-        if (savedParentType === "category") {
-          if (current_text.length > 20 || current_text.length === 0) {
-            td.removeAttribute("data-clicked");
-            td.removeAttribute("data-text");
-            td.innerHTML = original_text;
-            return;
-          }
-          delete checkId.category;
-          checkId.category = current_text;
-          sincronizeDecember2022();
-          sincronizeJanuary2023();
-          sincronizeFebuary2023();
-          
-        }
-        if (savedParentType === "price") {
-          if (current_text.length > 9 || current_text.length === 0) {
-            td.removeAttribute("data-clicked");
-            td.removeAttribute("data-text");
-            td.innerHTML = original_text;
-            return;
-          }
-          delete checkId.price;
-          checkId.price = parseFloat(current_text);
-          sincronizeDecember2022();
-          sincronizeJanuary2023();
-          sincronizeFebuary2023();
-          
-        }
+       
         location.reload();
     } else {
           console.log('hola?');
@@ -171,7 +180,6 @@ document.querySelectorAll(".fa-pencil").forEach((pencil) => {
     };
     input.onkeydown = function (e) {
       if (e.keyCode === 9) {
-        // location.reload();{
       }
     };
     iconParent.innerHTML = "";
