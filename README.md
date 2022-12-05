@@ -111,14 +111,18 @@
 ### 04/12/2022
 - Some sorts are not working in some months ✅
 - When editing a price is not being automatically updated on the totals ✅
-- Local storage not working (check local storage and totals on all functions)
+- When user selects a non existing date unlike the table, the totals are updated ✅
+
+### 05/12/2022
+- Sidebar 
+
+
+
 
 ### css
-- Add a transition when creating a new entry
+- Add a transition when creating a new entry❌
 - Sidebar 
 - Diseño del home (Big chart, brieflty summary of incomes, expenses, mandatory expenses and voluntary expenses, goal chart)
-
-
 - Manual de uso
 - FAQ
 - Adjust message for inexisiting date selected 
