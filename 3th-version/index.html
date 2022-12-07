@@ -134,7 +134,7 @@
         <div>
           <label for="date"></label>
           <input
-            placeholder="Elige una fecha"
+            placeholder="Fecha"
             class="allInputs"
             type="text"
             onfocus="(this.type='date')"
@@ -153,11 +153,19 @@
         </div>
         <div>
           <label for="categoryExpense"></label>
+          <select name="type" class="allInputs" id="type">
+            <option value="" disabled selected>Tipo</option>
+            <option>Voluntario</option>
+            <option>Obligatorio</option>
+          </select>
+        </div>
+        <div>
+          <label for="categoryExpense"></label>
           <input
             class="allInputs"
             list="category"
             id="categoryExpense"
-            placeholder="Elige una categoría"
+            placeholder="Categoría"
           />
           <datalist id="category">
             <option value="Comida"></option>
@@ -172,7 +180,7 @@
             type="number"
             id="priceExpense"
             onwheel="return false;"
-            placeholder="Escribe un monto"
+            placeholder="Valor"
           />
         </div>
       </div>

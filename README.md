@@ -121,15 +121,16 @@
 - (falta arreglar los meses y años en el tamaño mediano de la página)  ✅
 - (Falta centrar el summary) ✅
 - (Falta agregar las opciones del sidebar en el menu hamburguesa y hacer que funcione el menu hamburguesa)✅
-
+- Agregué option tipo en las entries ✅
+- El boton enviar esta más pequeño a causa de una nueva categoria en mq 768 ✅
 
 ### css
 - Add a transition when creating a new entry❌
-- Sidebar 
+- Sidebar ✅
 - Diseño del home (Big chart, brieflty summary of incomes, expenses, mandatory expenses and voluntary expenses, goal chart)
+- Adjust message for inexisiting date selected 
 - Manual de uso
 - FAQ
-- Adjust message for inexisiting date selected 
 ### JS
 - Organize by month ✅
 - Add audio ✅
@@ -139,7 +140,7 @@
 
 --- Pending issues
 - Update the month and year text of the list when a new date is added ✅
-- Fix issues with month and list filter at the same time ✅
+- Fix issues with month qand list filter at the same time ✅
 - Sometimes change the month and creates an array that does not exist ✅
 - When adding a new entry, the array does not save the arrange previously done by the user, you have to update the allbudget array at the same time ✅
 - Some sorts are not working in some months ✅
@@ -148,3 +149,4 @@
 - When deleting a complete month, one of the months with entries is deleted until the page is refreshed (sometimes) 
 - There is an error with the location reload when cloning rows ✅
 - Local storage not working (check local storage and totals on all functions) 
+- Issues with mobile screen orientationq
