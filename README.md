@@ -137,6 +137,8 @@
 - Recreate the app with a month array active ✅
 - Sidebar: draggable calculator 
 
+# 07/12/2022
+- Un chart sobre cada tipo (voluntario, obligatorio, ahorro, ingreso)
 
 --- Pending issues
 - Update the month and year text of the list when a new date is added ✅
