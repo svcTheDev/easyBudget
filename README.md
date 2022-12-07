@@ -116,11 +116,11 @@
 
 ### 05/12/2022
 - Sidebar ✅
+
+### 06/12/2022
 - (falta arreglar los meses y años en el tamaño mediano de la página)  ✅
 - (Falta centrar el summary) ✅
-- (Falta agregar las opciones del sidebar en el menu hamburguesa y hacer que funcione el menu hamburguesa)
-
-
+- (Falta agregar las opciones del sidebar en el menu hamburguesa y hacer que funcione el menu hamburguesa)✅
 
 
 ### css
