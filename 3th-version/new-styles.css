@@ -16,6 +16,23 @@
     margin: 0rem auto 1rem auto;
   }
   
+  @media (max-width: 1200px) {
+    .container {
+      max-width: 1200px;
+      width: 80%;
+      margin: 0rem auto 1rem 8rem;
+    }
+  }
+  @media (max-width: 768px) {
+    @media (max-width: 1200px) {
+      .container {
+        max-width: 1200px;
+        width: 90%;
+        margin: 0rem auto 1rem auto;
+      }
+    }
+  }
+  
   a {
     text-decoration: none;
   }
@@ -67,8 +84,9 @@
   }
   
   .logIn {
+    text-align: center;
     padding: 0.2rem 1rem;
-    width: 3.5rem;
+    width: 6rem;
     background-color: #244564;
   }
   
@@ -143,6 +161,95 @@
   
   /* Sidebar */
   
+  .nav__cont {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    width: 50px;
+    top: 4vh;
+    left: 0;
+    height: 96vh;
+    z-index: 100;
+    background-color: #25384F;
+    overflow: hidden;
+    transition: width 0.3s ease;
+    cursor: pointer;
+    /* box-shadow: 4px 7px 10px rgba(0, 0, 0, 0.4); */
+  }
+  .nav__cont:hover {
+    width: 200px;
+  }
+  @media (max-width: 768px) {
+    .nav__cont {
+      /* width: 80px; */
+      display: flex;
+      flex-direction: row;
+    }
+    /* .nav {
+      display: flex;
+    } */
+  }
+
+  .nav {
+    margin-top: 3rem;
+    list-style-type: none;
+    color: white;
+  }
+  .nav:first-child {
+    padding-top: 1.5rem;
+  }
+  
+  .nav__items {
+    padding-bottom: 4rem;
+    font-family: "roboto";
+  }
+  .nav__items a {
+    position: relative;
+    display: block;
+    top: -35px;
+    padding-left: 35px;
+    padding-right: 15px;
+    transition: all 0.3s ease;
+    margin-left: 35px;
+    margin-right: 10px;
+    text-decoration: none;
+    color: white;
+    font-family: "roboto";
+    font-weight: 100;
+    font-size: 1.35em;
+  }
+  .nav__items a:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 2px;
+    background: radial-gradient(circle at 94.02% 88.03%, #44AEF2, transparent 100%);
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: -10;
+  }
+  .nav__items:hover a:after {
+    opacity: 1;
+  }
+
+  .nav__items svg {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    left: 9px;
+    cursor: pointer;
+  }
+  /* @media screen and (min-width: 350px) {
+    .nav__items svg {
+      width: 32px;
+      height: 32px;
+      left: -15px;
+    }
+  } */
+
   /* Summary */
   
   .summary {
@@ -157,7 +264,7 @@
     /* width: 50%; */
     margin-bottom: 1.5rem;
     /* text-align: center; */
-    width: 300px;
+    width: 200px;
   }
   .outcome p {
     font-size: 2rem;
@@ -180,7 +287,7 @@
   
   @media (max-width: 1200px) {
     .summary {
-      margin: 0;
+      /* margin-top: 0rem; */
       /* max-width: 1104px; */
     }
   
@@ -193,11 +300,14 @@
   
   @media (max-width: 768px) {
     .summary {
+      /* margin: 6rem 3rem 1.5rem 3rem;q */
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      width: 100%;
+      width: 85%;
+      border: solid 1px black;
+      
     }
   
     .income,
@@ -206,6 +316,8 @@
       text-align: center;
       max-width: 400px;
       width: 100%;
+      border: solid 1px black;
+      
     }
   }
   
@@ -214,7 +326,7 @@
   .history-container {
     display: grid;
     grid-template-columns: repeat(1, 1fr 1fr 1fr);
-    column-gap: 2rem;
+    column-gap: 2rem;    
   }
   
   #months{
@@ -294,13 +406,37 @@
   @media (max-width: 1200px) {
     .search__input {
       width: 50%;
+        }
+        /* .history-container {
+          display: grid;
+          grid-template-columns: repeat(1, 1fr 1fr 1fr);
+          column-gap: 2rem;
+          border: solid 1px black;
+          
+        } */
+    .history-container {
+      padding: .5rem;
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      row-gap: 1rem;
     }
+    .dateList {
+      margin: 0;  
+      display: flex;
+      justify-content: space-around;
+      /* transform: translate(-50%, -50%); */
+    }
+    #months, #years {
+        width: 100%;
+    }
+      
   }
   
   @media (max-width: 840px) {
     .search__input {
-      width: 70%;
+      width: 100%;
     }
+    
   }
   
   /*  Entries */

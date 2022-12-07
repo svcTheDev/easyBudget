@@ -7,6 +7,7 @@
 - Diseño del home (Big chart, brieflty summary of incomes, expenses, mandatory expenses and voluntary expenses, goal chart)
 - Manual de uso
 - FAQ
+- Historial 
 - Adjust message for inexisiting date selected 
 ### JS
 - Organize by month ✅
@@ -114,7 +115,10 @@
 - When user selects a non existing date unlike the table, the totals are updated ✅
 
 ### 05/12/2022
-- Sidebar 
+- Sidebar ✅
+- (falta arreglar los meses y años en el tamaño mediano de la página)  ✅
+- (Falta centrar el summary) ✅
+- (Falta agregar las opciones del sidebar en el menu hamburguesa y hacer que funcione el menu hamburguesa)
 
 
 

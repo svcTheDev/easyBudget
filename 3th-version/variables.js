@@ -33,6 +33,9 @@ const descriptionColumnButton = document.querySelector(
   "#sort-description .fas"
 );
 
+const hamburger = document.querySelector(".hamburger");
+const navMenu = document.querySelector(".navMenu");
+
 let allBudgetStorage;
 let balance,
   expense,
