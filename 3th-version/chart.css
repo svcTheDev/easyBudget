@@ -1,0 +1,80 @@
+.container h2 {
+    text-align: center;
+    margin: 4rem auto;
+    font-size: 2rem;
+}
+
+
+.grid {
+    /* display: grid;
+    grid-template-columns: repeat(1, 1fr 1fr);
+    grid-template-rows: repeat(1, 2fr); */
+    /* position: relative; */
+    max-width: 100rem;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    grid-template-rows: auto repeat(2, 10rem) auto;
+    gap: 1rem;
+}
+
+.chart-containter {
+    /* display: flex; */
+    grid-column: 1/3;
+    border: solid 1px black;
+    width: 100%;
+    /* height: 30rem; */
+    /* align-items: center; */
+}
+.p {
+    border: solid 1px black;
+}
+
+.summary-home {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-template-rows: auto repeat(1, 8rem) auto;
+    /* align-items: center; */
+    /* justify-content: center; */
+    height: 17rem;
+    border: solid 1px black;
+    
+}
+
+.selection-chart {
+    display: flex;
+    justify-content: space-around;
+}
+
+.income,
+  .outcome,
+  .balance {
+    width: 100%;
+      text-align: center;
+  }
+
+  .balance {
+      grid-column: 1/3;
+      width: 100%;
+      text-align: center;
+  }
+
+  .selection {
+      flex-grow: 1;
+  }
+
+  .selection:nth-child(1) {
+      margin-right: 2rem;
+  }
+  .chart-category {
+    margin-top: 2rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+  @media (max-width: 1200px) {
+    .selection-chart {
+        flex-direction: column;
+    }
+    .chart-containter {
+        margin: 0;
+    }
+  }

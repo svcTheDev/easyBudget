@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="new-styles.css"/>
+    <link rel="stylesheet" href="chart.css"/>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -15,10 +16,13 @@
     <header>
       <nav class="navbar container">
         <!-- 0 -->
-        <a href="#" class="nav-branding">MyEasyBudget</a>
+        <a href="home.html" class="nav-branding">MyEasyBudget</a>
 
         <!-- 1 -->
         <div class="navMenu">
+          <div class="FAQ">
+            <a class="navLink" href="index.html">Entradas</a>
+          </div>
           <div class="FAQ">
             <a class="navLink" href="#">Privacidad</a>
           </div>
@@ -79,7 +83,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
             <use xlink:href="#home"></use>
           </svg>
-          <a href="">Home</a>
+          <a href="index.html">Entradas</a>
         </li>
     
         <li class="nav__items ">
@@ -105,9 +109,80 @@
     
       </ul>
     </nav>
+    
+    <div class="container">
+    <h2>Bienvenido Sergio 👋👋</h2>
+    </div>
 
+    <section class="container">
+        <main class="grid">
+            
+            <!-- 1 -->
+            <div class="chart-containter container">
+                <canvas id="myChart"></canvas>
+                <div class="selection-chart">
+                <div class="selection">
+                    <label for="categoryExpense"></label>
+                    <select name="type" class="allInputs chart-category" id="type">
+                      <option value="" disabled selected>Que entrada deseas ver</option>
+                      <option>General</option>
+                      <option>Gastos Obligatorios</option>
+                      <option>Gastos Voluntarios</option>
+                      <option>Ahorros</option>
+                      <option>Ingresos</option>
+                    </select>
+                </div>
+
+                <div class="selection">
+                    <label for="categoryExpense"></label>
+                    <select name="type" class="allInputs chart-category" id="type">
+                      <option value="" disabled selected>Elige un año</option>
+                      <option>2023</option>
+                    </select>
+                  </div>
+                </div>
+            </div>
+            <!-- 2 -->
+            <div class="summary-home">
+                <div class="income">
+                  <h3>Ingresos</h3>
+                  <p class="numbersIncome">0</p>
+                  <span class="numberLettersIncome"></span>
+                </div>
+                <div class="income">
+                  <h3>Ahorros</h3>
+                  <p class="numbersIncome">0</p>
+                  <span class="numberLettersIncome"></span>
+                </div>
+                <div class="outcome">
+                  <h3>Gastos Obligatorios</h3>
+                  <p class="numbersOutcome">0</p>
+                  <span class="numberLettersOutcome"></span>
+                </div>
+                <div class="outcome">
+                  <h3>Gastos Voluntarios</h3>
+                  <p class="numbersOutcome">0</p>
+                  <span class="numberLettersOutcome"></span>
+                </div>
+                <div class="balance">
+                  <h3>Balance</h3>
+                  <p class="numbersBalance">0</p>
+                  <span class="numberLettersBalance"></span>
+                </div>
+              </div>
+              <!-- 3 -->
+              <div class="p">
+                  <h3>Aquí va tu meta</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam perspiciatis culpa sint exercitationem quo debitis et ratione rem at ducimus autem, laudantium voluptatum dignissimos in nam voluptates vitae aperiam illum?</p>
+              </div>
+        </main>
+    </section>
     
     <script src="variables.js"></script>
     <script src="nav.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="chart.js"></script>
+    <!-- <script src="package.json"></script> -->
+    <!-- <script type="module" src="acquisitions.js"></script> -->
   </body>
 </html>
