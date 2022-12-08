@@ -8,6 +8,7 @@
 - Manual de uso
 - FAQ
 - Historial 
+- Planificador de gastos (gastos e ingresos que crees que tendrás en el futuro para momentos especificos)
 - Adjust message for inexisiting date selected 
 ### JS
 - Organize by month ✅
@@ -138,7 +139,12 @@
 - Sidebar: draggable calculator 
 
 # 07/12/2022
-- Un chart sobre cada tipo (voluntario, obligatorio, ahorro, ingreso)
+- Desingning home section part 1 ✅
+
+# 08/12/2022 
+- Desingning home section part 2 (goal section missing(custome price slider), adjusting responsive) ✅ 2:00
+- Fix font family
+- Start to edit the different charts 
 
 --- Pending issues
 - Update the month and year text of the list when a new date is added ✅

@@ -4,31 +4,51 @@
     font-size: 2rem;
 }
 
-
+/* Chart */
 .grid {
-    /* display: grid;
-    grid-template-columns: repeat(1, 1fr 1fr);
-    grid-template-rows: repeat(1, 2fr); */
-    /* position: relative; */
     max-width: 100rem;
     margin: auto;
     display: grid;
     grid-template-columns: 4fr 3fr;
-    grid-template-rows: auto repeat(2, 10rem) auto;
+    grid-template-rows: auto repeat(1, 10rem) auto;
     gap: 1rem;
+    height: 60rem;
 }
+
+@media (max-width: 768px) {
+    
+    .summary-home {
+        grid-column: 1/3;
+    }
+    .grid {
+        grid-template-rows: auto repeat(1, 20rem) auto;
+        /* 
+        max-width: 100rem;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 4fr 3fr;
+        grid-template-rows: 3fr 3fr 3fr;
+        gap: 1rem;
+        background-color: yellow;
+        */
+    }
+      
+    .planner {
+        /* border: solid 1px black; */
+        grid-column: 1/3;
+    }
+    
+} 
 
 .chart-containter {
     /* display: flex; */
     grid-column: 1/3;
-    border: solid 1px black;
+    /* border: solid 1px black; */
     width: 100%;
     /* height: 30rem; */
     /* align-items: center; */
 }
-.p {
-    border: solid 1px black;
-}
+
 
 .summary-home {
     display: grid;
@@ -37,7 +57,7 @@
     /* align-items: center; */
     /* justify-content: center; */
     height: 17rem;
-    border: solid 1px black;
+    /* border: solid 1px black; */
     
 }
 
@@ -45,6 +65,28 @@
     display: flex;
     justify-content: space-around;
 }
+
+.selection {
+    flex-grow: 1;
+}
+
+.selection:nth-child(1) {
+    margin-right: 2rem;
+}
+.chart-category {
+  margin-top: 2rem;
+  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); */
+}
+@media (max-width: 1200px) {
+  .selection-chart {
+      flex-direction: column;
+  }
+  .chart-containter {
+      margin: 0;
+  }
+}
+
+/* Summary-home */
 
 .income,
   .outcome,
@@ -59,22 +101,110 @@
       text-align: center;
   }
 
-  .selection {
-      flex-grow: 1;
+  /* Planificador de gastos */
+
+
+  
+.planner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: solid 1px black; */
+  width: 100%;
+}
+
+
+.range {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+    width: 100%;
+    
+    /* width: 600px; */
+  }
+  
+  .range__slider {
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    
   }
 
-  .selection:nth-child(1) {
-      margin-right: 2rem;
+  .range__value {
+    padding-left: 2rem;
+    text-align: center;
   }
-  .chart-category {
-    margin-top: 2rem;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+  .arrow {
+    
   }
-  @media (max-width: 1200px) {
-    .selection-chart {
-        flex-direction: column;
-    }
-    .chart-containter {
-        margin: 0;
-    }
+  .form-group {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+  }
+
+  .form-group label {
+    text-transform: uppercase;
+    font-size: .7rem;
+    color: #222;
+    margin-bottom: 5px;
+  }
+  
+  .form-group span {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #3c3b3b;
+  }
+
+  .range__slider label {
+    margin-bottom: 10px;
+  }
+
+  .range__slider [type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 13px;
+    border-radius: 6px;
+    background: #ffffff;
+    outline: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .range__slider [type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #a1dcfc;
+    border: #25384f 5px solid;
+    cursor: pointer;
+    -webkit-transition: background .15s ease-in-out;
+    transition: background .15s ease-in-out;
+  }
+
+  .range__slider [type="range"]::-webkit-slider-thumb:hover {
+    background: #25384f;
+  }
+  
+  .range__slider [type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border: 0;
+    border-radius: 50%;
+    background: #a1dcfc;
+    border: #25384f 5px solid; cursor: pointer;
+    -webkit-transition: background .15s ease-in-out;
+    transition: background .15s ease-in-out;
+  }
+
+  .range__slider [type="range"]::-moz-range-thumb:hover {
+    background: #f9ca24;
+  }
+  
+  /* remove border */
+  input::-moz-focus-inner, input::-moz-focus-outer {
+    border: 0;
   }

@@ -171,9 +171,22 @@
                 </div>
               </div>
               <!-- 3 -->
-              <div class="p">
-                  <h3>Aquí va tu meta</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam perspiciatis culpa sint exercitationem quo debitis et ratione rem at ducimus autem, laudantium voluptatum dignissimos in nam voluptates vitae aperiam illum?</p>
+              <div class="planner">
+                  <h3>Planificador de gastos</h3>
+                  <div class="planner-container">
+                    <form class="range">
+                      <div class="form-group range__slider">
+                        <input class="range" type="range" step="500">
+                      </div><!--/form-group-->
+                      <div class="form-group range__value">
+                        <label>Presupuesto</label>
+                        <span></span>        
+                        <!-- <div class="arrow-icon container">
+                          <i class="fas fa-angle-double-right arrow" style="font-size: 24px"></i>
+                        </div>     -->
+                      </div><!--/form-group-->
+                    </form>
+                  </div><!--/container-->
               </div>
         </main>
     </section>
@@ -182,6 +195,7 @@
     <script src="nav.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="chart.js"></script>
+    <script src="planner-slider.js"></script>
     <!-- <script src="package.json"></script> -->
     <!-- <script type="module" src="acquisitions.js"></script> -->
   </body>
