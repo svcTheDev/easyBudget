@@ -289,11 +289,6 @@
   }
   
   @media (max-width: 1200px) {
-    .summary {
-      /* margin-top: 0rem; */
-      /* max-width: 1104px; */
-    }
-  
     .income,
     .outcome,
     .balance {
