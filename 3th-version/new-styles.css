@@ -333,7 +333,7 @@
     position: relative;
     top: 0%;
     left: 0%;
-    z-index: -2;
+    /* z-index: -2; */
     /* transform: translate(-50%, -50%); */
   }
   
@@ -359,7 +359,7 @@
     margin: 0;
     width: 100%;
     padding: 0;
-    z-index: -1;
+    /* z-index: -1; */
   }
   
   .search__input {
@@ -785,7 +785,7 @@
   .record tbody tr {
     position: relative;
     cursor:grab;
-    z-index: -1;
+    /* z-index: -1; */
   }
   
   .record tbody tr::before {
