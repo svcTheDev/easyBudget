@@ -21,11 +21,8 @@ let savedLastDate;
 
 let uniqueMonths = [];
 let uniqueYears = [];
-let allmonths = [december2022, january2023]
+// let allmonths = [december2022, january2023]
 let originalPrices = []
-
-
-
 
 allBudgetStorage = JSON.parse(localStorage.getItem("globalBudgetSaved")) || [];
 december2022 = JSON.parse(localStorage.getItem("budgetDecember2022")) || [];
@@ -271,6 +268,7 @@ function setCurrentDates(allBudgetStorage) {
 
 function generateDateList() {
   /* Months */
+  console.log(monthList);
   monthList.innerHTML = '';
   if (uniqueMonths.length > 1) {  
     let lastMonthString = lastDate.slice(5, 7);

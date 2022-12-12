@@ -135,9 +135,9 @@
     text-align: center;
   }
 
-  .arrow {
+  /* .arrow {
     
-  }
+  } */
   .form-group {
     display: flex;
     flex-direction: column; 
