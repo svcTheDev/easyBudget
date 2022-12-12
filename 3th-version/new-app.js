@@ -308,6 +308,7 @@ function generateDateList() {
 
 function showMonthFiltered() {
   if (!generateDateList) {
+    console.log('hola');
     return;
   }
 

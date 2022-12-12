@@ -146,6 +146,10 @@
 - Fix font family
 - Start to edit the different charts 
 
+# 11/12/2022
+- Fix font family whole page
+- Start to edit the different charts 
+
 --- Pending issues
 - Update the month and year text of the list when a new date is added ✅
 - Fix issues with month qand list filter at the same time ✅
