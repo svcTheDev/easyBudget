@@ -147,8 +147,13 @@
 - Start to edit the different charts 
 
 # 11/12/2022
-- Fix font family whole page
-- Start to edit the different charts 
+- Fix font family whole page ✅
+
+# 12/12/2022
+Start to edit the different charts
+- Create the all balances and print them on the chart ✅
+- Create a localStorage folder apart
+-
 
 --- Pending issues
 - Update the month and year text of the list when a new date is added ✅

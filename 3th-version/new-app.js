@@ -13,24 +13,24 @@
 // * 9 — Clones rows by clicking the clone icon
 //* 10 - Drag rows
 
-let december2022;
-let january2023;
-let febuary2023;
-let lastDate;
-let savedLastDate;
+// let december2022;
+// let january2023;
+// let febuary2023;
+// let lastDate;
+// let savedLastDate;
 
-let uniqueMonths = [];
-let uniqueYears = [];
-// let allmonths = [december2022, january2023]
-let originalPrices = []
+// let uniqueMonths = [];
+// let uniqueYears = [];
+// // let allmonths = [december2022, january2023]
+// let originalPrices = []
 
-allBudgetStorage = JSON.parse(localStorage.getItem("globalBudgetSaved")) || [];
-december2022 = JSON.parse(localStorage.getItem("budgetDecember2022")) || [];
-january2023 = JSON.parse(localStorage.getItem("budgetJanuary2023")) || [];
-febuary2023 = JSON.parse(localStorage.getItem("budgetFebuary2023")) || [];
-lastDate = JSON.parse(localStorage.getItem("lastDate")) || '';
+// allBudgetStorage = JSON.parse(localStorage.getItem("globalBudgetSaved")) || [];
+// december2022 = JSON.parse(localStorage.getItem("budgetDecember2022")) || [];
+// january2023 = JSON.parse(localStorage.getItem("budgetJanuary2023")) || [];
+// febuary2023 = JSON.parse(localStorage.getItem("budgetFebuary2023")) || [];
+// lastDate = JSON.parse(localStorage.getItem("lastDate")) || '';
 
-console.log({december2022: december2022, january2023: january2023, febuary2023: febuary2023, all: allBudgetStorage, lastDate: lastDate});
+// console.log({december2022: december2022, january2023: january2023, febuary2023: febuary2023, all: allBudgetStorage, lastDate: lastDate});
 
 // if (allBudgetStorage.length > 1) {
   if (lastDate.includes('2023-01')) {
