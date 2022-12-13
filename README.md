@@ -2,8 +2,8 @@
 
 ### CSS
 
-- Add a transition when creating a new entry
-- Sidebar
+- Add a transition when creating a new entry X
+- Sidebar ✅
 - Diseño del home (Big chart, brieflty summary of incomes, expenses, mandatory expenses and voluntary expenses, goal chart)
 - Manual de uso
 - FAQ
@@ -13,7 +13,8 @@
 ### JS
 - Organize by month ✅
 - Add audio ✅
-- Recreate the app with a month array active
+- Recreate the app with a month array active ✅
+- Make sharp the code app (reduce the way months are read individually into a function, )
 - Sidebar: draggable calculator
 
 
@@ -152,8 +153,12 @@
 # 12/12/2022
 Start to edit the different charts
 - Create the all balances and print them on the chart ✅
-- Create a localStorage folder apart
--
+- Create a localStorage folder apart ✅
+
+# 13/12/2022
+- Simulate whole months of 2023 in order to see it better (with an empty one)✅
+- Adding voluntary expenses and mandatory expenses 
+- Update the balances on the home page 
 
 --- Pending issues
 - Update the month and year text of the list when a new date is added ✅

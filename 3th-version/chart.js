@@ -1,26 +1,24 @@
 
 
 let allBalances = [];
-let allmonths = [january2023, febuary2023]
+let allmonths = [january2023, febuary2023, march2023, december2022]
 
-
-
-getAllBalances(january2023);
-getAllBalances(febuary2023);
-getAllBalances(march2023);
-getAllBalances(december2022);
+for (let f = 0; f < allmonths.length; f++) {
+    getAllBalances(allmonths[f])
+  
+}
 function getAllBalances (allMonths) {
   let monthPrices = [];
     for (let i = 0; i < allMonths.length; i++) {
       monthPrices.push(allMonths[i].price);
-      // console.log(allMonths[m][i].price);
-      // console.log(monthPrices);
     }
-    console.log({allMonths: allMonths});
+
     if (allMonths === 0) {  
+      // Agrega el balance vacío
       allBalances.push(allMonths)
       return;
     } else {
+      // Suma nuevo balance
       function sum(accumulator, currentValue) {      
         return accumulator + currentValue;
       }
@@ -31,6 +29,13 @@ function getAllBalances (allMonths) {
     return allBalances;
     } 
   }
+
+  function sumYearBalances(accumulator, currentValue) {      
+    return accumulator + currentValue;
+  }
+
+  const yearBalances = allBalances.reduce(sumYearBalances)
+  balanceTotal.textContent = yearBalances + ' COP';
 
 const ctx = document.getElementById('myChart');
 new Chart(ctx, {
