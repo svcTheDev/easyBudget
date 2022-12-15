@@ -85,16 +85,18 @@ function getExpense(e) {
     !expenseDate.value ||
     !expenseDescription.value ||
     !expenseCategory.value ||
-    !expensePrice.value
+    !expensePrice.value ||
+    !expenseTypeList.value
   ) {
     pointErrorBox([
       expenseDate,
       expenseDescription,
       expenseCategory,
       expensePrice,
+      expenseTypeList
     ]);
 
-    return;
+    return;q
   }
 
   let expenseValues = {
@@ -104,6 +106,7 @@ function getExpense(e) {
     description: expenseDescription.value,
     category: expenseCategory.value,
     price: parseFloat(expensePrice.value),
+    typeList: typeList
   };
 
   allBudgetStorage.push(expenseValues);
@@ -115,7 +118,7 @@ function getExpense(e) {
   showFilterDate();
     // setAllCalculations();
     // showTableEntries(allBudgetStorage);
-  location.reload();
+  // location.reload();q
 }
 function getIncome(e) {
   e.preventDefault();
@@ -141,6 +144,7 @@ function getIncome(e) {
     description: incomeDescription.value,
     category: incomeCategory.value,
     price: parseFloat(incomePrice.value),
+    typeList: 'Ingresos'
   };
 
   allBudgetStorage.push(incomeValues);
@@ -269,7 +273,6 @@ function setCurrentDates(allBudgetStorage) {
 
 function generateDateList() {
   /* Months */
-  console.log(monthList);
   monthList.innerHTML = '';
   if (uniqueMonths.length > 1) {  
     let lastMonthString = lastDate.slice(5, 7);
@@ -309,13 +312,12 @@ function showMonthFiltered() {
   if (!generateDateList) {
     console.log('hola');
     return;
-  }
-
+  }  
   savedLastDate = lastDate;
   let indexSelection = "";
-    const indexMonth = monthIndex.findIndex(
-      (monthIndex) => monthIndex === monthList.value
-      );
+  const indexMonth = monthIndex.findIndex(
+    (monthIndex) => monthIndex === monthList.value
+    );
     indexSelection = `-${indexMonth}-`;
     if (indexMonth < 10) {
       indexSelection = `-0${indexMonth}-`;
@@ -398,22 +400,6 @@ function showFilterDate() {
   setAllCalculations(filterDate);
   sincronizeLastDate(lastDate);
   sincronizeStorage();
-}
-
-function getCurrentDate() {
-  let indexDateList = monthIndex.findIndex(
-    (monthIndex) => monthIndex === monthList.value
-    );
-if (indexDateList == 12) {
-    console.log(1);
-    currentDate = december2022;
-  } else if (indexDateList == 1) {
-    currentDate = january2023;
-  } else if (indexDateList = 2) {
-    currentDate = febuary2023;
-  }
-
-  return currentDate;
 }
 
 function sincronizeStorage() {

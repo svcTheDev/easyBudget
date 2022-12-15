@@ -28,7 +28,9 @@ function showTableEntries(budgetStorage) {
       }" class="size"><i class='far fa-clone duplicate-icon'></i>    
       ${getDayWeek(new Date(budget.date))} ${
         budget.date
-      }
+      }</td>
+          <td id="date-field" class="size">${budget.typeList
+      }</td>
           <td id="description-field ${budget.id}" class="size edit-field">${
         budget.description
       }<i class="fa-solid fa-pencil"></i></td>

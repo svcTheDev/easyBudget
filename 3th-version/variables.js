@@ -3,6 +3,12 @@ const expenseDescription = document.querySelector("#descriptionExpense");
 const expenseCategory = document.querySelector("#categoryExpense");
 const expensePrice = document.querySelector("#priceExpense");
 const expenseForm = document.querySelector("#expense-form");
+const expenseTypeList = document.getElementById("type");
+let typeList;
+function typeSelection() {
+  typeList = expenseTypeList.value;
+  console.log(typeList);
+}
 
 const incomeDate = document.querySelector("#dateIncome");
 const incomeDescription = document.querySelector("#descriptionIncome");
@@ -19,6 +25,7 @@ const cancelation = document.querySelector(".cancel");
 
 const incomeTotal = document.querySelector(".income p");
 const expenseTotal = document.querySelector(".outcome p");
+const voluntaryTotal = document.querySelector(".outcome-voluntary");
 const balanceTotal = document.querySelector(".balance p");
 
 const monthList = document.getElementById("months");

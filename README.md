@@ -160,6 +160,13 @@ Start to edit the different charts
 - Adding voluntary expenses and mandatory expenses 
 - Update the balances on the home page 
 
+# 14/12/2022
+- Adding voluntary expenses and mandatory expenses ✅
+- Update chart function to receive saving, voluntary and mandatory
+- Update the balances on the home page 
+- Create a function to read the chart selected 
+- Arreglar todas las funciones para el nuevo entry
+
 --- Pending issues
 - Update the month and year text of the list when a new date is added ✅
 - Fix issues with month qand list filter at the same time ✅

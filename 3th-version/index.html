@@ -160,10 +160,11 @@
         </div>
         <div>
           <label for="categoryExpense"></label>
-          <select name="type" class="allInputs" id="type">
+          <select name="type" class="allInputs" id="type" onchange="typeSelection()">
             <option value="" disabled selected>Tipo</option>
             <option>Voluntario</option>
             <option>Obligatorio</option>
+            <option>Ahorro</option>
           </select>
         </div>
         <div>
@@ -279,6 +280,9 @@
             <th class="sort-column" id="sort-date"></th>
             <th class="sort-column" id="sort-date">
               Fecha<i class="fas fa-sort"></i>
+            </th>
+            <th class="sort-column" id="sort-description">
+              Tipo<i class="fas fa-sort"></i>
             </th>
             <th class="sort-column" id="sort-description">
               Descripción<i class="fas fa-sort"></i>
