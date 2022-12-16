@@ -162,10 +162,16 @@ Start to edit the different charts
 
 # 14/12/2022
 - Adding voluntary expenses and mandatory expenses ✅
-- Update chart function to receive saving, voluntary and mandatory
-- Update the balances on the home page 
+- Update chart function to receive saving, voluntary and mandatory ✅
+- Update the balances on the home page ✅
+
+# 16/12/2022
+- Organize update totals on index html
+- Fix bug when month does not have a specific type of expense on chart js
+- Update the totals on the entry page 
 - Create a function to read the chart selected 
-- Arreglar todas las funciones para el nuevo entry
+- Arreglar todas las funciones de la app para el nuevo entry
+- Update chart function to receive saving, voluntary and mandatory on the get Expenses function instead of the chart
 
 --- Pending issues
 - Update the month and year text of the list when a new date is added ✅
