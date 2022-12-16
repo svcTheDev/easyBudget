@@ -84,7 +84,7 @@ function sumSavingBalance (allMonths) {
 const yearBalances = allBalances.reduce(sum);
 balanceTotal.textContent = yearBalances + " COP";
 const mandatoryBalances = allMandatory.reduce(sum );
-expenseTotal.textContent = mandatoryBalances + " COP";
+mandatoryTotal.textContent = mandatoryBalances + " COP";
 const voluntaryBalances = allVoluntary.reduce(sum );
 voluntaryTotal.textContent = voluntaryBalances + " COP";
 const savingBalances = allSaving.reduce(sum );

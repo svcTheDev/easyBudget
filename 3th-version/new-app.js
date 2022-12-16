@@ -206,32 +206,57 @@ function calculateBalance(income, expense) {
 
 function updateTotals() {
   incomeTotal.innerHTML = income;
-  expenseTotal.innerHTML = expense;
+  mandatoryTotal.innerHTML = expense;
   balanceTotal.innerHTML = balance;
 
   numbersToLetters();
 
   let numbersBalanceText = numbersBalance.textContent;
   let numbersIncomeText = numbersIncome.textContent;
-  let numbersOutcomeText = numbersOutcome.textContent;
+  let numbersSavingText = numbersSaving.textContent;
+  let numbersMandatoryText = numbersMandatory.textContent;
+  let numbersVoluntaryText = numbersVoluntary.textContent;
+
+  let showConvertedBalance;
+  let showConvertedIncome;
+  let showConvertedMandatory;
+  let showConvertedVoluntary;
+  let showConvertedSaving;
 
   if (numbersBalanceText.includes("000000")) {
     showConvertedBalance.innerHTML += " DE PESOS";
   } else {
     showConvertedBalance.innerHTML += " PESOS";
   }
+
   if (numbersIncomeText.includes("000000")) {
     showConvertedIncome.innerHTML += " DE PESOS";
   } else {
     showConvertedIncome.innerHTML += " PESOS";
   }
-  if (numbersOutcomeText.includes("000000")) {
-    showConvertedOutcome.innerHTML += " DE PESOS";
+  
+  if (numbersSavingText.includes("000000")) {
+    showConvertedSaving.innerHTML += " DE PESOS";
   } else {
-    showConvertedOutcome.innerHTML += " PESOS";
+    showConvertedSaving.innerHTML += " PESOS";
   }
+
+  if (numbersMandatoryText.includes("000000")) {
+    showConvertedMandatory.innerHTML += " DE PESOS";
+  } else {
+    showConvertedMandatory.innerHTML += " PESOS";
+  }
+
+  if (numbersVoluntaryText.includes("000000")) {
+    showConvertedVoluntary.innerHTML += " DE PESOS";
+  } else {
+    showConvertedVoluntary.innerHTML += " PESOS";
+  }
+
   incomeTotal.innerHTML += " COP";
-  expenseTotal.innerHTML += " COP";
+  savingTotal.innerHTML += " COP";
+  voluntaryTotal.innerHTML += " COP";
+  mandatoryTotal.innerHTML += " COP";
   balanceTotal.innerHTML += " COP";
 }
 

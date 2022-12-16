@@ -1,14 +1,21 @@
 
-let numbersIncome= document.querySelector('.numbersIncome');
-let numbersOutcome = document.querySelector('.numbersOutcome');
+let numbersIncome = document.querySelector('.numbersIncome');
+let numbersSaving = document.querySelector('.numbersSaving');
+let numbersMandatory = document.querySelector('.numbersMandatory');
+let numbersVoluntary = document.querySelector('.numbersVoluntary');
 let numbersBalance = document.querySelector('.numbersBalance');
+
 let showConvertedIncome = document.querySelector(".numberLettersIncome");
-let showConvertedOutcome = document.querySelector(".numberLettersOutcome");
+let showConvertedSaving = document.querySelector(".numberLettersSaving");
+let showConvertedMandatory = document.querySelector(".numberLettersMandatory");
+let showConvertedVoluntary = document.querySelector(".numberLettersVoluntary");
 let showConvertedBalance = document.querySelector(".numberLettersBalance");
 
 function numbersToLetters() {
-  showConvertedIncome.innerHTML=NumeroALetras(numbersIncome.textContent);
-  showConvertedOutcome.innerHTML=NumeroALetras(numbersOutcome.textContent);
+  showConvertedIncome.innerHTML=NumeroALetras(numbersSaving.textContent);
+  showConvertedSaving.innerHTML=NumeroALetras(numbersIncome.textContent);
+  showConvertedMandatory.innerHTML=NumeroALetras(numbersMandatory.textContent);
+  showConvertedVoluntary.innerHTML=NumeroALetras(numbersVoluntary.textContent);
   showConvertedBalance.innerHTML=NumeroALetras(Math.abs(numbersBalance.textContent));
     }
     

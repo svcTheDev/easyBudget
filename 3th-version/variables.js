@@ -24,7 +24,7 @@ const confirmation = document.querySelector(".confirm");
 const cancelation = document.querySelector(".cancel");
 
 const incomeTotal = document.querySelector(".income p");
-const expenseTotal = document.querySelector(".outcome-mandatory p");
+const mandatoryTotal = document.querySelector(".outcome-mandatory p");
 const voluntaryTotal = document.querySelector(".outcome-voluntary p");
 const balanceTotal = document.querySelector(".balance p");
 const savingTotal = document.querySelector(".outcome-saving p");
