@@ -166,7 +166,7 @@ Start to edit the different charts
 - Update the balances on the home page ✅
 
 # 16/12/2022
-- Organize update totals on index html
+- Organize update totals on index html 
 - Fix bug when month does not have a specific type of expense on chart js
 - Update the totals on the entry page 
 - Create a function to read the chart selected 

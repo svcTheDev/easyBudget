@@ -54,10 +54,7 @@
     display: grid;
     grid-template-columns: 2fr 2fr;
     grid-template-rows: auto repeat(1, 8rem) auto;
-    /* align-items: center; */
-    /* justify-content: center; */
     height: 20rem;
-    /* border: solid 1px black; */
     
 }
 
