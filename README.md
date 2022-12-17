@@ -166,9 +166,12 @@ Start to edit the different charts
 - Update the balances on the home page ✅
 
 # 16/12/2022
-- Organize update totals on index html 
+Update the totals on the entry page 
+- Organize html, css ✅
+- Organize numbertoletters ✅
+- Update chart function to receive saving, voluntary and mandatory on the get Expenses function instead of the chart
+
 - Fix bug when month does not have a specific type of expense on chart js
-- Update the totals on the entry page 
 - Create a function to read the chart selected 
 - Arreglar todas las funciones de la app para el nuevo entry
 - Update chart function to receive saving, voluntary and mandatory on the get Expenses function instead of the chart

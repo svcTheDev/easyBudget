@@ -96,7 +96,7 @@ function getExpense(e) {
       expenseTypeList
     ]);
 
-    return;q
+    return;
   }
 
   let expenseValues = {
@@ -186,18 +186,33 @@ function showErrorMessage () {
 function setAllCalculations(currentBudget) {
   income = sumEntries("income", currentBudget);
   expense = sumEntries("expense", currentBudget);
+  voluntary = sumEntries("Voluntario", currentBudget)
+  saving = sumEntries("Ahorro", currentBudget)
+  mandatory = sumEntries("Obligatorio", currentBudget)
   balance = calculateBalance(income, expense);
   updateTotals();
 }
 
 function sumEntries(type, entries) {
   let sum = 0;
-  entries.forEach((entry) => {
-    if (entry.type === type) {
+  if (type === 'income' || type === 'expense') {
+    console.log(1);
+    entries.forEach((entry) => {
+      if (entry.type === type) {
+        sum += entry.price;
+      }
+    });
+    return sum;
+  } else {
+    console.log(2);
+    entries.forEach((entry) => {
+    if (entry.typeList === type) {
+      console.log(entry.typeList);
       sum += entry.price;
     }
-  });
+  })
   return sum;
+}
 }
 
 function calculateBalance(income, expense) {
@@ -206,8 +221,11 @@ function calculateBalance(income, expense) {
 
 function updateTotals() {
   incomeTotal.innerHTML = income;
-  mandatoryTotal.innerHTML = expense;
+  // mandatoryTotal.innerHTML = expense;
   balanceTotal.innerHTML = balance;
+  savingTotal.innerHTML = saving;
+  voluntaryTotal.innerHTML = voluntary;
+  mandatoryTotal.innerHTML = mandatory;
 
   numbersToLetters();
 
@@ -217,11 +235,6 @@ function updateTotals() {
   let numbersMandatoryText = numbersMandatory.textContent;
   let numbersVoluntaryText = numbersVoluntary.textContent;
 
-  let showConvertedBalance;
-  let showConvertedIncome;
-  let showConvertedMandatory;
-  let showConvertedVoluntary;
-  let showConvertedSaving;
 
   if (numbersBalanceText.includes("000000")) {
     showConvertedBalance.innerHTML += " DE PESOS";

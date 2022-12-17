@@ -47,7 +47,7 @@ const navMenu = document.querySelector(".navMenu");
 let allBudgetStorage;
 let balance,
   expense,
-  income = [0, 0, 0];
+  income, saving, voluntary, mandatory = [0, 0, 0, 0, 0, 0];
 let filterMonth = [];
 let filterYear = []
 let monthsName = [];
