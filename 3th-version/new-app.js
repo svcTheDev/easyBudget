@@ -79,9 +79,11 @@ document.querySelectorAll(".navLink").forEach((n) =>
 expenseForm.addEventListener("submit", getExpense);
 incomeForm.addEventListener("submit", getIncome);
 
+
 function getExpense(e) {
   e.preventDefault();
-  if (!expenseDate.value.includes('2023-01') || !expenseDate.value.includes('2023-02') && expenseDate.value) {
+
+  if (expenseDate.value.slice(0, -3) !== '2023-01' && expenseDate.value.slice(0, -3) !== '2023-02' && expenseDate.value) {
     showErrorMessage(errorDateMessage)
     return;
   }
@@ -115,9 +117,7 @@ function getExpense(e) {
     
     return;
   }
-  
-  console.log(expenseDate.value);
-  
+    
   let expenseValues = {
     id: Date.now(),
     type: "expense",
@@ -137,11 +137,12 @@ function getExpense(e) {
   showFilterDate();
     // setAllCalculations();
     // showTableEntries(allBudgetStorage);
-  location.reload();
+  // location.reload();
 }
 function getIncome(e) {
   e.preventDefault();
-  if (!incomeDate.value.includes('2023') && incomeDate.value) {
+
+  if (incomeDate.value.slice(0, -3) !== '2023-01' && incomeDate.value.slice(0, -3) !== '2023-02' && incomeDate.value) {
     showErrorMessage(errorDateMessage)
     return;
   }
