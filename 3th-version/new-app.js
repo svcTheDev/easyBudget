@@ -81,7 +81,7 @@ incomeForm.addEventListener("submit", getIncome);
 
 function getExpense(e) {
   e.preventDefault();
-  if (!expenseDate.value.includes('2023') && expenseDate.value) {
+  if (!expenseDate.value.includes('2023-01') || !expenseDate.value.includes('2023-02') && expenseDate.value) {
     showErrorMessage(errorDateMessage)
     return;
   }
