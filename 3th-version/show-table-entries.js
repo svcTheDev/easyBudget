@@ -121,6 +121,6 @@ function deleteRow(id, current) {
     sincronizeFebuary2023(); 
   }
 
-  // location.reload(); 
+  location.reload(); 
 }
 

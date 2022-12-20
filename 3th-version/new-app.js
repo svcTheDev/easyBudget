@@ -137,7 +137,7 @@ function getExpense(e) {
   showFilterDate();
     // setAllCalculations();
     // showTableEntries(allBudgetStorage);
-  // location.reload();
+  location.reload();
 }
 function getIncome(e) {
   e.preventDefault();
@@ -196,7 +196,7 @@ function getIncome(e) {
   showFilterDate();
   //   setAllCalculations();
   //   showTableEntries(allBudgetStorage);
-  // location.reload();
+  location.reload();
 }
 
 function pointErrorBox(inputs) {
