@@ -173,10 +173,14 @@ Update the totals on the entry page
 - Update totals by adding voluntary mandatory and saving as a new variable to sum ✅
 - Add a new expense totals ✅
 
-# 17/12/2022
+# 19/22/2022
+- All entry validations done ✅
+
+# 20/12/2022
 - Fix bug when month does not have a specific type of expense on chart js
+
+
 - Create a function to read the chart selected 
-- Arreglar todas las funciones de la app para el nuevo entry
 
 --- Pending issues
 - Update the month and year text of the list when a new date is added ✅
