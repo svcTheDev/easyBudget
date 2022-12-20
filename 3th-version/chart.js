@@ -33,13 +33,26 @@ function getAllBalances(allMonths) {
     let mandatoryType = sumMandatoryBalance(allMonths); 
     let voluntaryType = sumVoluntaryBalance(allMonths); 
     let savingType = sumSavingBalance(allMonths); 
+    console.log(mandatoryType);
+    console.log(voluntaryType);
+    console.log(savingType);
     
-    const monthMandatory = mandatoryType.reduce(sum);
-    allMandatory.push(monthMandatory);
-    const monthVoluntary = voluntaryType.reduce(sum);
-    allVoluntary.push(monthVoluntary);
-    const monthSaving = savingType.reduce(sum);
-    allSaving.push(monthSaving);
+    if (!mandatoryType.length === 0) {
+      const monthMandatory = mandatoryType.reduce(sum);
+      allMandatory.push(monthMandatory);
+      const mandatoryBalances = allMandatory.reduce(sum );
+      mandatoryTotal.textContent = mandatoryBalances + " COP";
+    }
+    if(!voluntaryType.length === 0) {
+      const monthVoluntary = voluntaryType.reduce(sum);
+      allVoluntary.push(monthVoluntary);
+    }
+    if(!savingType.length === 0) {
+      const monthSaving = savingType.reduce(sum);
+      allSaving.push(monthSaving);
+      const savingBalances = allSaving.reduce(sum );
+      savingTotal.textContent = savingBalances + " COP";
+    }
   }
   console.log(allMandatory);
   console.log(allSaving);
@@ -51,6 +64,7 @@ function sumMandatoryBalance (allMonths) {
   const mandatoryPrices = allMonths.filter(
     (month) => month.typeList === "Obligatorio"
     );
+  
   let mandatoryType = [];
   for (let i = 0; i < mandatoryPrices.length; i++) {
     mandatoryType.push(allMonths[i].price);
@@ -83,12 +97,9 @@ function sumSavingBalance (allMonths) {
 
 const yearBalances = allBalances.reduce(sum);
 balanceTotal.textContent = yearBalances + " COP";
-const mandatoryBalances = allMandatory.reduce(sum );
-mandatoryTotal.textContent = mandatoryBalances + " COP";
-const voluntaryBalances = allVoluntary.reduce(sum );
-voluntaryTotal.textContent = voluntaryBalances + " COP";
-const savingBalances = allSaving.reduce(sum );
-savingTotal.textContent = savingBalances + " COP";
+
+
+
 
 
 const ctx = document.getElementById("myChart");
