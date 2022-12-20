@@ -18,7 +18,12 @@ const incomeForm = document.querySelector("#income-form");
 
 const table = document.querySelector("#table-body");
 
-const errorMessageBox = document.querySelector(".error-message");
+const errorPriceMessage = document.querySelector("#price-error");
+const errorCategoryMessage = document.querySelector("#category-error");
+const errorDescriptionMessage = document.querySelector("#description-error");
+const noDateMessage = document.querySelector("#no-dates");
+const errorDateMessage = document.querySelector("#error-date");
+const mandatoryFieldMessage = document.querySelector("#mandatory-field");
 const modalContainer = document.querySelector(".modal-container");
 const confirmation = document.querySelector(".confirm");
 const cancelation = document.querySelector(".cancel");
@@ -27,6 +32,7 @@ const incomeTotal = document.querySelector(".income p");
 const mandatoryTotal = document.querySelector(".outcome-mandatory p");
 const voluntaryTotal = document.querySelector(".outcome-voluntary p");
 const balanceTotal = document.querySelector(".balance p");
+const expenseTotal = document.querySelector(".expense p");
 const savingTotal = document.querySelector(".outcome-saving p");
 
 const monthList = document.getElementById("months");

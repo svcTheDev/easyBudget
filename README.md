@@ -169,12 +169,14 @@ Start to edit the different charts
 Update the totals on the entry page 
 - Organize html, css ✅
 - Organize numbertoletters ✅
-- Update chart function to receive saving, voluntary and mandatory on the get Expenses function instead of the chart
+- Update chart function to receive saving, voluntary qqand mandatory on the get Expenses function instead of the chart X (Not necesary)
+- Update totals by adding voluntary mandatory and saving as a new variable to sum ✅
+- Add a new expense totals ✅
 
+# 17/12/2022
 - Fix bug when month does not have a specific type of expense on chart js
 - Create a function to read the chart selected 
 - Arreglar todas las funciones de la app para el nuevo entry
-- Update chart function to receive saving, voluntary and mandatory on the get Expenses function instead of the chart
 
 --- Pending issues
 - Update the month and year text of the list when a new date is added ✅

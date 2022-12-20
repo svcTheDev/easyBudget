@@ -2,7 +2,7 @@ let allBalances = [];
 let allMandatory = [];
 let allVoluntary = [];
 let allSaving = [];
-let allmonths = [january2023];
+let allmonths = [january2023, febuary2023];
 
 
 function sum(accumulator, currentValue) {

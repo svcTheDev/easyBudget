@@ -81,6 +81,23 @@ incomeForm.addEventListener("submit", getIncome);
 
 function getExpense(e) {
   e.preventDefault();
+  if (!expenseDate.value.includes('2023') && expenseDate.value) {
+    showErrorMessage(errorDateMessage)
+    return;
+  }
+  if (expenseDescription.value.length > 50) {
+    showErrorMessage(errorDescriptionMessage)
+    return;
+  }
+  if (expenseCategory.value.length > 20) {
+    showErrorMessage(errorCategoryMessage)
+    return;
+  }
+  if (expensePrice.value.length > 9 || expensePrice.value < 100 && expensePrice.value) {
+    showErrorMessage(errorPriceMessage)
+    return;
+  }
+
   if (
     !expenseDate.value ||
     !expenseDescription.value ||
@@ -95,10 +112,12 @@ function getExpense(e) {
       expensePrice,
       expenseTypeList
     ]);
-
+    
     return;
   }
-
+  
+  console.log(expenseDate.value);
+  
   let expenseValues = {
     id: Date.now(),
     type: "expense",
@@ -118,10 +137,28 @@ function getExpense(e) {
   showFilterDate();
     // setAllCalculations();
     // showTableEntries(allBudgetStorage);
-  // location.reload();q
+  // location.reload();
 }
 function getIncome(e) {
   e.preventDefault();
+  if (!incomeDate.value.includes('2023') && incomeDate.value) {
+    showErrorMessage(errorDateMessage)
+    return;
+  }
+
+  if (incomeDescription.value.length > 50) {
+    showErrorMessage(errorDescriptionMessage)
+    return;
+  }
+  if (incomeCategory.value.length > 20) {
+    showErrorMessage(errorCategoryMessage)
+    return;
+  }
+  if (incomePrice.value.length > 9 || incomePrice.value < 100) {
+    showErrorMessage(errorPriceMessage)
+    return;
+  }
+
   if (
     !incomeDate.value ||
     !incomeDescription.value ||
@@ -134,9 +171,13 @@ function getIncome(e) {
       incomeCategory,
       incomePrice,
     ]);
+
     return;
   }
 
+  
+
+  
   let incomeValues = {
     id: Date.now(),
     type: "income",
@@ -155,30 +196,45 @@ function getIncome(e) {
   showFilterDate();
   //   setAllCalculations();
   //   showTableEntries(allBudgetStorage);
-  location.reload();
+  // location.reload();
 }
 
 function pointErrorBox(inputs) {
-  const checkEmptyField = inputs.filter((input) => input.value === "");
 
-  checkEmptyField.forEach((field) => {
-    field.classList.add("error-field");
-    setTimeout(function () {
-      field.classList.remove("error-field");
-    }, 3000);
-  });
+  // if (inputs.length === 1) {
+  
+  //   console.log(1);
+  //   inputs.forEach((input) => {
+  //     input.classList.add("error-field");
+  //     setTimeout(function () {
+  //       input.classList.remove("error-field");
+  //     }, 3000);   
+  //   })
+  
+  //   showErrorMessage(errorDateMessage);
+  // } else {
+    const checkEmptyField = inputs.filter((input) => input.value === "");
 
-  showErrorMessage();
+    checkEmptyField.forEach((field) => {
+      field.classList.add("error-field");
+      setTimeout(function () {
+        field.classList.remove("error-field");
+      }, 3000);
+    });
+    showErrorMessage(mandatoryFieldMessage);
+  // }
 }
 
-function showErrorMessage () {
-  errorMessageBox.classList.add("show-message");
-  errorMessageBox.classList.add("hide-error-message");
+function showErrorMessage (errorMessage) {
+  errorMessage.classList.add("show-message");
+  errorMessage.classList.add("hide-error-message");
 
   setTimeout(function () {
-    errorMessageBox.classList.remove("show-message");
-    errorMessageBox.classList.remove("hide-error-message");
+    errorMessage.classList.remove("show-message");
+    errorMessage.classList.remove("hide-error-message");
   }, 6000);
+
+
 }
 
 
@@ -186,6 +242,7 @@ function showErrorMessage () {
 function setAllCalculations(currentBudget) {
   income = sumEntries("income", currentBudget);
   expense = sumEntries("expense", currentBudget);
+  console.log(expense);
   voluntary = sumEntries("Voluntario", currentBudget)
   saving = sumEntries("Ahorro", currentBudget)
   mandatory = sumEntries("Obligatorio", currentBudget)
@@ -221,7 +278,7 @@ function calculateBalance(income, expense) {
 
 function updateTotals() {
   incomeTotal.innerHTML = income;
-  // mandatoryTotal.innerHTML = expense;
+  expenseTotal.innerHTML = expense;
   balanceTotal.innerHTML = balance;
   savingTotal.innerHTML = saving;
   voluntaryTotal.innerHTML = voluntary;
@@ -234,6 +291,7 @@ function updateTotals() {
   let numbersSavingText = numbersSaving.textContent;
   let numbersMandatoryText = numbersMandatory.textContent;
   let numbersVoluntaryText = numbersVoluntary.textContent;
+  let numbersExpensesText = numbersExpenses.textContent;
 
 
   if (numbersBalanceText.includes("000000")) {
@@ -265,12 +323,18 @@ function updateTotals() {
   } else {
     showConvertedVoluntary.innerHTML += " PESOS";
   }
+  if (numbersExpensesText.includes("000000")) {
+    showConvertedExpenses.innerHTML += " DE PESOS";
+  } else {
+    showConvertedExpenses.innerHTML += " PESOS";
+  }
 
   incomeTotal.innerHTML += " COP";
   savingTotal.innerHTML += " COP";
   voluntaryTotal.innerHTML += " COP";
   mandatoryTotal.innerHTML += " COP";
   balanceTotal.innerHTML += " COP";
+  expenseTotal.innerHTML += " COP";
 }
 
 
@@ -367,7 +431,7 @@ function showMonthFiltered() {
     if (filterMonth.length === 0) {
       table.innerHTML = '';
       setAllCalculations(filterMonth)
-      showErrorMessage();
+      showErrorMessage(noDateMessage);
       return indexSelection;
     }
     showTableEntries(filterMonth);
@@ -391,7 +455,7 @@ function showYearFiltered() {
     if (filterYearMonth.length === 0) {
       table.innerHTML = '';
       setAllCalculations(filterYearMonth)
-      showErrorMessage();
+      showErrorMessage(noDateMessage);
       return yearList.value;
       
     }

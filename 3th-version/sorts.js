@@ -14,6 +14,7 @@ function setSortTool (currentBudget) {
         sortByDate(currentBudget)
       })
     descriptionColumnButton.addEventListener("click", function (e){
+      console.log('hola');
         e.preventDefault();
         sortByDescription(currentBudget)
       })

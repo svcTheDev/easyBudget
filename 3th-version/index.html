@@ -120,20 +120,25 @@
         <p class="numbersIncome">0</p>
         <span class="numberLettersIncome"></span>
       </div>
-      <div class="outcome outcome-mandatory">
-        <h3>Gastos Obligatorios</h3>
-        <p class="numbersMandatory">0</p>
-        <span class="numberLettersMandatory"></span>
-      </div>
       <div class="balance">
         <h3>Balance</h3>
         <p class="numbersBalance">0</p>
         <span class="numberLettersBalance"></span>
       </div>
-      <div class="outcome outcome-saving">
+      <div class="outcome outcome-mandatory">
+        <h3>Gastos Obligatorios</h3>
+        <p class="numbersMandatory">0</p>
+        <span class="numberLettersMandatory"></span>
+      </div>
+      <div class="saving outcome-saving">
         <h3>Ahorros</h3>
         <p class="numbersSaving">0</p>
         <span class="numberLettersSaving"></span>
+      </div>
+      <div class="balance expense">
+        <h3>Gastos Totales</h3>
+        <p class="numbersExpenses">0</p>
+        <span class="numberLettersExpenses"></span>
       </div>
       <div class="outcome outcome-voluntary">
         <h3>Gastos Voluntarios</h3>
@@ -289,7 +294,7 @@
             <th class="sort-column" id="sort-date">
               Fecha<i class="fas fa-sort"></i>
             </th>
-            <th class="sort-column" id="sort-description">
+            <th class="sort-column" id="">
               Tipo<i class="fas fa-sort"></i>
             </th>
             <th class="sort-column" id="sort-description">
@@ -321,12 +326,54 @@
 
     <!-- Dynamic classes -->
 
-    <div class="error-message">
+    <div class="error-message" id="mandatory-field">
       <div class="error-message-icon">
         <i class="close-icon fa-solid fa-xmark"></i>
       </div>
       <div class="error-message-content">
         <p>Todos los campos son obligatorios</p>
+      </div>
+    </div>
+
+    <div class="error-message" id="error-date">
+      <div class="error-message-icon">
+        <i class="close-icon fa-solid fa-xmark"></i>
+      </div>
+      <div class="error-message-content">
+        <p>Debes seleccionar el 2023</p>
+      </div>
+    </div>
+
+    <div class="error-message" id="no-dates">
+      <div class="error-message-icon">
+        <i class="close-icon fa-solid fa-xmark"></i>
+      </div>
+      <div class="error-message-content">
+        <p>No hay entradas en esta fecha</p>
+      </div>
+    </div>
+    <div class="error-message" id="description-error">
+      <div class="error-message-icon">
+        <i class="close-icon fa-solid fa-xmark"></i>
+      </div>
+      <div class="error-message-content">
+        <p>La descripción debe contener menos de 50 caracteres</p>
+      </div>
+    </div>
+    <div class="error-message" id="category-error">
+      <div class="error-message-icon">
+        <i class="close-icon fa-solid fa-xmark"></i>
+      </div>
+      <div class="error-message-content">
+        <p>La categoría debe contener menos de 20 caracteres</p>
+      </div>
+    </div>
+    <div class="error-message" id="price-error">
+      <div class="error-message-icon">
+        <i class="close-icon fa-solid fa-xmark"></i>
+      </div>
+      <div class="error-message-content">
+        <p>El monto debe ser máx 9 dígitos y min 100 COP</p>
       </div>
     </div>
 
